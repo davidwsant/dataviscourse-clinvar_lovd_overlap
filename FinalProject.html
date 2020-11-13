@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Visualization - Homework 6 - The State of the State of the State </title>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-force.v2.min.js"></script>
+    <script src="https://d3js.org/d3-color.v2.min.js"></script>
+    <script src="https://d3js.org/d3-dispatch.v2.min.js"></script>
+    <script src="https://d3js.org/d3-ease.v2.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
+    <script src="https://d3js.org/d3-timer.v2.min.js"></script>
+    <script src="https://d3js.org/d3-selection.v2.min.js"></script>
+    <script src="https://d3js.org/d3-transition.v2.min.js"></script>
+    <script src="https://d3js.org/d3-drag.v2.min.js"></script>
+    <script src="https://d3js.org/d3-brush.v2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
+    <script src="./js/bubbleChart.js"></script>
+    <script src="./js/table.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  
+    <!-- 
+       Bootstrap styling if you want to use it: 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+</head>
+
+<body>
+    
+    
+    <div id="header-wrap">
+        <header>
+            <h1>Data Visualization CS - 5630/ CS - 6630 Final Project</h1>
+            <div>Name: David Sant; Dallon Durfey; Marcus Stucki</div>
+            <div>E-Mail: david.sant@utah.edu; dallon.durfey@utah.edu; marcus.stucki@hsc.utah.edu</div>
+            <div>UID: u0454956; u01275125; u0420655</div>
+
+        </header>
+    </div>
+    <div class="dropdown">
+        <button onclick ="pickDisease()" class = "dropDisease">Select a Disease</button>
+        <div id="DiseaseList" class = "diseaseList">
+            <a href = "#">Metabolic Diseases</a>
+            <a href = "#">Metachromatic Leukodystrophy (MLD)</a>
+            <a href = "#">Severe Combined Immunodeficiency (SCID)</a>
+        </div>  
+    </div>
+
+    <div class="dropdown">
+        <button onclick ="pickGene()" class = "dropGene">Select a Gene</button>
+        <div id="GeneList" class = "geneList">
+
+    </div>
+
+    <div class="overview">
+        <div>
+          <h2>ClinVar and LOVD Disease Overview</h2>
+          <div id="Overview-chart">
+            <svg id="Overlap-bar-chart">
+    
+            </svg>
+            <svg id="Total-Variant-chart">
+    
+            </svg>
+    
+        </div>
+    </div>
+    </div>
+    
+    <div class="disease">
+        <div>
+            <div id="Disease-chart">
+                <svg id="Stacked-Disease-chart">
+        
+                </svg>
+                <svg id="frequencyDiseaseChart">
+        
+                </svg>
+        
+            </div>
+            </div>
+        </div>
+
+    <div class="gene">
+         <div>
+            <div id="Gene-chart">
+                <svg id="genePathogen-scatterplot">
+            
+                </svg>
+                <svg id="freqGeneChart">
+            
+                </svg>
+
+            </svg>
+            <svg id="stackedGeneFailChart">
+        
+            </svg>
+            
+            </div>
+        </div>
+    </div>
+  
+</body>
+
+</html>
