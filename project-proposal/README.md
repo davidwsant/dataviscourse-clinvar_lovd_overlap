@@ -103,7 +103,7 @@ This, like the other bar charts, could be changed to percentage rather than tota
 Along with drawing these, there would also be options for filtering the data. By default, it will show information about all of the variants. I would like the viewer to be able to select the filter based on several criteria. One of them could be the year that the information was last changed. ClinVar has only been around since 2012, so no variants are older than that, but I thought it could be changed so that you can show only variants from the last two years. Another filter criteria could be pathogenicity. ClinVar and LOVD use the same pathogenicity scales (with slightly different wording). The degrees of pathogenicity are benign, likely benign, variant of unknown significance, likely pathogenic, and pathogenic. The users could also filter the ClinVar variants based on the review status (star level) from clinvar. These are as follows: 0 stars - No submission information provided, 1 star - Single submitter or multiple submitters with conflicting interpretations, 2 stars - multiple submitters with no conflicts, 3 stars - determined by expert panel, 4 stars - clinical standard for diagnosis. Finally, it would be nice if the viewer could filter based on the database. They could select only variants present in both ClinVar and LOVD, variants in only ClinVar, variants only in LOVD, or variants only from a specific LOVD database. Ignore the poorly erased line in the figure below (crappy eraser).
 
 
-![dash.png](Images/dash.png)
+![dash.png](Images/dashboard.png)
 
 Another graph that could appear on the page after selecting the disease is a line chart showing the proportion of variants for a given gene that are of each pathogenicity.
 
