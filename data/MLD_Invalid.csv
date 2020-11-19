@@ -1,0 +1,276 @@
+,Database Accession,Database,Gene Symbol,Disease,Variant Type,Pathogenicity,Review Status,Star Level,Submitter,HGVS Normalization Failure Reason
+338,RCV000050848,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, multiple submitters, no conflicts",2,"Multiple Submitters: ISCA site 17, ISCA site 4",Compound Variant
+339,RCV000051412,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+340,RCV000051413,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 14,Compound Variant
+341,RCV000051440,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+342,RCV000051442,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 17,Compound Variant
+343,RCV000051443,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+344,RCV000051444,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+345,RCV000133707,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+346,RCV000133859,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+347,RCV000135615,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+348,RCV000135691,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+349,RCV000136106,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,ISCA site 4,Compound Variant
+350,RCV000136874,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Benign,no assertion criteria provided,0,ISCA site 8,Compound Variant
+351,RCV000136941,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+352,RCV000137377,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+353,RCV000139655,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+354,RCV000140089,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,GeneDx,Compound Variant
+355,RCV000140772,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 6,Compound Variant
+356,RCV000142303,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+357,RCV000142589,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+358,RCV000143203,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,ISCA site 1,Compound Variant
+359,RCV000143487,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+360,RCV000143708,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+389,RCV001031919,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+390,RCV000050935,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 4,Compound Variant
+391,RCV000051098,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 4,Compound Variant
+392,RCV000051371,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+393,RCV000051407,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+394,RCV000051408,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+395,RCV000051409,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",Compound Variant
+396,RCV000051410,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+397,RCV000051411,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+398,RCV000051686,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+399,RCV000051687,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+400,RCV000051689,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+401,RCV000133865,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+402,RCV000134513,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 6,Compound Variant
+403,RCV000135444,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 17,Compound Variant
+404,RCV000136124,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Benign,no assertion criteria provided,0,ISCA site 8,Compound Variant
+405,RCV000136573,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+406,RCV000136894,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+407,RCV000136921,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+408,RCV000137136,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+409,RCV000140901,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+410,RCV000141415,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 6,Compound Variant
+411,RCV000141659,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+412,RCV000142755,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+433,RCV000051682,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",Compound Variant
+434,RCV000051684,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+438,RCV000133646,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Multiple Submitters: ISCA site 1, ISCA site 4",Compound Variant
+439,RCV000134730,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+449,RCV000631450,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+11,578462:2917,Global_Variome,ARSA,Metachromatic Leukodystrophy,Deletion,-,-,-,Johan den Dunnen,Compound Variant
+10,79353:2917,Global_Variome,ARSA,Metachromatic Leukodystrophy,Deletion,-,-,-,Johan den Dunnen,Incorrect reference base
+12,578788:2917,Global_Variome,ARSA,Metachromatic Leukodystrophy,single nucleotide variant,-,-,-,Alessandra Biffi,Incorrect reference base
+13,578647:2917,Global_Variome,ARSA,Metachromatic Leukodystrophy,single nucleotide variant,-,-,-,Alessandra Biffi,Incorrect reference base
+73,438946:11758,BIPmed_SNPhg19,ARSA,Metachromatic Leukodystrophy,single nucleotide variant,-,-,-,Admin,Incorrect reference base
+14,578935:2917,Global_Variome,ARSA,Metachromatic Leukodystrophy,Indel,-,-,-,Alessandra Biffi,Inserted unknown sequence
+437,RCV000003232,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,no assertion criteria provided,0,OMIM,Microsatellite
+443,RCV000269167,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Uncertain significance,"criteria provided, single submitter",1,"Illumina Clinical Services Laboratory,Illumina",Microsatellite
+444,RCV000410209,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Likely pathogenic,"criteria provided, multiple submitters, no conflicts",2,"Multiple Submitters: Counsyl, Integrated Genetics/Laboratory Corporation of America",Microsatellite
+450,RCV000674033,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Likely pathogenic,"criteria provided, single submitter",1,Counsyl,Microsatellite
+456,RCV001250461,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,"criteria provided, single submitter",1,"Amsterdam Leukodystrophy Center,Amsterdam UMC",Microsatellite
+457,RCV000078934,ClinVar,ARSA,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,"criteria provided, single submitter",1,"EGL Genetic Diagnostics, Eurofins Clinical Diagnostics",Microsatellite
+331,RCV000003222,ClinVar,ARSA,Metachromatic Leukodystrophy,single nucleotide variant,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+332,RCV000003225,ClinVar,ARSA,Metachromatic Leukodystrophy,single nucleotide variant,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+333,RCV000003200,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+334,RCV000003201,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+335,RCV000684461,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+336,RCV000742123,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Likely pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+337,RCV001007196,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+361,RCV000208731,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Human Genome and Stem Cell Research Center,Department of Genetics and Evolutionary Biology, Institute of Biosciences, University of S√£o Paulo",No variant information provided
+362,RCV000240423,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,No variant information provided
+363,RCV000446928,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 6,No variant information provided
+364,RCV000447242,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Likely benign,no assertion criteria provided,0,ISCA site 6,No variant information provided
+365,RCV000447418,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Likely benign,no assertion criteria provided,0,ISCA site 6,No variant information provided
+366,RCV000447857,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+367,RCV000449123,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Likely benign,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+368,RCV000449140,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+369,RCV000510342,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+370,RCV000511340,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+371,RCV000511797,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,ISCA site 1,No variant information provided
+372,RCV000511993,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+373,RCV000512145,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+374,RCV000684479,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+375,RCV000684487,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+376,RCV000684488,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+377,RCV000684522,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+378,RCV000684523,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+379,RCV000742061,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+380,RCV000742062,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+381,RCV000742071,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+382,RCV000742097,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+383,RCV000767671,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,Baylor Genetics,No variant information provided
+384,RCV000846659,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+385,RCV001007194,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+386,RCV001007506,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+387,RCV001007507,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+388,RCV001007508,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+413,RCV000240459,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,GeneDx,No variant information provided
+414,RCV000510351,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+415,RCV000510765,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+416,RCV000511015,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+417,RCV000511220,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+418,RCV000511256,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+419,RCV000512121,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+420,RCV000684524,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+421,RCV000684525,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+422,RCV000684526,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+423,RCV000684527,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+424,RCV000684528,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+425,RCV000684529,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+426,RCV000741989,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+427,RCV000767745,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,Baylor Genetics,No variant information provided
+428,RCV000767746,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,Baylor Genetics,No variant information provided
+429,RCV000849204,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+430,RCV001007502,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+431,RCV001258791,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+432,RCV001258793,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+435,RCV000240469,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,GeneDx,No variant information provided
+436,RCV000003211,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+440,RCV000208718,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Human Genome and Stem Cell Research Center,Department of Genetics and Evolutionary Biology, Institute of Biosciences, University of S√£o Paulo",No variant information provided
+441,RCV000208741,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Human Genome and Stem Cell Research Center,Department of Genetics and Evolutionary Biology, Institute of Biosciences, University of S√£o Paulo",No variant information provided
+442,RCV000240091,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,GeneDx,No variant information provided
+445,RCV000446956,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 6,No variant information provided
+446,RCV000448847,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 6,No variant information provided
+447,RCV000510873,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+448,RCV000512333,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+451,RCV000741689,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+452,RCV000741691,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+453,RCV000741692,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+454,RCV000846344,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+455,RCV001007181,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+458,RCV001254355,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+459,RCV001254356,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+460,RCV001254357,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+461,RCV001254358,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+462,RCV001254359,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+463,RCV001254360,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+464,RCV001254361,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+465,RCV001254362,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+466,RCV001254363,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+467,RCV001254364,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+468,RCV001254365,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+469,RCV001254366,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+470,RCV001254367,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+471,RCV001254368,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+472,RCV001254369,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+473,RCV001254370,ClinVar,ARSA,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,"Greenwood Genetic Center Diagnostic Laboratories,Greenwood Genetic Center",No variant information provided
+474,RCV001263056,ClinVar,ARSA,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"HudsonAlpha Institute for Biotechnology, HudsonAlpha Institute for Biotechnology",No variant information provided
+476,RCV001032659,ClinVar,PSAP,Metachromatic Leukodystrophy,Duplication,Likely pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+482,RCV000052511,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+483,RCV000052530,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",Compound Variant
+484,RCV000134848,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+485,RCV000135438,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 17,Compound Variant
+486,RCV000136658,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+487,RCV000138007,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+74,560088:1300,BIPmed_SNPhg19,PSAP,Metachromatic Leukodystrophy,single nucleotide variant,-,-,-,Admin,Incorrect reference base
+9,66776:16989,Global_Variome,PSAP,Metachromatic Leukodystrophy,Insertion,-,-,-,Mirella Filocamo,Inserted unknown sequence
+479,RCV000014304,ClinVar,PSAP,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,no assertion criteria provided,0,OMIM,Microsatellite
+480,RCV001090814,ClinVar,PSAP,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,"criteria provided, single submitter",1,CeGaT Praxis fuer Humangenetik Tuebingen,Microsatellite
+475,RCV000014290,ClinVar,PSAP,Metachromatic Leukodystrophy,single nucleotide variant,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+477,RCV000014297,ClinVar,PSAP,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+478,RCV000840527,ClinVar,PSAP,Metachromatic Leukodystrophy,Deletion,Benign,"criteria provided, single submitter",1,GeneDx,No variant information provided
+481,RCV000446453,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+488,RCV000626438,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number loss,drug response,no assertion criteria provided,0,"Oxford Haemato-Oncology Service,Oxford University Hospitals NHS Foundation Trust",No variant information provided
+489,RCV000683289,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+490,RCV000448750,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 6,No variant information provided
+491,RCV000510861,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+492,RCV000511389,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+493,RCV000749464,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+494,RCV000749465,ClinVar,PSAP,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+498,RCV000050822,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 4,Compound Variant
+499,RCV000051447,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+500,RCV000051474,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 17,Compound Variant
+501,RCV000051475,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+502,RCV000051476,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+503,RCV000051477,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,ISCA site 6,Compound Variant
+504,RCV000051478,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+505,RCV000051690,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",Compound Variant
+506,RCV000051719,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,GeneDx,Compound Variant
+507,RCV000134257,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 6,Compound Variant
+508,RCV000134690,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Benign,no assertion criteria provided,0,GeneDx,Compound Variant
+509,RCV000134996,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Benign,no assertion criteria provided,0,GeneDx,Compound Variant
+510,RCV000135586,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+511,RCV000136600,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+512,RCV000136675,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+513,RCV000137109,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+514,RCV000137127,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,ISCA site 1,Compound Variant
+515,RCV000137941,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+516,RCV000138004,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+517,RCV000138072,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Likely benign,no assertion criteria provided,0,ISCA site 1,Compound Variant
+518,RCV000138143,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+519,RCV000138287,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+520,RCV000138376,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+521,RCV000138552,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+522,RCV000138946,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+523,RCV000139164,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 4,Compound Variant
+524,RCV000139253,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+525,RCV000140239,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+526,RCV000140848,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+527,RCV000141010,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Benign,no assertion criteria provided,0,GeneDx,Compound Variant
+528,RCV000141319,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Likely pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+529,RCV000141647,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+530,RCV000141731,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+531,RCV000141838,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,ISCA site 1,Compound Variant
+532,RCV000142284,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+533,RCV000142519,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+534,RCV000142736,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 2,Compound Variant
+535,RCV000142857,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,ISCA site 1,Compound Variant
+536,RCV000143173,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+537,RCV000143325,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+538,RCV000143470,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,ISCA site 1,Compound Variant
+539,RCV000143706,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+565,RCV000824656,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+582,RCV001031611,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+583,RCV001031714,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+584,RCV001031779,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+585,RCV001031834,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Likely pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+586,RCV001033043,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Likely pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+587,RCV001033094,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Likely pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+588,RCV001033725,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Likely pathogenic,"criteria provided, single submitter",1,Invitae,Compound Variant
+589,RCV000051097,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,"criteria provided, single submitter",1,ISCA site 4,Compound Variant
+591,RCV000141810,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,Compound Variant
+75,65535:6185,BIPmed_SNPhg19,SUMF1,Metachromatic Leukodystrophy,single nucleotide variant,-,-,-,Admin,Incorrect reference base
+495,RCV000002782,ClinVar,SUMF1,Metachromatic Leukodystrophy,Microsatellite,Pathogenic,no assertion criteria provided,0,OMIM,Microsatellite
+496,RCV000002789,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+497,RCV000002793,ClinVar,SUMF1,Metachromatic Leukodystrophy,Deletion,Pathogenic,no assertion criteria provided,0,OMIM,No variant information provided
+540,RCV000240381,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,GeneDx,No variant information provided
+541,RCV000446290,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+542,RCV000447095,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+543,RCV000447247,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+544,RCV000447756,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+545,RCV000448528,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+546,RCV000448789,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+547,RCV000449247,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Likely benign,no assertion criteria provided,0,"ARUP Laboratories, Cytogenetics and Genomic Microarray,ARUP Laboratories",No variant information provided
+548,RCV000510414,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+549,RCV000510429,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+550,RCV000511041,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+551,RCV000511155,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+552,RCV000511463,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+553,RCV000511872,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+554,RCV000512359,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+555,RCV000682175,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+556,RCV000682176,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+557,RCV000682177,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+558,RCV000682178,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+559,RCV000682179,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+560,RCV000682180,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+561,RCV000682215,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+562,RCV000682231,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+563,RCV000742137,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+564,RCV000767705,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,"criteria provided, single submitter",1,Baylor Genetics,No variant information provided
+566,RCV000845748,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+567,RCV000845855,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+568,RCV000846550,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+569,RCV000847446,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+570,RCV000847638,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+571,RCV000847910,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+572,RCV000848339,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+573,RCV000848341,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+574,RCV000848388,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+575,RCV000848466,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+576,RCV000849206,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,"Lineagen, Inc",No variant information provided
+577,RCV000998197,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,"criteria provided, single submitter",1,CeGaT Praxis fuer Humangenetik Tuebingen,No variant information provided
+578,RCV001005407,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+579,RCV001005409,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+580,RCV001005410,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+581,RCV001007530,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Pathogenic,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+590,RCV000626532,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Likely pathogenic,"criteria provided, single submitter",1,"Centre for Mendelian Genomics,University Medical Centre Ljubljana",No variant information provided
+592,RCV001259811,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number loss,Uncertain significance,no assertion criteria provided,0,Quest Diagnostics Nichols Institute San Juan Capistrano,No variant information provided
+593,RCV000511055,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+594,RCV000512358,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,ISCA site 1,No variant information provided
+595,RCV000742133,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided
+596,RCV000742138,ClinVar,SUMF1,Metachromatic Leukodystrophy,copy number gain,Pathogenic,no assertion criteria provided,0,"Cincinnati Children's Hospital Medical Center Laboratory of Genetics and Genomics, Cincinnati Children's Hospital Medical Center",No variant information provided

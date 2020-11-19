@@ -51,11 +51,58 @@
             <div style="padding-bottom: 30px; padding-left: 10px">UID: u0454956; u01275125; u0420655</div>
         </header>
     </div>
-    <div id="body-wrap" style="display:flex; width:1400px">
-        <div id="filters" style="flex-grow: 1; flex-basis: 0">
-            This will be the filter boxes
+    <div id="body-wrap" style="display:flex; width:1400px;">
+        <div id="filters" style="flex-grow: 1; flex-basis: 0; padding-left: 10px; background-color:#cccccc;">
+            <div style="font-size:22px; padding-bottom:7px; text-align: center">
+                Filters
+            </div>
+            <div>
+                Filter by Database:
+            </div>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxClinVar" checked/> 
+                ClinVar 
+            </span> <!-- Add function here -->
+            <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxGlob" checked/> 
+                Global Variome 
+            </span> <!-- Add function here -->
+            <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxHum" checked/> 
+                Human Variome 
+            </span> <!-- Add function here -->
+            <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxBIPSNP" checked/> 
+                Brazilian Institute for Precision Medicine (BIPmed) Single Nucleotide Polymrphism (SNP) Study
+            </span> <!-- Add function here -->
+            <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxBIPWES" checked/> 
+                Brazilian Institute for Precision Medicine (BIPmed) Whole Exome Sequencing (WES) Study  
+            </span> <!-- Add function here -->
+            <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxCCHMC" checked/>
+                Cincinnati Children's Hospital Medical Center (CCHMC)
+            </span> <!-- Add function here -->
+            <div style="padding-top:7px">
+                Filter by Variant Type:
+            </div>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxSNV" checked/> 
+                Single Nucleotide Variant (SNV) </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxDel" checked/> 
+                Deletion </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxDup" checked/> 
+                Duplication </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIns" checked/> 
+                Insertion </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Indel </span> <!-- Add function here -->
+                <br/>
+
         </div>
-        <div id="figures" style="flex-grow: 4; flex-basis: 0">
+        <div id="figures" style="flex-grow: 6; flex-basis: 0">
             This will be the figures
             <!-- The rest is stuff that Marcus has added -->
             <div class="dropdown">
