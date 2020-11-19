@@ -1,6 +1,6 @@
 // read the csv using d3-fetch
 
-d3.csv('SQL/All_Invalid_SQL_Input.csv').then(function(data){
+d3.csv('data/MLD_Valid.csv').then(function(data){
     console.log(data)
 
     // call main class
@@ -11,7 +11,6 @@ d3.csv('SQL/All_Invalid_SQL_Input.csv').then(function(data){
 class Main {
 
     constructor(data) {
-        
 
         // get all unique diseases and genes from the data
         this.diseases = []
