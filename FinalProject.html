@@ -20,14 +20,15 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-  
-    <!-- 
-       Bootstrap styling if you want to use it: 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 </head>
 
 <body>
@@ -43,7 +44,7 @@
     
 
     <div id="header-wrap">
-        <header style="padding-left: 10px">
+        <header style="padding-left: 10px; padding-top:20px">
             <!-- <h1 style="padding-left: 10px"> Investigating Overlap and Segregation of Variants between ClinVar and LOVD Databases</h1> -->
             <h2 >Data Visualization CS - 5630/ CS - 6630 Final Project</h2>
             <div style="padding-bottom: 5px" >Name: David Sant; Dallon Durfey; Marcus Stucki</div>
@@ -74,9 +75,15 @@
     </div>
     <div id="body-wrap" style="display:flex; width:1200px;">
         <div id="filters" style="flex-grow: 1; flex-basis: 0; padding-left: 10px; background-color:#e6e6e6;">
-            <div style="font-size:22px; padding-bottom:10px; text-align: center">
+            <div style="font-size:22px; padding-bottom:10px; text-align: center; padding-right: 10px">
                 Filters
             </div>
+            <div style="padding-bottom:10px; padding-right:10px">
+                <button type="button" class="btn btn-primary  btn-block" style="margin-left:0px; margin-bottom:0px; margin-top:0px;">
+                    Redraw
+                </button> <!-- btn-outline-secondary btn-block btn-sm -->
+            </div>
+
             <div style="padding-bottom:5px">
                 Filter by Database:
             </div>
@@ -182,7 +189,7 @@
             <div style="padding-left:10px">
                 <label>Select a gene</label>
                 <select id="dropdown">
-                    <option selected>All Genes</option> <!-- These will need value="ARSA" or something like that to be able to graph them-->
+                    <option selected>None Selected</option> <!-- These will need value="ARSA" or something like that to be able to graph them-->
                     <option>ARSA</option>
                     <option>PSAP</option>
                     <option>SUMF1</option> <!-- Currently hard coded, may change this later-->
