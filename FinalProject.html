@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Visualization - Final Project - CLINVAR and LOVD Overlap </title>
-    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://d3js.org/d3-array.v2.min.js"></script>
     <script src="https://d3js.org/d3-color.v2.min.js"></script>
     <script src="https://d3js.org/d3-dispatch.v2.min.js"></script>
@@ -16,7 +16,7 @@
     <script src="https://d3js.org/d3-drag.v2.min.js"></script>
     <script src="https://d3js.org/d3-brush.v2.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
-    <script src="./js/script.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -107,6 +107,10 @@
                 BIPmed WES  
             </span> <!-- Add function here -->
             <br/>
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxMSEQ" checked/> 
+                MSeqDR  
+            </span> <!-- Add function here -->
+            <br/>
             <span style="padding-left:5px"> <input type="checkbox" id="checkBoxCCHMC" checked/>
                 CCHMC
             </span> <!-- Add function here -->
@@ -131,37 +135,37 @@
             <div style="padding-top:10px; padding-bottom:5px">
                 Filter by Pathogenicity:
             </div>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxBenign" checked/> 
                 Benign </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxLikBenign" checked/> 
                 Likely Benign </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxVUS" checked/> 
                 Unknown Significance </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxLikPath" checked/> 
                 Likely Pathogenic </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxPath" checked/> 
                 Pathogenic </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxCon" checked/> 
                 Conflicting </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxNotPro" checked/> 
                 Not Provided </span> <!-- Add function here -->
                 <br/>
             <div style="padding-top:10px; padding-bottom:5px">
                 Filter by Review Status (ClinVar only):
             </div>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxReview0" checked/> 
                 0 Stars </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxReview1" checked/> 
                 1 Star </span> <!-- Add function here -->
                 <br/>
-            <span style="padding-left:5px; padding-bottom:10px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+            <span style="padding-left:5px; padding-bottom:10px"> <input type="checkBox" id="checkBoxReview2" checked/> 
                 2 Stars </span> <!-- Add function here -->
                 <br/>
 
@@ -224,5 +228,6 @@
     </div>   
   
 </body>
+<script src="./js/script.js"></script>
 
 </html>
