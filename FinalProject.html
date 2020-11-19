@@ -43,44 +43,65 @@
     
 
     <div id="header-wrap">
-        <header>
+        <header style="padding-left: 10px">
             <!-- <h1 style="padding-left: 10px"> Investigating Overlap and Segregation of Variants between ClinVar and LOVD Databases</h1> -->
-            <h2 style="padding-left: 10px" >Data Visualization CS - 5630/ CS - 6630 Final Project</h2>
-            <div style="padding-left: 10px; padding-bottom: 5px" >Name: David Sant; Dallon Durfey; Marcus Stucki</div>
-            <div style="padding-left: 10px; padding-bottom: 5px">E-Mail: david.sant@utah.edu; dallon.durfey@utah.edu; marcus.stucki@hsc.utah.edu</div>
-            <div style="padding-bottom: 30px; padding-left: 10px">UID: u0454956; u01275125; u0420655</div>
+            <h2 >Data Visualization CS - 5630/ CS - 6630 Final Project</h2>
+            <div style="padding-bottom: 5px" >Name: David Sant; Dallon Durfey; Marcus Stucki</div>
+            <div style="padding-bottom: 5px">E-Mail: david.sant@utah.edu; dallon.durfey@utah.edu; marcus.stucki@hsc.utah.edu</div>
+            <div style="padding-bottom: 30px">UID: u0454956; u01275125; u0420655</div>
         </header>
     </div>
-    <div id="body-wrap" style="display:flex; width:1400px;">
-        <div id="filters" style="flex-grow: 1; flex-basis: 0; padding-left: 10px; background-color:#cccccc;">
+    <div id="descriptive-info" style="padding-left: 10px">
+        <h3 >Where does this data come from?</h3>
+        <div style="padding-bottom: 15px" >
+            This page gives shows information about the overlap and segregation of genetic variants in clinical genetics 
+            databases. The variants are currently related to three genes: <i>ARSA</i>, <i>PSAP</i> and <i>SUMF1</i>. All 
+            three genes have been found to be associated with Metachromatic Leukodystrophy.
+            <br/>
+            The databases investigated are:
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a></li>
+                <li><a href="https://databases.lovd.nl/shared/genes">Global Variome Shared LOVD</a></li>
+                <li><a href="http://proteomics.bio21.unimelb.edu.au/lovd/genes">Human Variome Project Proteomics Database</a></li>
+                <li><a href="https://mseqdr.org/MITO/genes">Mitochondrial Disease Locus Specific Database (MSeqDR-LSDB)</a></li>
+                <li><a href="http://bipmed.iqm.unicamp.br/snparray_hg19/genes">Brazilian Initiative on Precision Medicine (BIPmed) Single Nucleotide Polymorphism array database</a></li>
+                <li><a href="http://bipmed.iqm.unicamp.br/wes_hg19/genes/">Brazilian Initiative on Precision Medicine (BIPmed) Whole Exome Sequencing (WES) database</a></li>
+                <li><a href="https://research.cchmc.org/LOVD2/home.php">Cincinnati Children’s Hospital Medical Center (CCHMC) database</a></li>
+            </ul>
+        </div>
+
+
+    </div>
+    <div id="body-wrap" style="display:flex; width:1200px;">
+        <div id="filters" style="flex-grow: 1; flex-basis: 0; padding-left: 10px; background-color:#e6e6e6;">
             <div style="font-size:22px; padding-bottom:7px; text-align: center">
                 Filters
             </div>
             <div>
                 Filter by Database:
             </div>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxClinVar" checked/> 
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxClinVar" checked/> 
                 ClinVar 
             </span> <!-- Add function here -->
             <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxGlob" checked/> 
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxGlob" checked/> 
                 Global Variome 
             </span> <!-- Add function here -->
             <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxHum" checked/> 
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxHum" checked/> 
                 Human Variome 
             </span> <!-- Add function here -->
             <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxBIPSNP" checked/> 
-                Brazilian Institute for Precision Medicine (BIPmed) Single Nucleotide Polymrphism (SNP) Study
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxBIPSNP" checked/> 
+                BIPmed SNP
             </span> <!-- Add function here -->
             <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxBIPWES" checked/> 
-                Brazilian Institute for Precision Medicine (BIPmed) Whole Exome Sequencing (WES) Study  
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxBIPWES" checked/> 
+                BIPmed WES  
             </span> <!-- Add function here -->
             <br/>
-            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxCCHMC" checked/>
-                Cincinnati Children's Hospital Medical Center (CCHMC)
+            <span style="padding-left:5px"> <input type="checkbox" id="checkBoxCCHMC" checked/>
+                CCHMC
             </span> <!-- Add function here -->
             <div style="padding-top:7px">
                 Filter by Variant Type:
@@ -102,76 +123,62 @@
                 <br/>
 
         </div>
+        <!-- Each of these will need an SVG added through d3 -->
         <div id="figures" style="flex-grow: 6; flex-basis: 0">
-            This will be the figures
             <!-- The rest is stuff that Marcus has added -->
-            <div class="dropdown">
-                <button onclick ="pickDisease()" class = "dropDisease">Select a Disease</button>
-                <div id="DiseaseList" class = "diseaseList">
-                    <a href = "#">Metabolic Diseases</a>
-                    <a href = "#">Metachromatic Leukodystrophy (MLD)</a>
-                    <a href = "#">Severe Combined Immunodeficiency (SCID)</a>
-                </div>  
-            </div>
-        
-            <div class="dropdown">
-                <button onclick ="pickGene()" class = "dropGene">Select a Gene</button>
-                <div id="GeneList" class = "geneList">
-        
-            </div>
-        
-            <div class="overview">
-                <div>
-                  <h2>ClinVar and LOVD Disease Overview</h2>
-                  <div id="Overview-chart">
-                    <svg id="Overlap-bar-chart">
-            
-                    </svg>
-                    <svg id="Total-Variant-chart">
-            
-                    </svg>
-            
+            <div id="overlapFigures" style="display:flex; width:100%;"> <!-- Width is 1191 on the page-->
+                <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
+                    Percentage Overlap between ClinVar and LOVD
                 </div>
-            </div> 
-            <div class="disease">
-                <div>
-                    <div id="Disease-chart">
-                        <svg id="Stacked-Disease-chart">
-                
-                        </svg>
-                        <svg id="frequencyDiseaseChart">
-                
-                        </svg>
-                
-                    </div>
-                    </div>
-                </div>
-        
-            <div class="gene">
-                 <div>
-                    <div id="Gene-chart">
-                        <svg id="genePathogen-scatterplot">
-                    
-                        </svg>
-                        <svg id="freqGeneChart">
-                    
-                        </svg>
-        
-                    </svg>
-                    <svg id="stackedGeneFailChart">
-                
-                    </svg>
-                    
-                    </div>
+                <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
+                    Count Overlap between ClinVar and LOVD
                 </div>
             </div>
-        </div>
-    </div>
+            <br/>
+            <div id="overlapFigures" style="text-align: center; padding-top:10px">
+                Percentage of Variants per Gene of Each Pathogenicity
+            </div>
+            <br/>
+            <!-- The rest is stuff related to picking an individual gene -->
+
+
+
+            <div style="padding-left:10px">
+                <label>Select a gene</label>
+                <select id="dropdown">
+                    <option selected>All Genes</option> <!-- These will need value="ARSA" or something like that to be able to graph them-->
+                    <option>ARSA</option>
+                    <option>PSAP</option>
+                    <option>SUMF1</option> <!-- Currently hard coded, may change this later-->
+                </select>
+                <br/>
+                <br/>
+
+            </div>
+            <div style="padding-left:10px; display:flex; width:100%;">
+                <div id="frequency-distance" style="flex-grow: 1; flex-basis: 0; text-align: center;">
+                    Distance from TSS vs -log10 Frequency 
+                </div>
+                <div id="path-comparison" style="flex-grow: 1; flex-basis: 0; text-align: center;">
+                    Pathogenicity reported in LOVD vs ClinVar  
+                </div>
+                <br/>
+
+            </div>
+            <br/>
+            <br/>
+            <div id="frequency-height" style="padding-left:10px; text-align: center;">
+                Location of Variants Within the Gene
+            </div>
+            <br/>
+            <br/>
+            <div id="invalid" style="padding-left:10px; text-align: center;">
+                Count of Invalid Variants per Database
+            </div>
 
     
-    </div>
-    
-    
+        </div>
+    </div>   
   
 </body>
 
