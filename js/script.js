@@ -1,24 +1,29 @@
 // read the csv using d3-fetch
 
-d3.csv('data/MLD_Valid.csv').then(function(data){
-    //console.log(data)
+Promise.all([
+    d3.csv("data/MLD_Valid.csv"), // read in the MLD data
+    d3.json("data/Genomic_Features.json") // read the genomic features data
+]).then(function(data){
+    let MLD_data = data[0]
+    let genomic_features = data[1]
 
-    // call main class
-    new Main(data)
-    
-    
-});
+    // call the class
+    new Main(MLD_data, genomic_features)
+
+})
 
 
 class Main {
 
-    constructor(data) {
+    constructor(MLD_data, genomic_features) {
+        console.log(MLD_data)
+        console.log(genomic_features)
 
         // get all unique diseases and genes from the data
         this.diseases = []
         this.genes = []
 
-        for (let d of data){
+        for (let d of MLD_data){
             let disease = d.Disease
             let gene = d["Gene Symbol"]
             if (!this.diseases.includes(disease)){
