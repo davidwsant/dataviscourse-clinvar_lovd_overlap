@@ -74,10 +74,10 @@
     </div>
     <div id="body-wrap" style="display:flex; width:1200px;">
         <div id="filters" style="flex-grow: 1; flex-basis: 0; padding-left: 10px; background-color:#e6e6e6;">
-            <div style="font-size:22px; padding-bottom:7px; text-align: center">
+            <div style="font-size:22px; padding-bottom:10px; text-align: center">
                 Filters
             </div>
-            <div>
+            <div style="padding-bottom:5px">
                 Filter by Database:
             </div>
             <span style="padding-left:5px"> <input type="checkbox" id="checkBoxClinVar" checked/> 
@@ -103,7 +103,7 @@
             <span style="padding-left:5px"> <input type="checkbox" id="checkBoxCCHMC" checked/>
                 CCHMC
             </span> <!-- Add function here -->
-            <div style="padding-top:7px">
+            <div style="padding-top:10px; padding-bottom:5px">
                 Filter by Variant Type:
             </div>
             <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxSNV" checked/> 
@@ -121,10 +121,46 @@
             <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
                 Indel </span> <!-- Add function here -->
                 <br/>
+            <div style="padding-top:10px; padding-bottom:5px">
+                Filter by Pathogenicity:
+            </div>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Benign </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Likely Benign </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Unknown Significance </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Likely Pathogenic </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Pathogenic </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Conflicting </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                Not Provided </span> <!-- Add function here -->
+                <br/>
+            <div style="padding-top:10px; padding-bottom:5px">
+                Filter by Review Status (ClinVar only):
+            </div>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                0 Stars </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                1 Star </span> <!-- Add function here -->
+                <br/>
+            <span style="padding-left:5px; padding-bottom:10px"> <input onclick="" type="checkbox" id="checkBoxIndel" checked/> 
+                2 Stars </span> <!-- Add function here -->
+                <br/>
 
         </div>
         <!-- Each of these will need an SVG added through d3 -->
-        <div id="figures" style="flex-grow: 6; flex-basis: 0">
+        <div id="figures" style="flex-grow: 5; flex-basis: 0">
             <!-- The rest is stuff that Marcus has added -->
             <div id="overlapFigures" style="display:flex; width:100%;"> <!-- Width is 1191 on the page-->
                 <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
