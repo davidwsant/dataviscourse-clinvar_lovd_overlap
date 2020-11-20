@@ -2,22 +2,29 @@
 
 Promise.all([
     d3.csv("data/MLD_Valid.csv"), // read in the MLD data
-    d3.json("data/Genomic_Features.json") // read the genomic features data
+    d3.json("data/Genomic_Features.json"), // read the genomic features data
+    d3.csv("data/MLD_Invalid.csv") // read the invalid MLD data
 ]).then(function(data){
     let MLD_data = data[0]
     let genomic_features = data[1]
+    let invalid_data = data[2]
 
     // call the class
-    new Main(MLD_data, genomic_features)
-
+    new Main(MLD_data, genomic_features, invalid_data)
+    
 })
 
 
 class Main {
 
-    constructor(MLD_data, genomic_features) {
+    constructor(MLD_data, genomic_features, invalid_data) {
+        this.MLD_data = MLD_data 
+        this.genomic_features = genomic_features
+        this.invalid_data = invalid_data
+
         console.log(MLD_data)
         console.log(genomic_features)
+        console.log(invalid_data)
 
         // get all unique diseases and genes from the data
         this.diseases = []
@@ -68,6 +75,8 @@ class Main {
         this.eventListeners()
         // console.log(this.diseases)
         // console.log(this.genes)
+        // this.drawItNow()
+        // this.redraw()
 
 
     }
@@ -156,6 +165,11 @@ class Main {
 
     }
     
-
+    redraw(){
+        
+    }
+    
 
 }
+
+
