@@ -22,6 +22,20 @@ class Main {
         this.genomic_features = genomic_features
         this.invalid_data = invalid_data
 
+        for (let variant of this.MLD_data) {
+            variant['Overall_MAF'] = +variant['Overall_MAF']
+            variant['Position Start'] = +variant['Position Start']
+            variant['Position Stop'] = +variant['Position Stop']
+            variant['Variant Length'] = +variant['Variant Length']
+            let midPoint = Math.round((variant['Position Stop'] + variant['Position Start'])/2)
+            variant['Position Middle'] = midPoint
+            let logFreq = 6
+            if (variant['Overall_MAF'] > 0.000001) {
+                logFreq = -1*Math.log10(variant['Overall_MAF'])
+            }
+            variant['Frequency Position'] = logFreq
+        }
+
         console.log(MLD_data)
         console.log(genomic_features)
         console.log(invalid_data)
@@ -73,6 +87,32 @@ class Main {
         }}
         
         this.eventListeners()
+        let frequencyDistance = d3.select('#frequency-distance')
+        frequencyDistance.append('svg')
+            .attr('id', 'frequency-distance-svg')
+            .attr('width', 450)
+            .attr('height', 300)
+        let freqDistanceSVG = d3.select('#frequency-distance-svg')
+        freqDistanceSVG
+            .append('text')
+            .attr('id', 'frequency-distance-text')
+            .attr('text-anchor', 'middle')
+            .attr('x', 225)
+            .attr('y', 150)
+            .style('font-size', '12px')
+        freqDistanceSVG.append('g')
+            .attr('id', 'freqDistanceXAxis')
+            .attr('transform', 'translate(30,240)')
+        
+        freqDistanceSVG.append('g')
+            .attr('id', 'freqDistanceYAxis')
+            .attr('transform', 'translate(30,20)')
+            
+        freqDistanceSVG.append('g')
+            .attr('id', 'freqDistancePlotSection')
+            .attr("transform", "translate(30,20)")
+        this.drawDistanceTSSScatter()
+        this.updateWithGene()
         // console.log(this.diseases)
         // console.log(this.genes)
         // this.drawItNow()
@@ -164,9 +204,156 @@ class Main {
 
 
     }
-    
-    redraw(){
+    drawDistanceTSSScatter(){
+        let dropDownValue = d3.select('#dropdownMenu').node().value
+        let svg = d3.select('frequency-distance-svg')
+        if (dropDownValue === "None Selected") {
+            d3.select('#frequency-distance-text')
+                .text('Please Select a Gene to see Chart')
+            d3.select("#freqDistanceXAxis").attr('opacity', '0')
+            d3.select("#freqDistanceYAxis").attr('opacity', '0')
+            let scatterCircles = d3.select('#freqDistancePlotSection')
+                .selectAll('circle')
+                .data('')
+                .join('circle')
+        }
+        else {
+            //find TSS and TTS to filter out relevant variants
+            let tss = +this.genomic_features[dropDownValue].TSS
+            let tts = +this.genomic_features[dropDownValue].TTS
+            let sense = this.genomic_features[dropDownValue].sense
+            let geneLength = Math.abs(tts - tss)
+            let addDistance = Math.round(geneLength*0.05)
+
+            let relevantVariants = []
+            let rangeStart = tss-addDistance
+            let rangeStop = tts+addDistance
+            if (sense === 'reverse') {
+                rangeStart = tts-addDistance
+                rangeStop = tss+addDistance
+            }
+            let keepDB = []
+            for (let db of Object.entries(this.filters.databases)) {
+                if (db[1]) {
+                    keepDB.push(db[0])
+                }
+            }
+            // console.log(keepDB)
+            let keepPath = []
+            for (let db of Object.entries(this.filters.pathogenicity)) {
+                if (db[1]) {
+                    keepPath.push(db[0])
+                }
+            }
+            //console.log(keepPath)
+            let keepType = []
+            for (let db of Object.entries(this.filters.varType)) {
+                if (db[1]) {
+                    keepType.push(db[0])
+                }
+            }
+            //console.log(keepType)
+            let keepStatus = []
+            for (let db of Object.entries(this.filters.reviewStatus)) {
+                if (db[1]) {
+                    keepStatus.push(db[0])
+                }
+            }
+            keepStatus.push('-') // LOVD does not have a star status
+            // console.log(keepStatus)
+            // console.log(keepType)
+            // console.log(keepPath)
+            // console.log(keepDB)
+            //console.log(this.MLD_data)
+            for (let variant of this.MLD_data) {
+                //console.log(variant)
+                // Only keep variants that are not large copy number variants and within the range
+                // Only keep variants that meet the filter crteria
+
+                if (variant['Gene Symbol'] === dropDownValue && 
+                    variant['Position Middle'] >= rangeStart &&
+                    variant['Position Middle'] <= rangeStop &&
+                    keepDB.includes(variant['Database']) &&
+                    keepPath.includes(variant['Pathogenicity']) &&
+                    keepType.includes(variant['Variant Type']) &&
+                    keepStatus.includes(variant['Star Level'])) {
+                        relevantVariants.push(variant) 
+                    }
+            }
+            for (let variant of relevantVariants) {
+                //sense
+                //tss
+                let distanceTss = variant['Position Middle'] - tss 
+                if (sense === 'reverse') {
+                    distanceTss = -1*distanceTss
+                }
+                variant['Distance from TSS'] = distanceTss
+            }
+            console.log(relevantVariants)
+            let scaleX = d3.scaleLinear()
+                .domain([-addDistance,geneLength+addDistance])
+                .range([0, 400]) // use 30 for legend left, 20 for space right
+            let scaleY = d3.scaleLinear()
+                .domain([6,0])
+                .range([0, 220]) // use 50 for legend
+            // freqDistanceSVG.append('g')
+            //     .attr('id', 'freqDistancePlotSection')
+            //     .attr("transform", "translate(30,20)")
+
+            let classDict = {'Pathogenic':'pathogenic', 
+                'Likely Pathogenic':'likely-pathogenic', 
+                'VUS':'vus', 
+                'Likely Benign': 'likely-benign', 
+                'Benign': 'benign',
+                'Not Provided': 'not-provided',
+                'Conflicting': 'conflicting'}
+
+            
+            let x_axis = d3.axisBottom(scaleX).ticks(10)
+            d3.select("#freqDistanceXAxis").call(x_axis)
+                .attr('opacity', '1')
+                .selectAll('text')
+                .style("text-anchor", "end")
+                .attr('transform', 'rotate(-45)')
+            let y_axis = d3.axisLeft(scaleY).ticks(7)
+                d3.select("#freqDistanceYAxis").call(y_axis)
+                .attr('opacity', '1')
+
+            d3.select('#frequency-distance-text')
+                .text('')
+            let scatterCircles = d3.select('#freqDistancePlotSection')
+                .selectAll('circle')
+                .data(relevantVariants)
+                .join('circle')
+
+            let newCircles = scatterCircles.enter().append('circle')
+                .attr('cx', d => scaleX(d['Distance from TSS']))
+                .attr('cy', d => scaleY(d['Frequency Position']))
+                .attr('r', '3')
+                .attr('opacity', '0.5')
+                .attr('class', d => classDict[d['Pathogenicity']])
+
+            newCircles.merge(scatterCircles)
+                .transition()
+                .duration(1000)
+                .attr('cx', d => scaleX(d['Distance from TSS']))
+                .attr('cy', d => scaleY(d['Frequency Position']))
+                .attr('r', '3')
+                .attr('opacity', '0.5')
+                .attr('class', d => classDict[d['Pathogenicity']])
+
+
+        }
+        //console.log(dropDownValue)
         
+
+    }
+    updateWithGene(){
+        d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
+    }
+    redraw(){
+        let redrawButton = d3.select('#redraw-button')
+        redrawButton.on('click', () => console.log('clicked')) //d => this.drawDistanceTSSScatter()
     }
     
 

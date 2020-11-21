@@ -8,3 +8,31 @@ h1 {
     white-space: normal;
     word-wrap: break-word;
 }
+
+.pathogenic {
+    fill: red;
+}
+
+.likely-pathogenic {
+    fill: orange;
+}
+
+.vus {
+    fill: purple;
+}
+
+.likely-benign {
+    fill: blue;
+}
+
+.benign {
+    fill: green;
+}
+
+.not-provided {
+    fill: gray;
+}
+
+.conflicting {
+    fill: black;
+}
