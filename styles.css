@@ -36,3 +36,18 @@ h1 {
 .conflicting {
     fill: black;
 }
+.line-chart{
+    stroke-width: 3;
+    fill: none;
+    opacity: 1;
+}
+
+.hovered{
+    opacity: 1;
+    stroke-width: 5;
+
+}
+
+.not-hovered{
+    opacity: .4;
+}
