@@ -445,7 +445,7 @@ class Main {
     
         // draw circles
         let radius = 6
-        d3.select('#ASRA-group').selectAll('circle')
+        let asra_circles = d3.select('#ASRA-group').selectAll('circle')
             .data(percentages_data[0])
             .join(
                 enter => {enter.append('circle')
@@ -453,6 +453,8 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'red')
+                .append('title')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
                     .transition()
                         .duration(duration)
 
@@ -463,13 +465,16 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'red')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
+
                 },
                 exit=>{exit.transition()
                     .duration(duration)
                 }
             )
+            
 
-        d3.select('#PSAP-group').selectAll('circle')
+        let psap_circles = d3.select('#PSAP-group').selectAll('circle')
             .data(percentages_data[1])
             .join(
                 enter => {enter.append('circle')
@@ -477,6 +482,8 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'blue')
+                .append('title')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
                     .transition()
                         .duration(duration)
 
@@ -487,13 +494,15 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'blue')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
+
                 },
                 exit=>{exit.transition()
                     .duration(duration)
                 }
             )
 
-        d3.select('#SUMF1-group').selectAll('circle')
+        let sumf1_circles = d3.select('#SUMF1-group').selectAll('circle')
             .data(percentages_data[2])
             .join(
                 enter => {enter.append('circle')
@@ -501,6 +510,9 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'green')
+                .append('title')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
+
                     .transition()
                         .duration(duration)
 
@@ -511,6 +523,8 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'green')
+                    .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
+
                 },
                 exit=>{exit.transition()
                     .duration(duration)
@@ -525,7 +539,76 @@ class Main {
             .attr('x', -200)
             .attr('transform', 'rotate(-90)')
 
+        // add legend
 
+        let svg = d3.select("#pathogenicity-svg")
+
+            svg.append('circle')
+                .attr('cx', 500)
+                .attr('cy', 42)
+                .attr('r', radius)
+                .style('fill', 'red')
+
+            
+            svg.append('circle')
+                .attr('cx', 500)
+                .attr('cy', 62)
+                .attr('r', radius)
+                .style('fill', 'blue')
+
+            svg.append('circle')
+                .attr('cx', 500)
+                .attr('cy', 82)
+                .attr('r', radius)
+                .style('fill', 'green')
+
+            svg.append('text')
+                .text('ASRA')
+                .attr('x', 510)
+                .attr('y', 47)
+            
+            svg.append('text')
+                .text('PSAP')
+                .attr('x', 510)
+                .attr('y', 67)
+            
+            svg.append('text')
+                .text('SUMF1')
+                .attr('x', 510)
+                .attr('y', 87)
+
+        
+        // add hover change
+        let all_lines = d3.select('#pathogenicity-svg').selectAll('path')
+            .classed('not-hovered', true)
+            .classed('hovered', false)
+
+        let all_circles = d3.select('#pathogenicity-svg').selectAll('circle')
+            .classed('not-hovered', true)
+            .classed('hovered', false)
+
+        all_lines.on('mouseover', event=>{
+            d3.select(event.target)
+                .classed('hovered', true)
+                .classed('not-hovered', false)
+        })
+            .on('mouseout', event=>{
+                d3.select(event.target)
+                .classed('hovered', false)
+                .classed('not-hovered', true)
+            })
+
+        all_circles.on('mouseover', event=>{
+            d3.select(event.target)
+                .classed('hovered', true)
+                .classed('not-hovered', false)
+        })
+            .on('mouseout', event=>{
+                d3.select(event.target)
+                    .classed('hovered', false)
+                    .classed('not-hovered', true)
+            })
+        
     }
     
     redraw(){
