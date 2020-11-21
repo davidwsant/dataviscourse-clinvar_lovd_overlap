@@ -289,7 +289,20 @@ class Main {
             percentages_data.push(temp_data)
         }
         
-        console.log(percentages_data)
+        // the percentages data for lines graph won't include values for "conflicting" or "not reported"
+        
+        let lines_data = []
+        for (let list of percentages_data){
+            let temp_array = []
+            for (let item of list){
+                let path = item.pathogenicity
+                if (path !== 'Conflicting' && path !== 'Not Provided'){
+                    temp_array.push(item)
+                }
+            }
+            lines_data.push(temp_array)
+        }
+
 
         // set up the svg
         let svg_width = 600
@@ -337,10 +350,11 @@ class Main {
         
         // draw the graph
 
+        // set transition duration time
+        let duration = 2000
+
         let linesgenerator = d3.line()
-            .x(d=>{
-                console.log(d.value)
-                return scaleX(d.pathogenicity)})
+            .x(d=>scaleX(d.pathogenicity))
             .y(d=>scaleY(d.value));
             
         pathogenicityGraphSVG.append('g')
@@ -356,64 +370,166 @@ class Main {
             .attr('id', 'SUMF1-group')
             .attr('transform', `translate(${margins + 40}, -${margins})`)
 
-        
-        d3.select('#ASRA-group')
-                // .append('path')
-                // .attr('d', linesgenerator(percentages_data[0]))
-                // .style('stroke', 'red')
-                // .classed('line-chart', true)
-            
-        
-        // d3.select('#ASRA-group')
-        //         .selectAll('circle')
+        // draw lines
+        d3.select('#ASRA-group')  
+            .selectAll('path')
             .data([1])
             .join(
-                enter => enter.append('path')
+                enter => {enter.append('path')
                     .style('stroke', 'red')
                     .classed('line-chart', true)
                 
-                    // .transition()
-                    //     .duration(2000)
-                        .attr('d', linesgenerator(percentages_data[0])),
+                    .transition()
+                        .duration(duration)
+                        .attr('d', linesgenerator(lines_data[0]))},
                 
-                update=>update
-                .call(update=>update.transition()
-                    .duration(2000)
-                    .attr('d', linesgenerator(percentages_data[0]))),
+                update=>{update
+                    .transition()
+                    .duration(duration)
+                    .attr('d', linesgenerator(lines_data[0]))},
 
-                exit => exit
-                .call(exit=>exit.transition()
-                    .duration(2000)
-                    .remove())
+                exit => {exit
+                    .transition()
+                    .duration(duration)
+                    .remove()}
 
             )
 
         d3.select('#PSAP-group')
-            .append('path')
-            .attr('d', linesgenerator(percentages_data[1]))
-            .style('stroke', 'blue')
-            .classed('line-chart', true)   
-            
+            .selectAll('path')
+            .data([1])
+            .join(
+                enter => {enter.append('path')
+                    .style('stroke', 'blue')
+                    .classed('line-chart', true)
+                
+                    .transition()
+                        .duration(duration)
+                        .attr('d', linesgenerator(lines_data[1]))},
+                
+                update=>{update
+                    .transition()
+                    .duration(duration)
+                    .attr('d', linesgenerator(lines_data[1]))},
+
+                exit => {exit
+                    .transition()
+                    .duration(duration)
+                    .remove()}
+
+            )
+        
         d3.select('#SUMF1-group')
-            .append('path')
-            .attr('d', linesgenerator(percentages_data[2]))
-            .style('stroke', 'green')
-            .classed('line-chart', true)  
-            
+            .selectAll('path')
+            .data([1])
+            .join(
+                enter => {enter.append('path')
+                    .style('stroke', 'green')
+                    .classed('line-chart', true)
+                
+                    .transition()
+                        .duration(duration)
+                        .attr('d', linesgenerator(lines_data[2]))},
+                
+                update=>{update
+                    .transition()
+                    .duration(duration)
+                    .attr('d', linesgenerator(lines_data[2]))},
 
-        // d3.select('#ASRA-group')
-        // .attr('transform', `translate(${margins + 40}, -${margins})`)
-        // .append('path')
-        // .style('stroke', 'red')
-        // .style('stroke-width', 2)
-        // .style('fill', 'none')
-        // .attr('d', linesgenerator(percentages_data[0]))
+                exit => {exit
+                    .transition()
+                    .duration(duration)
+                    .remove()}
 
+            )
+    
+        // draw circles
+        let radius = 6
+        d3.select('#ASRA-group').selectAll('circle')
+            .data(percentages_data[0])
+            .join(
+                enter => {enter.append('circle')
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'red')
+                    .transition()
+                        .duration(duration)
+
+                },
+                update=>{update.transition()
+                    .duration(duration)
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'red')
+                },
+                exit=>{exit.transition()
+                    .duration(duration)
+                }
+            )
+
+        d3.select('#PSAP-group').selectAll('circle')
+            .data(percentages_data[1])
+            .join(
+                enter => {enter.append('circle')
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'blue')
+                    .transition()
+                        .duration(duration)
+
+                },
+                update=>{update.transition()
+                    .duration(duration)
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'blue')
+                },
+                exit=>{exit.transition()
+                    .duration(duration)
+                }
+            )
+
+        d3.select('#SUMF1-group').selectAll('circle')
+            .data(percentages_data[2])
+            .join(
+                enter => {enter.append('circle')
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'green')
+                    .transition()
+                        .duration(duration)
+
+                },
+                update=>{update.transition()
+                    .duration(duration)
+                    .attr('r', radius)
+                    .attr('cx', d=>scaleX(d.pathogenicity))
+                    .attr('cy', d=>scaleY(d.value))
+                    .style('fill', 'green')
+                },
+                exit=>{exit.transition()
+                    .duration(duration)
+                }
+            )
+
+        // add y-axis label
+        d3.select('#pathogenicity-svg').append('text')
+            .text('Proportion')
+            .style('text-anchor', 'middle')
+            .attr('y', 7)
+            .attr('x', -200)
+            .attr('transform', 'rotate(-90)')
 
 
     }
     
     redraw(){
+    
         
     }
     
