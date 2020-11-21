@@ -200,6 +200,13 @@ class Main {
         d3.select('#checkBoxReview2').on('change', (event) => {
             this.filters['reviewStatus']['2'] = event.path[0].checked
         })
+
+        // redraw button
+        let redrawButton = d3.select('#redraw-button')
+        redrawButton.on('click', ()=>{
+            this.redraw()
+        })
+
         
 
 
@@ -793,15 +800,13 @@ class Main {
         
     }
     
-    redraw(){
-  
-    };
     updateWithGene(){
         d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
     }
+
     redraw(){
-        let redrawButton = d3.select('#redraw-button')
-        redrawButton.on('click', () => console.log('clicked')) //d => this.drawDistanceTSSScatter()
+       this.pathogenicityGraph()
+       this.drawDistanceTSSScatter()
     }
     
 
