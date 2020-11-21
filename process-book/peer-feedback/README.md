@@ -9,7 +9,7 @@ sources and that we were going to do this for so many genes. This is an awful lo
 
 Specific points that we went over:
 
-# General Questions
+### General Questions
 * Are the objectives interesting to the target audience? 
   * Yes, the objectives will be helpful for portraying information to people working with genetic information including clinicians
 * Is the scope of the project appropriate? If not, suggest improvements. Is the split between optional and must-have features appropriate? Why?
@@ -23,7 +23,7 @@ Specific points that we went over:
 * Is an interesting story told? 
   * Yes, the story is interesting because it can be used to help people determine if variants are pathogenic or not. 
 
-# Visual Encoding
+### Visual Encoding
 * Does the visualization follow the principles used in class? 
   * Yes, the basic principles for design of visualization and usability and interpretability are followed. 
 * What is the primary visual encoding? Does it match the most important aspect of the data? 
@@ -33,7 +33,7 @@ Specific points that we went over:
 * Is color sensibly used? If not, suggest improvements. 
   * Yes. Color scheme used was copied from python, which uses a color-blindness sensitive scheme. Any changes in color will still take into account colorblindness and make sure the colors are easily distinguishable.
 
-# Interaction and Animation
+### Interaction and Animation
 * Is the interaction meaningful? If not, suggest improvements.
   * Yes, they mentioned how they liked that each visualization allows us to drill down into each level of the data. They also thought adding a brush function would be helpful on the gene diagram. They liked the multiple layers of filters. 
 * If multiple views, are they coordinated? If not, would it be meaningful?
