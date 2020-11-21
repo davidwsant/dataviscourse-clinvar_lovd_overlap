@@ -30,9 +30,9 @@ databases per each disease. We now have only one disease (MLD), so these figures
 would not really be relevant. All of the information from these bar charts could
 also be found in other figures, so we have chosen to remove these two figures.
 
-![image1.png](../Images/image1.png)
+![image1.png](../../images/image1.png)
 
-![image2.png](../Images/image2.png)
+![image2.png](../../images/image2.png)
 
 We also had planned to include a figure showing a comparison of the pathogenicity
 reported for variants present in both LOVD and ClinVar. Unfortunately, LOVD contains
@@ -40,12 +40,12 @@ reported pathogenicity information only for some genes. As it turns out, all thr
 of the MLD genes have no reported pathogenicity, so this figure no longer makes any
 sense.
 
-![image13.png](../Images/image13.png)
+![image13.png](../../images/image13.png)
 
 Devin also suggested that we remove the radar chart as the information can be found
 in other figures and the chart itself is rather noisy and difficult to interpret.
 
-![image11.png](../Images/image11.png)
+![image11.png](../../images/image11.png)
 
 One more figure was still relevant, but it was by far the most complicated figure
 proposed. This was the graph with lines representing individual variants, with the
@@ -58,7 +58,7 @@ variants would have been gray so this would be far less interesting. Considering
 this graph would have take so much effort to make and that the important information
 can also be seen in the scatter plot, we chose to remove this figure.
 
-![image9.png](../Images/image9.png)
+![image9.png](../../images/image9.png)
 
 ### Removing date from the filter criteria
 
