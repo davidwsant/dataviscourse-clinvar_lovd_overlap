@@ -307,7 +307,7 @@ class Main {
         // set up the svg
         let svg_width = 600
         let svg_height = 400
-        let margins = 30
+        let margins = {left: 50, top: 30}
 
         let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
             .attr('width', svg_width)
@@ -317,7 +317,7 @@ class Main {
         // define scales
         let scaleX = d3.scaleBand()
             .domain(pathogenicityClasses)
-            .range([0, svg_width - margins])
+            .range([0, svg_width - margins.left])
 
 
         let scaleY = d3.scaleLinear()
@@ -341,12 +341,12 @@ class Main {
         let y_axis_group = pathogenicityGraphSVG.append('g')
             .attr('id', 'pathogenicity-y-axis')
             .call(y_axis)
-            .attr('transform', `translate(${margins}, ${-margins})`)
+            .attr('transform', `translate(${margins.left}, ${-margins.top})`)
         
         let x_axis_group = pathogenicityGraphSVG.append('g')
             .attr('id', 'pathogenicity-x-axis')
             .call(x_axis)
-            .attr('transform', `translate(${margins}, ${svg_height - margins})`)
+            .attr('transform', `translate(${margins.left}, ${svg_height - margins.top})`)
         
         // draw the graph
 
@@ -359,16 +359,16 @@ class Main {
             
         pathogenicityGraphSVG.append('g')
             .attr('id', 'ASRA-group')
-            .attr('transform', `translate(${margins + 40}, -${margins})`)
+            .attr('transform', `translate(${margins.left + 40}, -${margins.top})`)
 
         
         pathogenicityGraphSVG.append('g')
             .attr('id', 'PSAP-group')
-            .attr('transform', `translate(${margins + 40}, -${margins})`)
+            .attr('transform', `translate(${margins.left + 40}, -${margins.top})`)
 
         pathogenicityGraphSVG.append('g')
             .attr('id', 'SUMF1-group')
-            .attr('transform', `translate(${margins + 40}, -${margins})`)
+            .attr('transform', `translate(${margins.left + 40}, -${margins.top})`)
 
         // draw lines
         d3.select('#ASRA-group')  
@@ -521,7 +521,7 @@ class Main {
         d3.select('#pathogenicity-svg').append('text')
             .text('Proportion')
             .style('text-anchor', 'middle')
-            .attr('y', 7)
+            .attr('y', 12)
             .attr('x', -200)
             .attr('transform', 'rotate(-90)')
 
