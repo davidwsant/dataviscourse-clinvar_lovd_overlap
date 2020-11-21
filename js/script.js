@@ -338,11 +338,76 @@ class Main {
         // draw the graph
 
         let linesgenerator = d3.line()
-            .x(d=>d.pathogenicity)
-            .y(d=>d.value)
+            .x(d=>{
+                console.log(d.value)
+                return scaleX(d.pathogenicity)})
+            .y(d=>scaleY(d.value));
+            
+        pathogenicityGraphSVG.append('g')
+            .attr('id', 'ASRA-group')
+            .attr('transform', `translate(${margins + 40}, -${margins})`)
+
+        
+        pathogenicityGraphSVG.append('g')
+            .attr('id', 'PSAP-group')
+            .attr('transform', `translate(${margins + 40}, -${margins})`)
+
+        pathogenicityGraphSVG.append('g')
+            .attr('id', 'SUMF1-group')
+            .attr('transform', `translate(${margins + 40}, -${margins})`)
+
+        
+        d3.select('#ASRA-group')
+                // .append('path')
+                // .attr('d', linesgenerator(percentages_data[0]))
+                // .style('stroke', 'red')
+                // .classed('line-chart', true)
+            
+        
+        // d3.select('#ASRA-group')
+        //         .selectAll('circle')
+            .data([1])
+            .join(
+                enter => enter.append('path')
+                    .style('stroke', 'red')
+                    .classed('line-chart', true)
+                
+                    // .transition()
+                    //     .duration(2000)
+                        .attr('d', linesgenerator(percentages_data[0])),
+                
+                update=>update
+                .call(update=>update.transition()
+                    .duration(2000)
+                    .attr('d', linesgenerator(percentages_data[0]))),
+
+                exit => exit
+                .call(exit=>exit.transition()
+                    .duration(2000)
+                    .remove())
+
+            )
+
+        d3.select('#PSAP-group')
+            .append('path')
+            .attr('d', linesgenerator(percentages_data[1]))
+            .style('stroke', 'blue')
+            .classed('line-chart', true)   
+            
+        d3.select('#SUMF1-group')
+            .append('path')
+            .attr('d', linesgenerator(percentages_data[2]))
+            .style('stroke', 'green')
+            .classed('line-chart', true)  
             
 
-
+        // d3.select('#ASRA-group')
+        // .attr('transform', `translate(${margins + 40}, -${margins})`)
+        // .append('path')
+        // .style('stroke', 'red')
+        // .style('stroke-width', 2)
+        // .style('fill', 'none')
+        // .attr('d', linesgenerator(percentages_data[0]))
 
 
 
