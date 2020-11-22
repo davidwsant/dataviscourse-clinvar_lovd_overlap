@@ -87,40 +87,69 @@ class Main {
         
         this.eventListeners()
         let frequencyDistance = d3.select('#frequency-distance')
+        this.freqDistance = {}
+        this.freqDistance.margin = {}
+        this.freqDistance.margin.top = 20
+        this.freqDistance.margin.left = 15
+        this.freqDistance.margin.right = 10
+        this.freqDistance.margin.bottom = 20
+        //this.freqDistance.margin.top = 0
+        this.freqDistance.axis = {}
+        this.freqDistance.axis.left = 30
+        this.freqDistance.axis.bottom = 30
+        //this.freqDistance.margin.bottom = 20
+        this.freqDistance.figure = {}
+        this.freqDistance.figure.height = 400
+        this.freqDistance.figure.width = 750
+        this.freqDistance.legend = {}
+        this.freqDistance.legend.width = 200
+        this.freqDistance.bars = {}
+        this.freqDistance.bars.height = 100
+
+
+
+        let figWidth = this.freqDistance.margin.left+this.freqDistance.margin.right+this.freqDistance.axis.left+this.freqDistance.figure.width+this.freqDistance.legend.width
+        let figHeight = this.freqDistance.margin.top+this.freqDistance.margin.bottom+this.freqDistance.axis.bottom+this.freqDistance.figure.height+this.freqDistance.bars.height
+
         frequencyDistance.append('svg')
             .attr('id', 'frequency-distance-svg')
-            .attr('width', 1000)
-            .attr('height', 550)
+            .attr('width', figWidth)
+            .attr('height', figHeight)
         let freqDistanceSVG = d3.select('#frequency-distance-svg')
         freqDistanceSVG
             .append('text')
             .attr('id', 'frequency-distance-text')
             .attr('text-anchor', 'middle')
-            .attr('x', 450)
-            .attr('y', 250)
+            .attr('x', this.freqDistance.margin.left+this.freqDistance.axis.left+0.5*this.freqDistance.figure.width) 
+            .attr('y', this.freqDistance.margin.top+0.5*this.freqDistance.figure.height) 
             .style('font-size', '12px')
+        let axisStartLeft = this.freqDistance.margin.left+this.freqDistance.axis.left
+        let axisStartBottom = this.freqDistance.margin.top+this.freqDistance.figure.height
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistanceXAxis')
-            .attr('transform', 'translate(40,420)')
+            .attr('transform', 'translate('+axisStartLeft+','+axisStartBottom+')')
         
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistanceYAxis')
-            .attr('transform', 'translate(40,20)')
+            .attr('transform', 'translate('+axisStartLeft+','+this.freqDistance.margin.top+')')
             
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistancePlotSection')
-            .attr("transform", "translate(40,20)")
+            .attr("transform", "translate("+axisStartLeft+","+this.freqDistance.margin.top+")")
 
+        let legendHeight = this.freqDistance.margin.top+0.5*this.freqDistance.figure.height
         freqDistanceSVG.append('text')
             .attr('id', 'freqDistancePlotYAxisLabel')
-            .attr("transform", "translate(15,230) rotate(-90)")
+            .attr("transform", "translate("+this.freqDistance.margin.left+","+legendHeight+") rotate(-90)")
             //.text('-log10 Minor Allele Frequency')
             .style('font-size', '16px')
             .attr('text-anchor', 'middle')
 
+        let legendMidBottom = this.freqDistance.margin.left+this.freqDistance.axis.left+0.5*this.freqDistance.figure.width
+        let legnedBottomHeight = this.freqDistance.margin.top+this.freqDistance.figure.height+this.freqDistance.margin.bottom+this.freqDistance.axis.bottom
         freqDistanceSVG.append('text')
             .attr('id', 'freqDistancePlotXAxisLabel')
-            .attr("transform", "translate(400,470)")
+            .attr("transform", "translate("+legendMidBottom+","+legnedBottomHeight+")")
             //.text('Distance from Transcription Start Site (TSS)')
             .style('font-size', '16px')
             .attr('text-anchor', 'middle')
