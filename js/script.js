@@ -21,6 +21,9 @@ class Main {
         this.genomic_features = genomic_features
         this.invalid_data = invalid_data
 
+        // set global transition time
+        this.transition_time = 1000
+
         for (let variant of this.MLD_data) {
             variant['Overall_MAF'] = +variant['Overall_MAF']
             variant['Position Start'] = +variant['Position Start']
@@ -479,7 +482,7 @@ class Main {
 
             newCircles.merge(scatterCircles)
                 .transition()
-                .duration(1000)
+                .duration(this.transition_time)
                 .attr('cx', d => scaleX(d['Distance from TSS']))
                 .attr('cy', d => scaleY(d['Frequency Position']))
                 .attr('r', '3')
@@ -504,7 +507,7 @@ class Main {
         let includedDatabases = []
         let includedVarType = []
         let includedStar = []
-        console.log(this.filters)
+
 
         for (let i of Object.entries(this.filters.pathogenicity)){
             if (i[1]){
@@ -538,7 +541,6 @@ class Main {
         let conflicting_list = []
         let not_provided_list = []
 
-
         // loop through the MLD_data to get all the pathogenicity values
         for (let i of this.MLD_data) {
             let pathogenicity = i.Pathogenicity
@@ -546,7 +548,7 @@ class Main {
             let gene_symbol = i['Gene Symbol']
 
             // filter based on database selection
-            if (!includedDatabases.includes(i.Database)){
+            if (!includedDatabases.includes(i.Database)){ 
                 continue
             }
 
@@ -556,9 +558,9 @@ class Main {
             }
 
             // filter based on star level
-            if (!includedStar.includes(i['Star Level'])){
-                continue
-            }
+            // if (!includedStar.includes(i['Star Level'])){
+            //     continue
+            // }
 
 
             // check that the pathogenicity is selected on the page
@@ -598,14 +600,21 @@ class Main {
             }
             
         }
-
-
+        
 
         // now, determine the total count of all the pathogenicity classes
 
         let all_lists = [benign_list, likely_benign_list, vus_list, 
             likely_pathogenic_list, pathogenic_list, conflicting_list, 
             not_provided_list]
+
+
+        // look at all databases in the data lists
+        for (let list of all_lists){
+            for (let i of list){
+                console.log(i.Database)
+            }
+        }
 
         let total_count = 0
         let total_arsa = 0
@@ -721,7 +730,7 @@ class Main {
         // draw the graph
 
         // set transition duration time
-        let duration = 2000
+        let duration = this.transition_time
 
         let linesgenerator = d3.line()
             .x(d=>scaleX(d.pathogenicity))
