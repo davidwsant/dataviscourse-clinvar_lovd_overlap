@@ -89,27 +89,124 @@ class Main {
         let frequencyDistance = d3.select('#frequency-distance')
         frequencyDistance.append('svg')
             .attr('id', 'frequency-distance-svg')
-            .attr('width', 450)
-            .attr('height', 300)
+            .attr('width', 1000)
+            .attr('height', 550)
         let freqDistanceSVG = d3.select('#frequency-distance-svg')
         freqDistanceSVG
             .append('text')
             .attr('id', 'frequency-distance-text')
             .attr('text-anchor', 'middle')
-            .attr('x', 225)
-            .attr('y', 150)
+            .attr('x', 450)
+            .attr('y', 250)
             .style('font-size', '12px')
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistanceXAxis')
-            .attr('transform', 'translate(30,240)')
+            .attr('transform', 'translate(40,420)')
         
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistanceYAxis')
-            .attr('transform', 'translate(30,20)')
+            .attr('transform', 'translate(40,20)')
             
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistancePlotSection')
-            .attr("transform", "translate(30,20)")
+            .attr("transform", "translate(40,20)")
+
+        freqDistanceSVG.append('text')
+            .attr('id', 'freqDistancePlotYAxisLabel')
+            .attr("transform", "translate(15,230) rotate(-90)")
+            //.text('-log10 Minor Allele Frequency')
+            .style('font-size', '16px')
+            .attr('text-anchor', 'middle')
+
+        freqDistanceSVG.append('text')
+            .attr('id', 'freqDistancePlotXAxisLabel')
+            .attr("transform", "translate(400,470)")
+            //.text('Distance from Transcription Start Site (TSS)')
+            .style('font-size', '16px')
+            .attr('text-anchor', 'middle')
+
+        let freqDistanceLabel = freqDistanceSVG.append('g')
+            .attr('id', 'freqDistancePlotLabel')
+            .attr("transform", "translate(790,50)")
+            // .append('text').text('something')
+        
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '10')
+            .attr('r', '7')
+            .attr('class', 'pathogenic')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,15)")
+            .text('Pathogenic')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '33')
+            .attr('r', '7')
+            .attr('class', 'likely-pathogenic')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,38)")
+            .text('Likely Pathogenic')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '56')
+            .attr('r', '7')
+            .attr('class', 'vus')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,61)")
+            .text('Unknown Significance')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '79')
+            .attr('r', '7')
+            .attr('class', 'likely-benign')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,84)")
+            .text('Likely Benign')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '102')
+            .attr('r', '7')
+            .attr('class', 'benign')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,107)")
+            .text('Benign')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '125')
+            .attr('r', '7')
+            .attr('class', 'not-provided')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,130)")
+            .text('Not Provided')
+
+        freqDistanceLabel.append('circle')
+            .attr('cx', '5')
+            .attr('cy', '148')
+            .attr('r', '7')
+            .attr('class', 'conflicting')
+            .attr('opacity', '0.7')
+
+        freqDistanceLabel.append('text')
+            .attr("transform", "translate(17,153)")
+            .text('Conflicting')
+
         this.drawDistanceTSSScatter()
         this.updateWithGene()
         this.pathogenicityGraph()
@@ -223,6 +320,8 @@ class Main {
                 .selectAll('circle')
                 .data('')
                 .join('circle')
+            d3.select('#freqDistancePlotYAxisLabel').text('')
+            d3.select('#freqDistancePlotXAxisLabel').text('')
         }
         else {
             //find TSS and TTS to filter out relevant variants
@@ -299,10 +398,10 @@ class Main {
             console.log(relevantVariants)
             let scaleX = d3.scaleLinear()
                 .domain([-addDistance,geneLength+addDistance])
-                .range([0, 400]) // use 30 for legend left, 20 for space right
+                .range([0, 720]) // use 30 for legend left, 20 for space right
             let scaleY = d3.scaleLinear()
                 .domain([6,0])
-                .range([0, 220]) // use 50 for legend
+                .range([0, 400]) // use 50 for legend
             // freqDistanceSVG.append('g')
             //     .attr('id', 'freqDistancePlotSection')
             //     .attr("transform", "translate(30,20)")
@@ -326,6 +425,8 @@ class Main {
                 d3.select("#freqDistanceYAxis").call(y_axis)
                 .attr('opacity', '1')
 
+            d3.select('#freqDistancePlotYAxisLabel').text('-Log base 10 Minor Allele Frequency')
+            d3.select('#freqDistancePlotXAxisLabel').text('Distance from Transcription Start Site (TSS)')
             d3.select('#frequency-distance-text')
                 .text('')
             let scatterCircles = d3.select('#freqDistancePlotSection')

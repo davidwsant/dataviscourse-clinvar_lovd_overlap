@@ -24,7 +24,7 @@ disease means that JavaScript will be fast enough to perform all of the calculat
 without sending queries to a SQL server. Therefore we abandoned the idea of using
 SQLite and are now simply using JavaScript.
 
-## Removing Certain Figures
+### Removing Certain Figures
 We originally had two figures showing the overlap between ClinVar and the LOVD
 databases per each disease. We now have only one disease (MLD), so these figures
 would not really be relevant. All of the information from these bar charts could
