@@ -85,7 +85,8 @@ class Main {
         'reviewStatus': {
             '0': true,
             '1': true,
-            '2': true
+            '2': true,
+            '-': true
         }}
         
         this.eventListeners()
@@ -140,12 +141,7 @@ class Main {
             .attr('id', 'freqDistancePlotSection')
             .attr("transform", "translate("+axisStartLeft+","+this.freqDistance.margin.top+")")
         
-        let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
-            .attr('width', 600)
-            .attr('height', 400)
-            .attr('id', 'pathogenicity-svg')
-
-            .attr("transform", "translate(40,20)")
+        
 
         let legendHeight = this.freqDistance.margin.top+0.5*this.freqDistance.figure.height
         freqDistanceSVG.append('text')
@@ -245,6 +241,70 @@ class Main {
         freqDistanceLabel.append('text')
             .attr("transform", "translate(17,153)")
             .text('Conflicting')
+
+        // this line other one
+        let margins = {left: 50, top: 30}
+        let svg_width = 600
+        let svg_height = 400
+
+        let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
+            .attr('width', 600)
+            .attr('height', 400)
+            .attr('id', 'pathogenicity-svg')
+            .attr("transform", "translate(40,20)")
+
+        let y_axis_group = pathogenicityGraphSVG.append('g')
+            .attr('id', 'pathogenicity-y-axis')
+            //.call(y_axis)
+            .attr('transform', `translate(${margins.left}, ${-margins.top})`)
+        
+        let x_axis_group = pathogenicityGraphSVG.append('g')
+            .attr('id', 'pathogenicity-x-axis')
+            //.call(x_axis)
+            .attr('transform', `translate(${margins.left}, ${svg_height - margins.top})`)
+
+        d3.select('#pathogenicity-svg').append('text')
+            .text('Proportion')
+            .style('text-anchor', 'middle')
+            .attr('y', 12)
+            .attr('x', -180)
+            .attr('transform', 'rotate(-90)')
+
+        //let svg = d3.select("#pathogenicity-svg")
+        let radius = 6
+        pathogenicityGraphSVG.append('circle')
+            .attr('cx', 500)
+            .attr('cy', 42)
+            .attr('r', radius)
+            .style('fill', 'red')
+
+        
+        pathogenicityGraphSVG.append('circle')
+            .attr('cx', 500)
+            .attr('cy', 62)
+            .attr('r', radius)
+            .style('fill', 'blue')
+
+        pathogenicityGraphSVG.append('circle')
+            .attr('cx', 500)
+            .attr('cy', 82)
+            .attr('r', radius)
+            .style('fill', 'green')
+
+        pathogenicityGraphSVG.append('text')
+            .text('ASRA')
+            .attr('x', 510)
+            .attr('y', 47)
+        
+        pathogenicityGraphSVG.append('text')
+            .text('PSAP')
+            .attr('x', 510)
+            .attr('y', 67)
+        
+        pathogenicityGraphSVG.append('text')
+            .text('SUMF1')
+            .attr('x', 510)
+            .attr('y', 87)
 
         this.drawDistanceTSSScatter()
         this.updateWithGene()
@@ -405,11 +465,7 @@ class Main {
                 }
             }
             keepStatus.push('-') // LOVD does not have a star status
-            // console.log(keepStatus)
-            // console.log(keepType)
-            // console.log(keepPath)
-            // console.log(keepDB)
-            //console.log(this.MLD_data)
+
             for (let variant of this.MLD_data) {
                 //console.log(variant)
                 // Only keep variants that are not large copy number variants and within the range
@@ -557,10 +613,10 @@ class Main {
                 continue
             }
 
-            // filter based on star level
-            // if (!includedStar.includes(i['Star Level'])){
-            //     continue
-            // }
+            //filter based on star level
+            if (!includedStar.includes(i['Star Level'])){
+                continue
+            }
 
 
             // check that the pathogenicity is selected on the page
@@ -610,11 +666,6 @@ class Main {
 
 
         // look at all databases in the data lists
-        for (let list of all_lists){
-            for (let i of list){
-                console.log(i.Database)
-            }
-        }
 
         let total_count = 0
         let total_arsa = 0
@@ -717,15 +768,14 @@ class Main {
             .tickFormat((d,i)=>pathogenicityClasses[i])
 
         
-        let y_axis_group = pathogenicityGraphSVG.append('g')
-            .attr('id', 'pathogenicity-y-axis')
+
+        let y_axis_group = d3.select('#pathogenicity-y-axis') 
             .call(y_axis)
-            .attr('transform', `translate(${margins.left}, ${-margins.top})`)
+
         
-        let x_axis_group = pathogenicityGraphSVG.append('g')
-            .attr('id', 'pathogenicity-x-axis')
+        let x_axis_group = d3.select('#pathogenicity-x-axis') 
             .call(x_axis)
-            .attr('transform', `translate(${margins.left}, ${svg_height - margins.top})`)
+
         
         // draw the graph
 
@@ -911,50 +961,12 @@ class Main {
             )
 
         // add y-axis label
-        d3.select('#pathogenicity-svg').append('text')
-            .text('Proportion')
-            .style('text-anchor', 'middle')
-            .attr('y', 12)
-            .attr('x', -200)
-            .attr('transform', 'rotate(-90)')
+        
 
         // add legend
+        // this line 
 
-        let svg = d3.select("#pathogenicity-svg")
-
-            svg.append('circle')
-                .attr('cx', 500)
-                .attr('cy', 42)
-                .attr('r', radius)
-                .style('fill', 'red')
-
-            
-            svg.append('circle')
-                .attr('cx', 500)
-                .attr('cy', 62)
-                .attr('r', radius)
-                .style('fill', 'blue')
-
-            svg.append('circle')
-                .attr('cx', 500)
-                .attr('cy', 82)
-                .attr('r', radius)
-                .style('fill', 'green')
-
-            svg.append('text')
-                .text('ASRA')
-                .attr('x', 510)
-                .attr('y', 47)
-            
-            svg.append('text')
-                .text('PSAP')
-                .attr('x', 510)
-                .attr('y', 67)
-            
-            svg.append('text')
-                .text('SUMF1')
-                .attr('x', 510)
-                .attr('y', 87)
+        
 
         
         // add hover change
