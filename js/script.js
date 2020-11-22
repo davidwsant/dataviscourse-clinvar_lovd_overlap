@@ -110,6 +110,14 @@ class Main {
         freqDistanceSVG.append('g')
             .attr('id', 'freqDistancePlotSection')
             .attr("transform", "translate(30,20)")
+
+
+        let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
+            .attr('width', 600)
+            .attr('height', 400)
+            .attr('id', 'pathogenicity-svg')
+
+
         this.drawDistanceTSSScatter()
         this.updateWithGene()
         this.pathogenicityGraph()
@@ -498,10 +506,11 @@ class Main {
         let svg_height = 400
         let margins = {left: 50, top: 30}
 
-        let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
-            .attr('width', svg_width)
-            .attr('height', svg_height)
-            .attr('id', 'pathogenicity-svg')
+        let pathogenicityGraphSVG = d3.select("#pathogenicity-svg")
+        // let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
+        //     .attr('width', svg_width)
+        //     .attr('height', svg_height)
+        //     .attr('id', 'pathogenicity-svg')
 
         // define scales
         let scaleX = d3.scaleBand()
