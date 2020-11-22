@@ -109,6 +109,10 @@ class Main {
         this.freqDistance.legend.width = 200
         this.freqDistance.bars = {}
         this.freqDistance.bars.height = 100
+        this.freqDistance.hover = {}
+        this.freqDistance.hover.width = 250
+        this.freqDistance.hover.height = 20
+
 
 
 
@@ -160,89 +164,110 @@ class Main {
             .style('font-size', '16px')
             .attr('text-anchor', 'middle')
 
+        let freqDistLabelX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width+20
         let freqDistanceLabel = freqDistanceSVG.append('g')
             .attr('id', 'freqDistancePlotLabel')
-            .attr("transform", "translate(790,50)")
+            .attr("transform", "translate("+freqDistLabelX+",50)")
             // .append('text').text('something')
         
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '10')
             .attr('r', '7')
             .attr('class', 'pathogenic')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,15)")
+            .attr("transform", "translate(27,15)")
             .text('Pathogenic')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '33')
             .attr('r', '7')
             .attr('class', 'likely-pathogenic')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,38)")
+            .attr("transform", "translate(27,38)")
             .text('Likely Pathogenic')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '56')
             .attr('r', '7')
             .attr('class', 'vus')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,61)")
+            .attr("transform", "translate(27,61)")
             .text('Unknown Significance')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '79')
             .attr('r', '7')
             .attr('class', 'likely-benign')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,84)")
+            .attr("transform", "translate(27,84)")
             .text('Likely Benign')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '102')
             .attr('r', '7')
             .attr('class', 'benign')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,107)")
+            .attr("transform", "translate(27,107)")
             .text('Benign')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '125')
             .attr('r', '7')
             .attr('class', 'not-provided')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,130)")
+            .attr("transform", "translate(27,130)")
             .text('Not Provided')
 
         freqDistanceLabel.append('circle')
-            .attr('cx', '5')
+            .attr('cx', '15')
             .attr('cy', '148')
             .attr('r', '7')
             .attr('class', 'conflicting')
             .attr('opacity', '0.7')
 
         freqDistanceLabel.append('text')
-            .attr("transform", "translate(17,153)")
+            .attr("transform", "translate(27,153)")
             .text('Conflicting')
 
+        let freqDistanceHoverBox = freqDistanceSVG.append('g')
+            .attr('id', 'freqDistanceHoverBox')
+
+        freqDistanceHoverBox.append('rect')
+            .attr('width', this.freqDistance.hover.width)
+            .attr('height', this.freqDistance.hover.height)
+            .attr('rx', '5') // curvature line
+            .attr('fill', 'none')
+
+        freqDistanceHoverBox.append('text')
+            .attr('id', 'freqDistanceHoverBoxText')
+            .attr('x', (this.freqDistance.hover.width/2))
+            .attr('y', (this.freqDistance.hover.height/2)+3)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12')
+
         // this line other one
+        freqDistanceSVG.append('g')
+            .attr('id', 'freqDistanceInfoBox')
+            .attr("transform", "translate("+axisStartLeft+","+this.freqDistance.margin.top+")")
+
         let margins = {left: 50, top: 30}
         let svg_width = 600
         let svg_height = 400
@@ -421,9 +446,14 @@ class Main {
                 .join('circle')
             d3.select('#freqDistancePlotYAxisLabel').text('')
             d3.select('#freqDistancePlotXAxisLabel').text('')
+            //d3.select('#freqDistancePlotLabel').selectAll('text').style('font-size', '0px')
+            //d3.select('#freqDistancePlotLabel').selectAll('circle').attr('r', '0')
         }
         else {
             //find TSS and TTS to filter out relevant variants
+            //d3.select('#freqDistancePlotLabel').selectAll('text').style('font-size', '16px')
+            //d3.select('#freqDistancePlotLabel').selectAll('circle').attr('r', '7')
+
             let tss = +this.genomic_features[dropDownValue].TSS
             let tts = +this.genomic_features[dropDownValue].TTS
             let sense = this.genomic_features[dropDownValue].sense
@@ -464,7 +494,7 @@ class Main {
                     keepStatus.push(db[0])
                 }
             }
-            keepStatus.push('-') // LOVD does not have a star status
+            //keepStatus.push('-') // LOVD does not have a star status
 
             for (let variant of this.MLD_data) {
                 //console.log(variant)
@@ -490,13 +520,32 @@ class Main {
                 }
                 variant['Distance from TSS'] = distanceTss
             }
-            console.log(relevantVariants)
+            //console.log(relevantVariants)
+// this line
+            // this.freqDistance.margin = {}
+            // this.freqDistance.margin.top = 20
+            // this.freqDistance.margin.left = 15
+            // this.freqDistance.margin.right = 10
+            // this.freqDistance.margin.bottom = 20
+            // //this.freqDistance.margin.top = 0
+            // this.freqDistance.axis = {}
+            // this.freqDistance.axis.left = 30
+            // this.freqDistance.axis.bottom = 30
+            // //this.freqDistance.margin.bottom = 20
+            // this.freqDistance.figure = {}
+            // this.freqDistance.figure.height = 400
+            // this.freqDistance.figure.width = 750
+            // this.freqDistance.legend = {}
+            // this.freqDistance.legend.width = 200
+            // this.freqDistance.bars = {}
+            // this.freqDistance.bars.height = 100
+
             let scaleX = d3.scaleLinear()
                 .domain([-addDistance,geneLength+addDistance])
-                .range([0, 720]) // use 30 for legend left, 20 for space right
+                .range([0, this.freqDistance.figure.width]) // use 30 for legend left, 20 for space right
             let scaleY = d3.scaleLinear()
                 .domain([6,0])
-                .range([0, 400]) // use 50 for legend
+                .range([0, this.freqDistance.figure.height]) // use 50 for legend
             // freqDistanceSVG.append('g')
             //     .attr('id', 'freqDistancePlotSection')
             //     .attr("transform", "translate(30,20)")
@@ -529,23 +578,90 @@ class Main {
                 .data(relevantVariants)
                 .join('circle')
 
+                //this.freqDistance.figure.width
+            let circleRadius = 5
             let newCircles = scatterCircles.enter().append('circle')
-                .attr('cx', d => scaleX(d['Distance from TSS']))
-                .attr('cy', d => scaleY(d['Frequency Position']))
-                .attr('r', '3')
-                .attr('opacity', '0.5')
+                .attr('cx', d => scaleX(d['Distance from TSS'])) // 0.5*this.freqDistance.figure.width
+                .attr('cy', d => scaleY(d['Frequency Position'])) // 0.5*this.freqDistance.figure.height
+                .attr('r', circleRadius)
+                .attr('opacity', '0.4')
                 .attr('class', d => classDict[d['Pathogenicity']])
 
-            newCircles.merge(scatterCircles)
+            let mergedCircles = newCircles.merge(scatterCircles)
                 .transition()
                 .duration(this.transition_time)
                 .attr('cx', d => scaleX(d['Distance from TSS']))
                 .attr('cy', d => scaleY(d['Frequency Position']))
-                .attr('r', '3')
-                .attr('opacity', '0.5')
+                .attr('r', circleRadius)
+                .attr('opacity', '0.4')
                 .attr('class', d => classDict[d['Pathogenicity']])
 
+            scatterCircles.on('mouseover', (event, d)=>{
+                d3.select(event.target)
+                    .attr('opacity', '1')
+                    .attr('stroke', 'black')
 
+                let currentX = scaleX(d['Distance from TSS'])+this.freqDistance.margin.left+this.freqDistance.axis.left+15
+                if (currentX > 0.65*(this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width)) {
+                    currentX = currentX-this.freqDistance.hover.width-25
+                }
+                let currentY = scaleY(d['Frequency Position'])+20
+                let hoverBox = d3.select('#freqDistanceHoverBox')
+                hoverBox.attr('transform', 'translate('+currentX+', ' + currentY + ') scale(1, 1)')
+                hoverBox.select('rect')
+                    .attr('fill', 'white')
+                    .attr('stroke', 'black')
+                    .attr('opacity', '0.7')
+                let freqDistanceHoverBoxText = d3.select('#freqDistanceHoverBoxText')
+                    .text(d['HGVS Normalized Genomic Annotation'])
+
+                })
+//this line
+            scatterCircles.on('mouseout', event=>{
+                d3.select(event.target)
+                    .attr('opacity', '0.4')
+                    .attr('stroke', '')
+
+                let hoverBox = d3.select('#freqDistanceHoverBox')
+                hoverBox.select('rect')
+                    .attr('transform', 'translate('+0+', ' + 0 + ') scale(1, 1)')
+                    .attr('fill', 'none')
+                    .attr('stroke', 'none')
+                    .attr('opacity', '0')
+
+                let freqDistanceHoverBoxText = d3.select('#freqDistanceHoverBoxText')
+                    .text('')
+
+                })
+
+        // let freqDistanceHoverBox = freqDistanceSVG.append('g')
+        //     .attr('id', 'freqDistanceHoverBox')
+
+        // freqDistanceHoverBox.append('rect')
+        //     .attr('width', this.freqDistance.hover.width)
+        //     .attr('height', this.freqDistance.hover.height)
+        //     .attr('rx', '5') // curvature line
+        //     .attr('fill', 'none')
+
+        // freqDistanceHoverBox.append('text')
+        //     .attr('id', 'freqDistanceHoverBoxText')
+        //     .attr('x', (this.freqDistance.hover.width/2))
+        //     .attr('y', 30)
+        //     .attr('text-anchor', 'middle')
+        //     .style('font-size', '12')
+
+                //this line 3
+
+                // all_lines.on('mouseover', event=>{
+                //     d3.select(event.target)
+                //         .classed('hovered', true)
+                //         .classed('not-hovered', false)
+                // })
+                //     .on('mouseout', event=>{
+                //         d3.select(event.target)
+                //         .classed('hovered', false)
+                //         .classed('not-hovered', true)
+                //     })
         }
         //console.log(dropDownValue)
     }
@@ -959,14 +1075,6 @@ class Main {
                     .duration(duration)
                 }
             )
-
-        // add y-axis label
-        
-
-        // add legend
-        // this line 
-
-        
 
         
         // add hover change
