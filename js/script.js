@@ -372,12 +372,34 @@ class Main {
 
         // only include pathogenicity classes that are selected in the page
         let includedClasses = []
+        let includedDatabases = []
+        let includedVarType = []
+        let includedStar = []
+        console.log(this.filters)
 
         for (let i of Object.entries(this.filters.pathogenicity)){
             if (i[1]){
                 includedClasses.push(i[0])
             }
         };
+        for (let i of Object.entries(this.filters.databases)){
+
+            if (i[1]){
+                includedDatabases.push(i[0])
+            }
+        };
+
+        for (let i of Object.entries(this.filters.varType)){
+            if (i[1]){
+                includedVarType.push(i[0])
+            }
+        };
+
+        for (let i of Object.entries(this.filters.reviewStatus)){
+            if (i[1]){
+                includedStar.push(i[0])
+            }
+        }
 
         let benign_list = []
         let likely_benign_list = []
@@ -387,11 +409,28 @@ class Main {
         let conflicting_list = []
         let not_provided_list = []
 
+
         // loop through the MLD_data to get all the pathogenicity values
         for (let i of this.MLD_data) {
             let pathogenicity = i.Pathogenicity
             let hgvs = i['HGVS Normalized Genomic Annotation']
             let gene_symbol = i['Gene Symbol']
+
+            // filter based on database selection
+            if (!includedDatabases.includes(i.Database)){
+                continue
+            }
+
+            // filter based on variant type
+            if (!includedVarType.includes(i['Variant Type'])){
+                continue
+            }
+
+            // filter based on star level
+            if (!includedStar.includes(i['Star Level'])){
+                continue
+            }
+
 
             // check that the pathogenicity is selected on the page
             if (includedClasses.includes(pathogenicity)){
@@ -399,37 +438,39 @@ class Main {
                 // now we want to check which pathogenicity it is, and make sure the 
                 // HGVS normalized genomic annotation isn't already in the list to avoid duplicates
                 if (pathogenicity === 'Benign' && !benign_list.includes(hgvs)){
-                    benign_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    benign_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
                 else if (pathogenicity === 'Likely Benign' && !likely_benign_list.includes(hgvs)){
-                    likely_benign_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    likely_benign_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
                 else if (pathogenicity === 'VUS' && !vus_list.includes(hgvs)){
-                    vus_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    vus_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
                 else if (pathogenicity === 'Likely Pathogenic' && 
                 !likely_pathogenic_list.includes(hgvs)){
-                    likely_pathogenic_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    likely_pathogenic_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
                 else if (pathogenicity === 'Pathogenic' && !pathogenic_list.includes(hgvs)){
-                    pathogenic_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    pathogenic_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
             
                 else if (pathogenicity === 'Conflicting' && !conflicting_list.includes(hgvs)){
-                    conflicting_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    conflicting_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
                 else if (pathogenicity === 'Not Provided' && !not_provided_list.includes(hgvs)){
-                    not_provided_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol})
+                    not_provided_list.push({'HGVS': hgvs, 'gene_symbol': gene_symbol, 'Database': i.Database})
                 }
 
             }
             
         }
+
+
 
         // now, determine the total count of all the pathogenicity classes
 
@@ -500,6 +541,13 @@ class Main {
             lines_data.push(temp_array)
         }
 
+        // convert any "NaN" value in data to 0
+        for (let i of percentages_data){
+            for (let j of i){
+                j.value = j.value ? j.value : 0
+            }
+        };
+
 
         // set up the svg
         let svg_width = 600
@@ -520,16 +568,11 @@ class Main {
 
         let scaleY = d3.scaleLinear()
             .domain([1, 0])
-            .range([0, svg_height])
+            .range([40, svg_height])
 
         // set up axes
         let y_axis = d3.axisLeft(scaleY)
             .ticks(4)
-
-        let colorScale = d3.scaleOrdinal()
-            .domain(pathogenicityClasses)
-            .range(['red', 'blue', 'green'])
-
         
         let x_axis = d3.axisBottom(scaleX)
             .ticks(8)
