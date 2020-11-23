@@ -104,9 +104,9 @@ class Main {
         //this.freqDistance.margin.bottom = 20
         this.freqDistance.figure = {}
         this.freqDistance.figure.height = 400
-        this.freqDistance.figure.width = 750
+        this.freqDistance.figure.width = 650
         this.freqDistance.legend = {}
-        this.freqDistance.legend.width = 200
+        this.freqDistance.legend.width = 300
         this.freqDistance.bars = {}
         this.freqDistance.bars.height = 100
         this.freqDistance.hover = {}
@@ -263,10 +263,74 @@ class Main {
             .attr('text-anchor', 'middle')
             .style('font-size', '12')
 
-        // this line other one
-        freqDistanceSVG.append('g')
+        //let freqDistLabelX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width+20
+
+        let newX = freqDistLabelX+7
+        let freqDistanceInfoBox = freqDistanceSVG.append('g')
             .attr('id', 'freqDistanceInfoBox')
-            .attr("transform", "translate("+axisStartLeft+","+this.freqDistance.margin.top+")")
+            .attr("transform", "translate("+newX+",250)")
+
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxTitle')
+            .style('font-size', '16')
+            .text('Click a Circle for Variant Info')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxHGVS')
+            .attr('transform', 'translate(0, 20)')
+            .style('font-size', '14')
+            //.text('HGVS:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxDB')
+            .attr('transform', 'translate(0, 37)')
+            .style('font-size', '14')
+            //.text('Database:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxPath')
+            .attr('transform', 'translate(0, 54)')
+            .style('font-size', '14')
+            //.text('Pathogenicity:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxChr')
+            .attr('transform', 'translate(0, 71)')
+            .style('font-size', '14')
+            //.text('Chromosome:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxStart')
+            .attr('transform', 'translate(0, 88)')
+            .style('font-size', '14')
+            //.text('Start:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxStop')
+            .attr('transform', 'translate(0, 105)')
+            .style('font-size', '14')
+            //.text('Stop:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxRef')
+            .attr('transform', 'translate(0, 122)')
+            .style('font-size', '14')
+            //.text('Reference:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxAlt')
+            .attr('transform', 'translate(0, 137)')
+            .style('font-size', '14')
+            //.text('Alternate:')
+
+        freqDistanceInfoBox.append('text')
+            .attr('id', 'freqDistanceInfoBoxFreq')
+            .attr('transform', 'translate(0, 154)')
+            .style('font-size', '14')
+            //.text('Minor Allele Frequency:')
+            
+        // this line 
 
         let margins = {left: 50, top: 30}
         let svg_width = 600
@@ -295,7 +359,6 @@ class Main {
             .attr('x', -180)
             .attr('transform', 'rotate(-90)')
 
-        //let svg = d3.select("#pathogenicity-svg")
         let radius = 6
         pathogenicityGraphSVG.append('circle')
             .attr('cx', 500)
@@ -334,17 +397,13 @@ class Main {
         this.drawDistanceTSSScatter()
         this.updateWithGene()
         this.pathogenicityGraph()
-        // console.log(this.diseases)
-        // console.log(this.genes)
- 
 
 
     }
     eventListeners() {
-        //let clinVarButton = 
         d3.select('#checkBoxClinVar').on('change', (event) => {
             this.filters['databases']['ClinVar'] = event.path[0].checked
-            // console.log(this.filters)
+
         })
         d3.select('#checkBoxGlob').on('change', (event) => {
             this.filters['databases']['Global_Variome'] = event.path[0].checked
@@ -446,14 +505,9 @@ class Main {
                 .join('circle')
             d3.select('#freqDistancePlotYAxisLabel').text('')
             d3.select('#freqDistancePlotXAxisLabel').text('')
-            //d3.select('#freqDistancePlotLabel').selectAll('text').style('font-size', '0px')
-            //d3.select('#freqDistancePlotLabel').selectAll('circle').attr('r', '0')
+
         }
         else {
-            //find TSS and TTS to filter out relevant variants
-            //d3.select('#freqDistancePlotLabel').selectAll('text').style('font-size', '16px')
-            //d3.select('#freqDistancePlotLabel').selectAll('circle').attr('r', '7')
-
             let tss = +this.genomic_features[dropDownValue].TSS
             let tts = +this.genomic_features[dropDownValue].TTS
             let sense = this.genomic_features[dropDownValue].sense
@@ -473,32 +527,31 @@ class Main {
                     keepDB.push(db[0])
                 }
             }
-            // console.log(keepDB)
+
             let keepPath = []
             for (let db of Object.entries(this.filters.pathogenicity)) {
                 if (db[1]) {
                     keepPath.push(db[0])
                 }
             }
-            //console.log(keepPath)
+
             let keepType = []
             for (let db of Object.entries(this.filters.varType)) {
                 if (db[1]) {
                     keepType.push(db[0])
                 }
             }
-            //console.log(keepType)
+
             let keepStatus = []
             for (let db of Object.entries(this.filters.reviewStatus)) {
                 if (db[1]) {
                     keepStatus.push(db[0])
                 }
             }
-            //keepStatus.push('-') // LOVD does not have a star status
+
 
             for (let variant of this.MLD_data) {
-                //console.log(variant)
-                // Only keep variants that are not large copy number variants and within the range
+
                 // Only keep variants that meet the filter crteria
 
                 if (variant['Gene Symbol'] === dropDownValue && 
@@ -520,35 +573,14 @@ class Main {
                 }
                 variant['Distance from TSS'] = distanceTss
             }
-            //console.log(relevantVariants)
-// this line
-            // this.freqDistance.margin = {}
-            // this.freqDistance.margin.top = 20
-            // this.freqDistance.margin.left = 15
-            // this.freqDistance.margin.right = 10
-            // this.freqDistance.margin.bottom = 20
-            // //this.freqDistance.margin.top = 0
-            // this.freqDistance.axis = {}
-            // this.freqDistance.axis.left = 30
-            // this.freqDistance.axis.bottom = 30
-            // //this.freqDistance.margin.bottom = 20
-            // this.freqDistance.figure = {}
-            // this.freqDistance.figure.height = 400
-            // this.freqDistance.figure.width = 750
-            // this.freqDistance.legend = {}
-            // this.freqDistance.legend.width = 200
-            // this.freqDistance.bars = {}
-            // this.freqDistance.bars.height = 100
 
             let scaleX = d3.scaleLinear()
                 .domain([-addDistance,geneLength+addDistance])
-                .range([0, this.freqDistance.figure.width]) // use 30 for legend left, 20 for space right
+                .range([0, this.freqDistance.figure.width]) 
             let scaleY = d3.scaleLinear()
                 .domain([6,0])
-                .range([0, this.freqDistance.figure.height]) // use 50 for legend
-            // freqDistanceSVG.append('g')
-            //     .attr('id', 'freqDistancePlotSection')
-            //     .attr("transform", "translate(30,20)")
+                .range([0, this.freqDistance.figure.height]) 
+
 
             let classDict = {'Pathogenic':'pathogenic', 
                 'Likely Pathogenic':'likely-pathogenic', 
@@ -629,41 +661,78 @@ class Main {
                     .attr('stroke', 'none')
                     .attr('opacity', '0')
 
-                let freqDistanceHoverBoxText = d3.select('#freqDistanceHoverBoxText')
+                d3.select('#freqDistanceHoverBoxText')
                     .text('')
 
                 })
 
-        // let freqDistanceHoverBox = freqDistanceSVG.append('g')
-        //     .attr('id', 'freqDistanceHoverBox')
+            scatterCircles.on('click', (event, d) => {
+                d3.select('#freqDistanceInfoBoxTitle').text('Variant Information')
+                let textLength = d['HGVS Normalized Genomic Annotation'].length
+                if (textLength > 35) {
+                    d3.select('#freqDistanceInfoBoxHGVS').text('HGVS too long to display')
+                }
+                else if (textLength > 27) {
+                    d3.select('#freqDistanceInfoBoxHGVS').text(d['HGVS Normalized Genomic Annotation'])
+                }
+                else {
+                    d3.select('#freqDistanceInfoBoxHGVS').text('HGVS: '+d['HGVS Normalized Genomic Annotation'])
+                }
+                d3.select('#freqDistanceInfoBoxDB').text('Database: '+d['Database'].replace(/_/g, ' '))
+                d3.select('#freqDistanceInfoBoxPath').text('Pathogenicity: '+d['Pathogenicity'])
+                d3.select('#freqDistanceInfoBoxChr').text('Chromosome: '+d['Chr'])
+                d3.select('#freqDistanceInfoBoxStart').text('Start: '+d['Position Start'])
+                d3.select('#freqDistanceInfoBoxStop').text('Stop: '+d['Position Stop'])
+                let refLength = d['Ref'].length 
+                if (refLength > 25) {
+                    d3.select('#freqDistanceInfoBoxRef').text('Reference too long to display')
+                }
+                else {
+                    d3.select('#freqDistanceInfoBoxRef').text('Reference: '+d['Ref'])
+                }
+                let altLength = d['Alt'].length
+                if (altLength > 25) { 
+                    d3.select('#freqDistanceInfoBoxAlt').text('Alternate too long to display')
+                }
+                else {
+                    d3.select('#freqDistanceInfoBoxAlt').text('Alternate: '+d['Alt'])
+                }
+                let countDecimals = function(value) {
+                    if (Math.floor(value) !== value) {
+                        return value.toString().split(".")[1].length || 0;
+                    }
+                    return 0
+                }
+                let freqLength = countDecimals(d['Overall_MAF'])
+                if (freqLength > 12) {
+                    let reportMAF = d['Overall_MAF'].toFixed(9)
+                    d3.select('#freqDistanceInfoBoxFreq').text('Frequency: '+reportMAF)
+                }
+                else {
+                    d3.select('#freqDistanceInfoBoxFreq').text('Frequency: '+d['Overall_MAF'])
+                }
+                
+            })
 
-        // freqDistanceHoverBox.append('rect')
-        //     .attr('width', this.freqDistance.hover.width)
-        //     .attr('height', this.freqDistance.hover.height)
-        //     .attr('rx', '5') // curvature line
-        //     .attr('fill', 'none')
+            function clearInfoBox(){
+                d3.select('#freqDistanceInfoBoxTitle').text('Click a Circle for Variant Info')
+                d3.select('#freqDistanceInfoBoxHGVS').text('')
+                d3.select('#freqDistanceInfoBoxDB').text('')
+                d3.select('#freqDistanceInfoBoxPath').text('')
+                d3.select('#freqDistanceInfoBoxChr').text('')
+                d3.select('#freqDistanceInfoBoxStart').text('')
+                d3.select('#freqDistanceInfoBoxStop').text('')
+                d3.select('#freqDistanceInfoBoxRef').text('')
+                d3.select('#freqDistanceInfoBoxAlt').text('')
+                d3.select('#freqDistanceInfoBoxFreq').text('')
+            }
 
-        // freqDistanceHoverBox.append('text')
-        //     .attr('id', 'freqDistanceHoverBoxText')
-        //     .attr('x', (this.freqDistance.hover.width/2))
-        //     .attr('y', 30)
-        //     .attr('text-anchor', 'middle')
-        //     .style('font-size', '12')
+            d3.select('body').on('click', clearInfoBox, true)
 
-                //this line 3
-
-                // all_lines.on('mouseover', event=>{
-                //     d3.select(event.target)
-                //         .classed('hovered', true)
-                //         .classed('not-hovered', false)
-                // })
-                //     .on('mouseout', event=>{
-                //         d3.select(event.target)
-                //         .classed('hovered', false)
-                //         .classed('not-hovered', true)
-                //     })
+            //super line
+           
         }
-        //console.log(dropDownValue)
+
     }
     
     pathogenicityGraph(){
