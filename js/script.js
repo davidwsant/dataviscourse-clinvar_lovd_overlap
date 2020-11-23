@@ -38,8 +38,44 @@ class Main {
             variant['Frequency Position'] = logFreq
         }
 
+        for (let gene of Object.entries(this.genomic_features)) {
+            let sense = gene[1].sense
+            let tss = gene[1].TSS
+            this.genomic_features[gene[0]].exons = []
+            for (let entry of Object.entries(this.genomic_features[gene[0]].UTRs)) {
+                let start = entry[1].start 
+                let stop = entry[1].stop
+                let distStart = start-tss 
+                let distStop = stop-tss 
+                if (sense === "reverse") {
+                    distStart = -1*distStart
+                    distStop = -1*distStop
+                    this.genomic_features[gene[0]].exons.push({'start': distStop, 'stop': distStart, 'type': 'UTR'})
+                }
+                else {
+                    this.genomic_features[gene[0]].exons.push({'start': distStart, 'stop': distStop, 'type': 'UTR'})
+                }
+            }
+            for (let entry of Object.entries(this.genomic_features[gene[0]].CDS)) {
+                let start = entry[1].start 
+                let stop = entry[1].stop
+                let distStart = start-tss 
+                let distStop = stop-tss 
+                if (sense === "reverse") {
+                    distStart = -1*distStart
+                    distStop = -1*distStop
+                    this.genomic_features[gene[0]].exons.push({'start': distStop, 'stop': distStart, 'type': 'CDS'})
+                }
+                else {
+                    this.genomic_features[gene[0]].exons.push({'start': distStart, 'stop': distStop, 'type': 'CDS'})
+                }
+                
+            }
+
+            console.log(tss)
+        }
         console.log(MLD_data)
-        // console.log(genomic_features)
+        console.log(genomic_features)
         // console.log(invalid_data)
 
         // get all unique diseases and genes from the data
@@ -97,18 +133,16 @@ class Main {
         this.freqDistance.margin.left = 15
         this.freqDistance.margin.right = 10
         this.freqDistance.margin.bottom = 20
-        //this.freqDistance.margin.top = 0
         this.freqDistance.axis = {}
         this.freqDistance.axis.left = 30
         this.freqDistance.axis.bottom = 30
-        //this.freqDistance.margin.bottom = 20
         this.freqDistance.figure = {}
         this.freqDistance.figure.height = 400
         this.freqDistance.figure.width = 650
         this.freqDistance.legend = {}
         this.freqDistance.legend.width = 300
         this.freqDistance.bars = {}
-        this.freqDistance.bars.height = 100
+        this.freqDistance.bars.height = 70
         this.freqDistance.hover = {}
         this.freqDistance.hover.width = 250
         this.freqDistance.hover.height = 20
@@ -168,7 +202,6 @@ class Main {
         let freqDistanceLabel = freqDistanceSVG.append('g')
             .attr('id', 'freqDistancePlotLabel')
             .attr("transform", "translate("+freqDistLabelX+",50)")
-            // .append('text').text('something')
         
         freqDistanceLabel.append('circle')
             .attr('cx', '15')
@@ -263,7 +296,6 @@ class Main {
             .attr('text-anchor', 'middle')
             .style('font-size', '12')
 
-        //let freqDistLabelX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width+20
 
         let newX = freqDistLabelX+7
         let freqDistanceInfoBox = freqDistanceSVG.append('g')
@@ -329,8 +361,73 @@ class Main {
             .attr('transform', 'translate(0, 154)')
             .style('font-size', '14')
             //.text('Minor Allele Frequency:')
-            
+        let structureStartY = this.freqDistance.margin.top+this.freqDistance.margin.bottom+this.freqDistance.axis.bottom+this.freqDistance.figure.height
+        let freqDistanceGeneStructure = freqDistanceSVG.append('g')
+            .attr('id', 'freqDistanceGeneStructure')
+            .attr('transform', 'translate('+axisStartLeft+','+structureStartY+')')
+        freqDistanceGeneStructure.append('line')
+            .attr('id', 'tssToTtsLine')
+            .style('stroke-width', 1)
+            .style('stroke', 'black')
+            .attr('y1', this.freqDistance.bars.height*0.5)//)//
+            .attr('y2', this.freqDistance.bars.height*0.5)//)//this.freqDistance.bars.height*0.5)
+
+        let labelStartY = structureStartY+this.freqDistance.bars.height
+        
+        let labelStartX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width*0.5
+        let freqDistStructureLabel = freqDistanceSVG
+            .append('g')
+            .attr('id', 'freqDistStructureLabel')
+            .attr('transform', 'translate('+labelStartX+','+labelStartY+')')
+            .attr('text-anchor', 'middle')
         // this line 
+        freqDistStructureLabel.append('text').attr('id', 'geneStructureText')
+        let nextlabelStartX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width+10
+        let freqDistStructureFigures = freqDistanceSVG
+            .append('g')
+            .attr('id', 'freqDistStructureFigures')
+            .attr('transform', 'translate('+nextlabelStartX+','+structureStartY+')')
+            
+        freqDistStructureFigures.append('text')
+            .attr('id', 'exonsLabel')
+            .attr('transform', 'translate(30, 21)')
+            .text('Exons')
+
+        freqDistStructureFigures.append('text')
+            .attr('id', 'UTRLabel')
+            .attr('transform', 'translate(30, 42)')
+            .text('Untranslated Exons')
+
+        freqDistStructureFigures.append('text')
+            .attr('id', 'intronLabel')
+            .attr('transform', 'translate(30, 61)')
+            .text('Introns')
+
+        freqDistStructureFigures.append('rect')
+            .attr('id', 'exonsRect')
+            .attr('transform', 'translate(0, 0)')
+            .attr('height', '25')
+            .attr('width', '20')
+            //.text('Exons')
+        freqDistStructureFigures.append('rect')
+            .attr('id', 'UTRRect')
+            .attr('transform', 'translate(0, 31)')
+            .attr('width', '20')
+            .attr('height', '10')
+            //.text('Untranslated Exons')
+        freqDistStructureFigures.append('line')
+            .attr('id', 'intronRect')
+            .attr('x1', 0)
+            .attr('x1', 20)
+            .attr('y1', 56)
+            .attr('y2', 56)
+            .style('stroke-width', 1)
+            .style('stroke', 'black')
+
+
+        
+// this line 
+
 
         let margins = {left: 50, top: 30}
         let svg_width = 600
@@ -505,6 +602,18 @@ class Main {
                 .join('circle')
             d3.select('#freqDistancePlotYAxisLabel').text('')
             d3.select('#freqDistancePlotXAxisLabel').text('')
+            d3.select('#tssToTtsLine').attr('x1', '0').attr('x2', '0')
+            let addRectangles = d3.select('#freqDistanceGeneStructure')
+                .selectAll('rect')
+                .data('')
+                .join('rect')
+            d3.select('#geneStructureText').text('')
+            d3.select('#exonsLabel').text('') // Exons
+            d3.select('#UTRLabel').text('') // Untranslated Exons
+            d3.select('#intronLabel').text('') // Introns
+            d3.select('#exonsRect').attr('width', '0') // 20
+            d3.select('#UTRRect').attr('width', '0') // 20
+            d3.select('#intronRect').style('stroke-width', 0) // 1
 
         }
         else {
@@ -514,6 +623,7 @@ class Main {
             let geneLength = Math.abs(tts - tss)
             let addDistance = Math.round(geneLength*0.05)
 
+           
             let relevantVariants = []
             let rangeStart = tss-addDistance
             let rangeStop = tts+addDistance
@@ -565,8 +675,6 @@ class Main {
                     }
             }
             for (let variant of relevantVariants) {
-                //sense
-                //tss
                 let distanceTss = variant['Position Middle'] - tss 
                 if (sense === 'reverse') {
                     distanceTss = -1*distanceTss
@@ -581,6 +689,69 @@ class Main {
                 .domain([6,0])
                 .range([0, this.freqDistance.figure.height]) 
 
+            // Draw rectangles for exons 
+            d3.select('#geneStructureText').text('Gene Structure')
+            d3.select('#exonsLabel').text('Exons') // 
+            d3.select('#UTRLabel').text('Untranslated Exons') 
+            d3.select('#intronLabel').text('Introns')
+            d3.select('#exonsRect').attr('width', '20') 
+            d3.select('#UTRRect').attr('width', '20') 
+            d3.select('#intronRect').style('stroke-width', 1) 
+            let addRectangles = d3.select('#freqDistanceGeneStructure')
+                .selectAll('rect')
+                .data(this.genomic_features[dropDownValue].exons)
+                .join('rect')
+
+            let newRectangles = addRectangles.enter()
+                .append('circle')
+                .attr('transform', d => {
+                    let localY = this.freqDistance.bars.height*0.5-12.5
+                    if (d['type'] === "UTR") {
+                        localY = this.freqDistance.bars.height*0.5-5
+                    }
+                    let localX = scaleX(d.start)
+                    return 'translate('+localX+','+localY+')'
+                }) 
+                .attr('width', d => {
+                    let localStart = scaleX(d.start)
+                    let localStop = scaleX(d.stop)
+                    let localWidth = localStop-localStart
+                    return localWidth
+                })
+                .attr('height', d => {
+                    if (d['type'] === "UTR") {
+                        return 10
+                    }
+                    return 25
+                })
+
+            let mergedRectangles = newRectangles.merge(addRectangles)
+                .transition()
+                .duration(this.transition_time)
+                .attr('transform', d => {
+                    let localY = this.freqDistance.bars.height*0.5-12.5
+                    if (d['type'] === "UTR") {
+                        localY = this.freqDistance.bars.height*0.5-5
+                    }
+                    let localX = scaleX(d.start)
+                    return 'translate('+localX+','+localY+')'
+                }) 
+                .attr('width', d => {
+                    let localStart = scaleX(d.start)
+                    let localStop = scaleX(d.stop)
+                    let localWidth = localStop-localStart
+                    return localWidth
+                })
+                .attr('height', d => {
+                    if (d['type'] === "UTR") {
+                        return 10
+                    }
+                    return 25
+                })
+
+            d3.select('#tssToTtsLine')
+                .attr('x1', scaleX(0))
+                .attr('x2', scaleX(geneLength))
 
             let classDict = {'Pathogenic':'pathogenic', 
                 'Likely Pathogenic':'likely-pathogenic', 
@@ -728,6 +899,7 @@ class Main {
             }
 
             d3.select('body').on('click', clearInfoBox, true)
+            
 
             //super line
            
