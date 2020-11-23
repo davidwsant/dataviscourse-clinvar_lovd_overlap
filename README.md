@@ -10,6 +10,7 @@
 |Email|david.sant@utah.edu|dallon.durfey@utah.edu|marcus.stucki@hsc.utah.edu|
 |UID|u0454956|u01275125|u0420655|
 
+Our project webpage is hosted on [GitPages](https://davidwsant.github.io/dataviscourse-clinvar_lovd_overlap/).
 
 ### Background and Motivation
 
