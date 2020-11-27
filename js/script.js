@@ -16,10 +16,13 @@ Promise.all([
 
 class Main {
 
-    constructor(MLD_data, genomic_features, invalid_data) {
+    constructor(MLD_data, genomic_features, invalid_data) { 
         this.MLD_data = MLD_data 
         this.genomic_features = genomic_features
         this.invalid_data = invalid_data
+
+
+        this.setupInvalidChart()
 
         // set global transition time
         this.transition_time = 1000
@@ -943,7 +946,7 @@ class Main {
             if (i[1]){
                 includedStar.push(i[0])
             }
-        }
+        };
 
         let benign_list = []
         let likely_benign_list = []
@@ -1348,8 +1351,55 @@ class Main {
     updateWithGene(){
         d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
     }
+
+    setupInvalidChart(){
+        let margin = {top: 40, bottom: 20, left: 40, right: 40}
+        let height = 400 - margin.top - margin.bottom
+        let width = 600 - margin.left - margin.right
+
+        let invalid_svg = d3.select("#invalid").append('svg')
+        .attr('height', height + margin.top + margin.bottom)
+        .attr('width', width + margin.left + margin.right)
+        .attr('id', 'invalid-svg');
+    }
     drawInvalidChart(){
         console.log(this.invalid_data)
+        console.log(this.filters)
+
+        let invalid_data = this.invalid_data
+        // filter data by database selections
+
+        let includedClasses = []
+        let includedDatabases = []
+        let includedVarType = []
+        let includedStar = []
+
+
+        for (let i of Object.entries(this.filters.pathogenicity)){
+            if (i[1]){
+                includedClasses.push(i[0])
+            }
+        };
+        for (let i of Object.entries(this.filters.databases)){
+
+            if (i[1]){
+                includedDatabases.push(i[0])
+            }
+        };
+
+        for (let i of Object.entries(this.filters.varType)){
+            if (i[1]){
+                includedVarType.push(i[0])
+            }
+        };
+
+        for (let i of Object.entries(this.filters.reviewStatus)){
+            if (i[1]){
+                includedStar.push(i[0])
+            }
+        };
+
+
 
         let failure_reasons = []
         let databases = []
@@ -1358,9 +1408,16 @@ class Main {
         let BIPmed_SNPhg19 = []
 
 
-        for (let i of this.invalid_data){
+
+
+        for (let i of invalid_data){
             let failure_reason = i["HGVS Normalization Failure Reason"]
             let database = i.Database
+
+            if (!includedDatabases.includes(database)){
+                continue
+            };
+
             if (!failure_reasons.includes(failure_reason)){
                 failure_reasons.push(failure_reason)
             }
@@ -1369,7 +1426,8 @@ class Main {
             }
         }
 
-        this.invalid_data.forEach(i => {
+
+        invalid_data.forEach(i => {
             if (i.Database === 'ClinVar'){
                 Clinvar.push(i)
             }
@@ -1387,63 +1445,66 @@ class Main {
         let globalVariomeCounts = {};
         let BIPmedSNPhg19Counts = {};
 
+
         Clinvar.forEach(d=>{
             let failure_reason = d["HGVS Normalization Failure Reason"]
-            ClinvarCounts[failure_reason] = ClinvarCounts[failure_reason] ? ClinvarCounts[failure_reason] + 1 : 1;        
+            ClinvarCounts[failure_reason] = ClinvarCounts[failure_reason] ? ClinvarCounts[failure_reason] + 1 : 1;  
+            ClinvarCounts['database'] = 'ClinVar';     
         });
 
         Global_Variome.forEach(d=>{
             let failure_reason = d["HGVS Normalization Failure Reason"]
             globalVariomeCounts[failure_reason] = globalVariomeCounts[failure_reason] ? globalVariomeCounts[failure_reason] + 1 : 1;
+            globalVariomeCounts['database'] = 'Global_Variome';
         })
 
         BIPmed_SNPhg19.forEach(d=>{
             let failure_reason = d["HGVS Normalization Failure Reason"]
             BIPmedSNPhg19Counts[failure_reason] = BIPmedSNPhg19Counts[failure_reason] ? BIPmedSNPhg19Counts[failure_reason] + 1 : 1;
+            BIPmedSNPhg19Counts['database'] = 'BIPmed_SNPhg19'
         })
 
-        let dataByDatabase = {'ClinVar': ClinvarCounts, "Global_Variome":  globalVariomeCounts, "BIPmed_SNPhg19": BIPmedSNPhg19Counts};
-
+        let dataByDatabase = [ClinvarCounts, globalVariomeCounts, BIPmedSNPhg19Counts];
         console.log(dataByDatabase)
 
-        let stacked_data = d3.stack().keys(failure_reasons)
-            (this.invalid_data)
+        let margin = {top: 40, bottom: 20, left: 40, right: 40}
+        let height = 400 - margin.top - margin.bottom
+        let width = 600 - margin.left - margin.right
 
-        
-        let height = 400
-        let width = 600
-        let margins = {top: 40, left: 40, right: 40}
 
         // set up scales
         let scaleX = d3.scaleBand()
             .domain(databases)
-            .range([margins.left, width - margins.right])
+            .range([margin.left, width - margin.right])
         let scaleY = d3.scaleLinear()
-            .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length])+10])
-            .range([height - margins.top, 0])
+            .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +20])
+            .range([height - margin.top, 0])
+
+        let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+            .domain(failure_reasons)
+
 
         // append the svg
-        d3.select("#invalid").append('svg')
-            .attr('height', height)
-            .attr('width', width)
-            .attr('id', 'invalid-svg');
+        let invalid_svg = d3.select("#invalid-svg")
+
+
 
         let yAxisGenerator = d3.axisLeft(scaleY)
             .ticks(6)
         
         let xAxisGenerator = d3.axisBottom(scaleX)
-            .ticks(databases.length + 1)
+            .ticks(databases.length)
 
         // append groups and call the axis generator
 
         let y_axis_group = d3.select('#invalid-svg').append('g')
             .attr('id', 'invalid-y-axis')
-            .attr('transform', `translate(${margins.left}, 0)`)
+            .attr('transform', `translate(${margin.left}, 0)`)
             
 
         let x_axis_group = d3.select('#invalid-svg').append('g')
             .attr('id', 'invalid-x-axis')
-            .attr('transform', `translate(0, ${height-margins.top})`)
+            .attr('transform', `translate(0, ${height-margin.top})`)
 
         d3.select('#invalid-y-axis')
             .call(yAxisGenerator)
@@ -1451,37 +1512,36 @@ class Main {
         d3.select('#invalid-x-axis')
             .call(xAxisGenerator)
 
+        let stackedData = d3.stack()   
+            .keys(failure_reasons)(dataByDatabase)
+
+        
+
+        invalid_svg.append('g')
+            .selectAll('g')
+            .data(stackedData)
+            .join('g')
+                .attr('fill', function(d) {return colorScale(d.key); })
+                .attr('transform', 'translate(45, 0)')
+                .selectAll('rect')
+                .data(d=> d)
+                .join('rect')
+                .attr('x', d=>scaleX(d.data.database))
+                .attr('y', d=>scaleY(d[1] || 0))
+                .attr('height', d=>{return scaleY(d[0]) - scaleY(d[1]) || 0; })
+                .attr('width', 55)
+            
+        
 
 
-        for (let i of this.invalid_data){
-            // console.log(i)
-        }
-
-        // d3.select('#invalid-svg').append('g')
-        //     .selectAll('g')
-        //     .data(stacked_data)
-        //     .join('g')
-        //         .attr('fill', d=>d.key)
-        //     .selectAll('rect')
-        //     .data(d=>d)
-        //     .join('rect')
-        //         .attr('x', d=>scaleX(d.data.Database))
-        //         .attr('y', d=>scaleY(d[1]))
-        //         .attr('height', d=>scaleY(d[0]) - scaleY(d[1]))
-        
-    
-        
-        
      
-    }
-    updateInvalidChart(){
-        d3.select("#invalid-svg").remove()
-        this.drawInvalidChart()
-    }
+    }  
+    
     redraw(){
-       this.pathogenicityGraph()
-       this.drawDistanceTSSScatter()
-       this.updateInvalidChart()
+        this.drawInvalidChart
+        this.pathogenicityGraph()
+        this.drawDistanceTSSScatter()
+        this.drawInvalidChart()
     }
 }
 
