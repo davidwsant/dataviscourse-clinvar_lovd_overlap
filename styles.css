@@ -9,34 +9,6 @@ h1 {
     word-wrap: break-word;
 }
 
-.LegendContainer {
-    display:flex;
-    justify-content:center;
-}
-
-.LOVDLegend{
-    border:5px solid #4e79a7;
-    border-radius: 5px;
-    background: #4e79a7;
-    display:inline-block;
-    margin: 0 8px 0 32px;
-}
-
-.BothLegend{
-    border:5px solid #af7aa1;
-    border-radius: 5px;
-    background: #af7aa1;
-    display:inline-block;
-    margin: 0 8px 0 32px;
-}
-
-.ClinVarLegend{
-    border:5px solid #e15759;
-    border-radius: 5px;
-    background: #e15759cd;
-    display:inline-block;
-    margin: 0 8px 0 32px;
-}
 .pathogenic {
     fill: red;
 }
