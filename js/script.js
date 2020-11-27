@@ -71,11 +71,9 @@ class Main {
                 }
                 
             }
-
-            console.log(tss)
         }
-        console.log(MLD_data)
-        console.log(genomic_features)
+        // console.log(MLD_data)
+        // console.log(genomic_features)
         // console.log(invalid_data)
 
         // get all unique diseases and genes from the data
@@ -426,7 +424,7 @@ class Main {
 
 
         
-// this line 
+// Set up svg and axes for pathogenicity line graph
 
 
         let margins = {left: 50, top: 30}
@@ -494,6 +492,8 @@ class Main {
         this.drawDistanceTSSScatter()
         this.updateWithGene()
         this.pathogenicityGraph()
+        this.drawInvalidChart()
+
 
 
     }
@@ -905,8 +905,7 @@ class Main {
            
         }
 
-    }
-    
+    }    
     pathogenicityGraph(){
 
         // first set up the data 
@@ -1101,10 +1100,6 @@ class Main {
         let margins = {left: 50, top: 30}
 
         let pathogenicityGraphSVG = d3.select("#pathogenicity-svg")
-        // let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
-        //     .attr('width', svg_width)
-        //     .attr('height', svg_height)
-        //     .attr('id', 'pathogenicity-svg')
 
         // define scales
         let scaleX = d3.scaleBand()
@@ -1349,18 +1344,126 @@ class Main {
                     .classed('not-hovered', true)
             })
         
-    }
-    
+    }   
     updateWithGene(){
         d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
     }
+    drawInvalidChart(){
+        // use this method to set up the chart svg
 
+        let failure_reasons = []
+        let databases = []
+        let Clinvar = []
+        let Global_Variome = []
+        let BIPmed_SNPhg19 = []
+
+
+        for (let i of this.invalid_data){
+            let failure_reason = i["HGVS Normalization Failure Reason"]
+            let database = i.Database
+            if (!failure_reasons.includes(failure_reason)){
+                failure_reasons.push(failure_reason)
+            }
+            if (!databases.includes(database)){
+                databases.push(database)
+            }
+        }
+
+        this.invalid_data.forEach(i => {
+            if (i.Database === 'ClinVar'){
+                Clinvar.push(i)
+            }
+            else if (i.Database === 'Global_Variome'){
+                Global_Variome.push(i)
+            }
+            else if (i.Database === 'BIPmed_SNPhg19'){
+                BIPmed_SNPhg19.push(i)
+            }
+        })
+
+        let stacked_data = d3.stack().keys(failure_reasons)
+            (this.invalid_data)
+
+        console.log(stacked_data)
+        
+        let height = 400
+        let width = 600
+        let margins = {top: 40, left: 40, right: 40}
+
+        // set up scales
+        let scaleX = d3.scaleBand()
+            .domain(databases)
+            .range([margins.left, width - margins.right])
+        let scaleY = d3.scaleLinear()
+            .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length])+10])
+            .range([height - margins.top, 0])
+
+        // append the svg
+        d3.select("#invalid").append('svg')
+            .attr('height', height)
+            .attr('width', width)
+            .attr('id', 'invalid-svg');
+
+        let yAxisGenerator = d3.axisLeft(scaleY)
+            .ticks(6)
+        
+        let xAxisGenerator = d3.axisBottom(scaleX)
+            .ticks(databases.length + 1)
+
+        // append groups and call the axis generator
+
+        let y_axis_group = d3.select('#invalid-svg').append('g')
+            .attr('id', 'invalid-y-axis')
+            .attr('transform', `translate(${margins.left}, 0)`)
+            
+
+        let x_axis_group = d3.select('#invalid-svg').append('g')
+            .attr('id', 'invalid-x-axis')
+            .attr('transform', `translate(0, ${height-margins.top})`)
+
+        d3.select('#invalid-y-axis')
+            .call(yAxisGenerator)
+            
+        d3.select('#invalid-x-axis')
+            .call(xAxisGenerator)
+
+        console.log(this.invalid_data)
+
+        console.log(failure_reasons)
+        console.log(databases)
+
+        console.log(Clinvar)
+
+        for (let i of this.invalid_data){
+            // console.log(i)
+        }
+
+        // d3.select('#invalid-svg').append('g')
+        //     .selectAll('g')
+        //     .data(stacked_data)
+        //     .join('g')
+        //         .attr('fill', d=>d.key)
+        //     .selectAll('rect')
+        //     .data(d=>d)
+        //     .join('rect')
+        //         .attr('x', d=>scaleX(d.data.Database))
+        //         .attr('y', d=>scaleY(d[1]))
+        //         .attr('height', d=>scaleY(d[0]) - scaleY(d[1]))
+        
+    
+        
+        
+     
+    }
+    updateInvalidChart(){
+        d3.select("#invalid-svg").remove()
+        this.drawInvalidChart()
+    }
     redraw(){
        this.pathogenicityGraph()
        this.drawDistanceTSSScatter()
+       this.updateInvalidChart()
     }
-    
-
 }
 
 
