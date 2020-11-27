@@ -1349,7 +1349,7 @@ class Main {
         d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
     }
     drawInvalidChart(){
-        // use this method to set up the chart svg
+        console.log(this.invalid_data)
 
         let failure_reasons = []
         let databases = []
@@ -1381,10 +1381,34 @@ class Main {
             }
         })
 
+        
+
+        let ClinvarCounts = {};
+        let globalVariomeCounts = {};
+        let BIPmedSNPhg19Counts = {};
+
+        Clinvar.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            ClinvarCounts[failure_reason] = ClinvarCounts[failure_reason] ? ClinvarCounts[failure_reason] + 1 : 1;        
+        });
+
+        Global_Variome.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            globalVariomeCounts[failure_reason] = globalVariomeCounts[failure_reason] ? globalVariomeCounts[failure_reason] + 1 : 1;
+        })
+
+        BIPmed_SNPhg19.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            BIPmedSNPhg19Counts[failure_reason] = BIPmedSNPhg19Counts[failure_reason] ? BIPmedSNPhg19Counts[failure_reason] + 1 : 1;
+        })
+
+        let dataByDatabase = {'ClinVar': ClinvarCounts, "Global_Variome":  globalVariomeCounts, "BIPmed_SNPhg19": BIPmedSNPhg19Counts};
+
+        console.log(dataByDatabase)
+
         let stacked_data = d3.stack().keys(failure_reasons)
             (this.invalid_data)
 
-        console.log(stacked_data)
         
         let height = 400
         let width = 600
@@ -1427,12 +1451,7 @@ class Main {
         d3.select('#invalid-x-axis')
             .call(xAxisGenerator)
 
-        console.log(this.invalid_data)
 
-        console.log(failure_reasons)
-        console.log(databases)
-
-        console.log(Clinvar)
 
         for (let i of this.invalid_data){
             // console.log(i)
