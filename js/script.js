@@ -1349,7 +1349,10 @@ class Main {
         
     }   
     updateWithGene(){
-        d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
+        d3.select('#dropdownMenu').on('change', d => {
+            this.drawDistanceTSSScatter()
+            this.drawInvalidChart()
+        })
     }
 
     setupInvalidChart(){
@@ -1363,42 +1366,26 @@ class Main {
         .attr('id', 'invalid-svg');
     }
     drawInvalidChart(){
-        console.log(this.invalid_data)
-        console.log(this.filters)
+        let dropDownValue = d3.select('#dropdownMenu').node().value
 
-        let invalid_data = this.invalid_data
-        // filter data by database selections
+        let invalid_data_filtered = []
 
-        let includedClasses = []
-        let includedDatabases = []
-        let includedVarType = []
-        let includedStar = []
-
-
-        for (let i of Object.entries(this.filters.pathogenicity)){
-            if (i[1]){
-                includedClasses.push(i[0])
+        // remove data objects that don't match the filtering criteria
+        for (let i of this.invalid_data){
+            let gene = i['Gene Symbol']
+            if (dropDownValue === 'None Selected'){
+                invalid_data_filtered.push(i)
             }
-        };
-        for (let i of Object.entries(this.filters.databases)){
-
-            if (i[1]){
-                includedDatabases.push(i[0])
+            else if (dropDownValue === gene){
+                invalid_data_filtered.push(i)
             }
-        };
-
-        for (let i of Object.entries(this.filters.varType)){
-            if (i[1]){
-                includedVarType.push(i[0])
+            else{
+                continue
             }
-        };
+        }
 
-        for (let i of Object.entries(this.filters.reviewStatus)){
-            if (i[1]){
-                includedStar.push(i[0])
-            }
-        };
 
+        console.log(invalid_data_filtered)
 
 
         let failure_reasons = []
@@ -1408,15 +1395,9 @@ class Main {
         let BIPmed_SNPhg19 = []
 
 
-
-
-        for (let i of invalid_data){
+        for (let i of invalid_data_filtered){
             let failure_reason = i["HGVS Normalization Failure Reason"]
             let database = i.Database
-
-            if (!includedDatabases.includes(database)){
-                continue
-            };
 
             if (!failure_reasons.includes(failure_reason)){
                 failure_reasons.push(failure_reason)
@@ -1427,7 +1408,9 @@ class Main {
         }
 
 
-        invalid_data.forEach(i => {
+
+
+        invalid_data_filtered.forEach(i => {
             if (i.Database === 'ClinVar'){
                 Clinvar.push(i)
             }
@@ -1438,7 +1421,7 @@ class Main {
                 BIPmed_SNPhg19.push(i)
             }
         })
-
+        
         
 
         let ClinvarCounts = {};
@@ -1449,7 +1432,7 @@ class Main {
         Clinvar.forEach(d=>{
             let failure_reason = d["HGVS Normalization Failure Reason"]
             ClinvarCounts[failure_reason] = ClinvarCounts[failure_reason] ? ClinvarCounts[failure_reason] + 1 : 1;  
-            ClinvarCounts['database'] = 'ClinVar';     
+            ClinvarCounts['database'] = 'ClinVar'; 
         });
 
         Global_Variome.forEach(d=>{
@@ -1465,7 +1448,7 @@ class Main {
         })
 
         let dataByDatabase = [ClinvarCounts, globalVariomeCounts, BIPmedSNPhg19Counts];
-        console.log(dataByDatabase)
+
 
         let margin = {top: 40, bottom: 20, left: 40, right: 40}
         let height = 400 - margin.top - margin.bottom
@@ -1475,7 +1458,8 @@ class Main {
         // set up scales
         let scaleX = d3.scaleBand()
             .domain(databases)
-            .range([margin.left, width - margin.right])
+            .range([margin.left, width])
+            .padding(0.3)
         let scaleY = d3.scaleLinear()
             .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +20])
             .range([height - margin.top, 0])
@@ -1483,17 +1467,13 @@ class Main {
         let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain(failure_reasons)
 
-
-        // append the svg
         let invalid_svg = d3.select("#invalid-svg")
-
-
 
         let yAxisGenerator = d3.axisLeft(scaleY)
             .ticks(6)
         
         let xAxisGenerator = d3.axisBottom(scaleX)
-            .ticks(databases.length)
+            .ticks(3)
 
         // append groups and call the axis generator
 
@@ -1512,29 +1492,70 @@ class Main {
         d3.select('#invalid-x-axis')
             .call(xAxisGenerator)
 
+        console.log(dataByDatabase)
+
         let stackedData = d3.stack()   
             .keys(failure_reasons)(dataByDatabase)
 
-        
+        console.log('stacked data:', stackedData)
 
         invalid_svg.append('g')
+            .attr('class', 'invalid-group')
             .selectAll('g')
             .data(stackedData)
-            .join('g')
-                .attr('fill', function(d) {return colorScale(d.key); })
-                .attr('transform', 'translate(45, 0)')
+            .join(
+                enter=>{
+                    enter.append('g')
+                        .attr('fill', d=>colorScale(d.key))
+                        // .attr('transform', 'translate(45, 0)')
+                        .transition()
+                            .duration(this.transition_time)
+                },
+                update=>{
+                    update
+                    .transition()
+                        .duration(this.transition_time)
+                    .attr('fill', d=>colorScale(d.key))
+                },
+                exit=>{exit.transition()
+                        .duration(this.transition_time)
+                    .remove()
+                }
+            )
+
+            d3.select('.invalid-group').selectAll('g')
                 .selectAll('rect')
-                .data(d=> d)
-                .join('rect')
-                .attr('x', d=>scaleX(d.data.database))
-                .attr('y', d=>scaleY(d[1] || 0))
-                .attr('height', d=>{return scaleY(d[0]) - scaleY(d[1]) || 0; })
-                .attr('width', 55)
-            
-        
+                .data(d=>d)
+                .join(
+                    enter=>{
+                        enter.append('rect')
+                            .attr('x', d=>scaleX(d.data.database))
+                            .attr('y', d=>scaleY(d[1] || 0))
+                            .attr('height', d=>{
+                                console.log(d)
+                                return scaleY(d[0]) - scaleY(d[1]) || 0; })
+                            .attr('width', scaleX.bandwidth())
+                            .transition()
+                                .duration(this.transition_time)
+                    },
+                    update=>{
+                        update.transition()
+                                .duration(this.transition_time)
+                            .attr('x', d=>{
+                                console.log(d)
+                                return scaleX(d.data.database)})
+                            .attr('y', d=>scaleY(d[1] ? d[1]: 0))
+                            .attr('height', d=>{return scaleY(d[0]) - scaleY(d[1]) || 0; })
+                            .attr('width', scaleX.bandwidth())
+                            
 
+                    },
+                    exit=>{
+                        exit.remove()
 
-     
+                    }
+                )
+                
     }  
     
     redraw(){
