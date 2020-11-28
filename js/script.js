@@ -1360,10 +1360,16 @@ class Main {
         let height = 400 - margin.top - margin.bottom
         let width = 600 - margin.left - margin.right
 
-        let invalid_svg = d3.select("#invalid").append('svg')
-        .attr('height', height + margin.top + margin.bottom)
-        .attr('width', width + margin.left + margin.right)
-        .attr('id', 'invalid-svg');
+        let invalid_thing = d3.select("#invalid")
+        invalid_thing.append('br')
+        let invalid_svg = invalid_thing.append('svg')
+            .attr('height', height + margin.top + margin.bottom)
+            .attr('width', width + margin.left + margin.right)
+            .attr('id', 'invalid-svg');
+
+        invalid_svg
+            .append('g')
+            .attr('class', 'invalid-group')
     }
     drawInvalidChart(){
         let dropDownValue = d3.select('#dropdownMenu').node().value
@@ -1393,6 +1399,9 @@ class Main {
         let Clinvar = []
         let Global_Variome = []
         let BIPmed_SNPhg19 = []
+        ////////// Dave's super pseudocode!!!!!!!
+        let superDict = {}
+
 
 
         for (let i of invalid_data_filtered){
@@ -1448,7 +1457,7 @@ class Main {
         })
 
         let dataByDatabase = [ClinvarCounts, globalVariomeCounts, BIPmedSNPhg19Counts];
-
+        // console.log('dataByDatabase:', dataByDatabase)
 
         let margin = {top: 40, bottom: 20, left: 40, right: 40}
         let height = 400 - margin.top - margin.bottom
@@ -1467,7 +1476,6 @@ class Main {
         let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain(failure_reasons)
 
-        let invalid_svg = d3.select("#invalid-svg")
 
         let yAxisGenerator = d3.axisLeft(scaleY)
             .ticks(6)
@@ -1499,15 +1507,13 @@ class Main {
 
         console.log('stacked data:', stackedData)
 
-        invalid_svg.append('g')
-            .attr('class', 'invalid-group')
+        d3.selectAll('.invalid-group')
             .selectAll('g')
             .data(stackedData)
             .join(
                 enter=>{
                     enter.append('g')
                         .attr('fill', d=>colorScale(d.key))
-                        // .attr('transform', 'translate(45, 0)')
                         .transition()
                             .duration(this.transition_time)
                 },
@@ -1517,9 +1523,7 @@ class Main {
                         .duration(this.transition_time)
                     .attr('fill', d=>colorScale(d.key))
                 },
-                exit=>{exit.transition()
-                        .duration(this.transition_time)
-                    .remove()
+                exit=>{exit.remove()
                 }
             )
 
@@ -1542,7 +1546,6 @@ class Main {
                         update.transition()
                                 .duration(this.transition_time)
                             .attr('x', d=>{
-                                console.log(d)
                                 return scaleX(d.data.database)})
                             .attr('y', d=>scaleY(d[1] ? d[1]: 0))
                             .attr('height', d=>{return scaleY(d[0]) - scaleY(d[1]) || 0; })
