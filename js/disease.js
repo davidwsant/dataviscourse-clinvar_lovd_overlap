@@ -9,7 +9,7 @@ const stackedByPercent = (data)=>{
         }
 
     })
-    console.log(dataBYGene)
+    // console.log(dataBYGene)
 
     const dataToPlot = {}
     Object.keys(dataBYGene).forEach((gene)=>{
@@ -32,7 +32,7 @@ const stackedByPercent = (data)=>{
         }).length
         dataToPlot[gene].push([ClinVarLength, gene])
     })
-    console.log(dataToPlot)
+    // console.log(dataToPlot)
     const margin = {
         top: 10,
         left:30,
@@ -105,9 +105,9 @@ const stackedByPercent = (data)=>{
 
         gs.selectAll("rect")
        .data((d)=>{
-                console.log(d)
-                console.log(dataToPlot[d])
-                console.log(dataBYGene)
+                // console.log(d)
+                // console.log(dataToPlot[d])
+                // console.log(dataBYGene)
                 const max = dataBYGene[d].length
                 return dataToPlot[d].map((dInner)=>{
                     return [(dInner[0]/max) *100, dInner[1]]
@@ -118,17 +118,17 @@ const stackedByPercent = (data)=>{
                     const rect = enter.append("rect")
                     .attr("x", 0)
                     .attr("y", (d,i,o)=>{
-                        console.log(d)
-                        console.log(i)
-                        console.log(o)
+                        // console.log(d)
+                        // console.log(i)
+                        // console.log(o)
                       let yCoord = 0
                       for(let j = 0;j<i;j++){
-                          console.log("getting here")
-                          console.log(dataToPlot[d[1]])
+                        //   console.log("getting here")
+                        //   console.log(dataToPlot[d[1]])
                           const max = dataBYGene[d[1]].length
                           yCoord += height - y(dataToPlot[d[1]][j][0]/max *100)
                       }
-                      console.log(yCoord)
+                    //   console.log(yCoord)
                        return yCoord 
                     })
                     .attr("width", barWidth)
@@ -142,20 +142,20 @@ const stackedByPercent = (data)=>{
                     return rect
                 },
                 (update)=>{
-                    console.log(update)
+                    // console.log(update)
                     update.transition().duration(1000).attr("x", 0)
                     .attr("y", (d,i,o)=>{
-                        console.log(d)
-                        console.log(i)
-                        console.log(o)
+                        // console.log(d)
+                        // console.log(i)
+                        // console.log(o)
                       let yCoord = 0
                       for(let j = 0;j<i;j++){
-                          console.log("getting here")
-                          console.log(dataToPlot[d[1]])
+                        //   console.log("getting here")
+                        //   console.log(dataToPlot[d[1]])
                           const max = dataBYGene[d[1]].length
                           yCoord += height - y(dataToPlot[d[1]][j][0]/max *100)
                       }
-                      console.log(yCoord)
+                    //   console.log(yCoord)
                        return yCoord 
                     })
                     .attr("width", barWidth)
@@ -232,22 +232,22 @@ function countPlot(dataToPlot, dataBYGene, width, height, margin, colorArray){
 
     gs.selectAll("rect")
    .data((d)=>{
-            console.log(d)
+            // console.log(d)
             return dataToPlot[d]
         }).join(
             (enter)=>{
                 const returnVal = enter.append("rect")
                 .attr("x", 0)
                 .attr("y", (d,i,o)=>{
-                    console.log(i)
-                    console.log(o)
+                    // console.log(i)
+                    // console.log(o)
                   let yCoord = 0
                   for(let j = 0;j<i;j++){
-                      console.log("getting here")
-                      console.log(dataToPlot[d[1]])
+                    //   console.log("getting here")
+                    //   console.log(dataToPlot[d[1]])
                       yCoord += height - y(dataToPlot[d[1]][j][0])
                   }
-                  console.log(yCoord)
+                //   console.log(yCoord)
                    return yCoord 
                 })
                 .attr("width", barWidth)
@@ -263,15 +263,15 @@ function countPlot(dataToPlot, dataBYGene, width, height, margin, colorArray){
                 update.transition().duration(1000)
                 .attr("x", 0)
                 .attr("y", (d,i,o)=>{
-                    console.log(i)
-                    console.log(o)
+                    // console.log(i)
+                    // console.log(o)
                   let yCoord = 0
                   for(let j = 0;j<i;j++){
-                      console.log("getting here")
-                      console.log(dataToPlot[d[1]])
+                    //   console.log("getting here")
+                    //   console.log(dataToPlot[d[1]])
                       yCoord += height - y(dataToPlot[d[1]][j][0])
                   }
-                  console.log(yCoord)
+                //   console.log(yCoord)
                    return yCoord 
                 })
                 .attr("width", barWidth)
@@ -321,26 +321,26 @@ d3.csv('./data/MLD_Valid.csv').then(function(data){
         '-': true
     }}
 
-    d3.select('#checkBoxClinVar').on('change', (event) => {
+    $('#checkBoxClinVar').on('change', (event) => {
         this.filters['databases']['ClinVar'] = event.target.checked
 
     })
-    d3.select('#checkBoxGlob').on('change', (event) => {
+    $('#checkBoxGlob').on('change', (event) => {
         this.filters['databases']['Global_Variome'] = event.target.checked
     })
-    d3.select('#checkBoxHum').on('change', (event) => {
+    $('#checkBoxHum').on('change', (event) => {
         this.filters['databases']['Human_Variome'] = event.target.checked
     })
-    d3.select('#checkBoxBIPSNP').on('change', (event) => {
+    $('#checkBoxBIPSNP').on('change', (event) => {
         this.filters['databases']['BIPmed_SNPhg19'] = event.target.checked
     })
-    d3.select('#checkBoxBIPWES').on('change', (event) => {
+    $('#checkBoxBIPWES').on('change', (event) => {
         this.filters['databases']['BIPmed_WES'] = event.target.checked
     })
-    d3.select('#checkBoxMSEQ').on('change', (event) => {
+    $('#checkBoxMSEQ').on('change', (event) => {
         this.filters['databases']['MSeqDR-LSDB'] = event.target.checked
     })
-    d3.select('#checkBoxCCHMC').on('change', (event) => {
+    $('#checkBoxCCHMC').on('change', (event) => {
         this.filters['databases']['CCHMC'] = event.target.checked
     })
 
@@ -351,56 +351,56 @@ d3.csv('./data/MLD_Valid.csv').then(function(data){
     // })
 
     // Now for variant type
-    d3.select('#checkBoxSNV').on('change', (event) => {
+    $('#checkBoxSNV').on('change', (event) => {
         this.filters['varType']['single nucleotide variant'] = event.target.checked
     })
-    d3.select('#checkBoxDel').on('change', (event) => {
+    $('#checkBoxDel').on('change', (event) => {
         this.filters['varType']['Deletion'] = event.target.checked
     })
-    d3.select('#checkBoxDup').on('change', (event) => {
+    $('#checkBoxDup').on('change', (event) => {
         this.filters['varType']['Duplication'] = event.target.checked
     })
-    d3.select('#checkBoxIns').on('change', (event) => {
+    $('#checkBoxIns').on('change', (event) => {
         this.filters['varType']['Insertion'] = event.target.checked
     })
-    d3.select('#checkBoxIndel').on('change', (event) => {
+    $('#checkBoxIndel').on('change', (event) => {
         this.filters['varType']['Indel'] = event.target.checked
     })
 
     // Now for pathogenicity
-    d3.select('#checkBoxBenign').on('change', (event) => {
+    $('#checkBoxBenign').on('change', (event) => {
         this.filters['pathogenicity']['Benign'] = event.target.checked
     })
-    d3.select('#checkBoxLikBenign').on('change', (event) => {
+    $('#checkBoxLikBenign').on('change', (event) => {
         this.filters['pathogenicity']['Likely Benign'] = event.target.checked
     })
-    d3.select('#checkBoxVUS').on('change', (event) => {
+    $('#checkBoxVUS').on('change', (event) => {
         this.filters['pathogenicity']['VUS'] = event.target.checked
     })
-    d3.select('#checkBoxLikPath').on('change', (event) => {
+    $('#checkBoxLikPath').on('change', (event) => {
         this.filters['pathogenicity']['Likely Pathogenic'] = event.target.checked
     })
-    d3.select('#checkBoxPath').on('change', (event) => {
+    $('#checkBoxPath').on('change', (event) => {
         this.filters['pathogenicity']['Pathogenic'] = event.target.checked
     })
-    d3.select('#checkBoxCon').on('change', (event) => {
+    $('#checkBoxCon').on('change', (event) => {
         this.filters['pathogenicity']['Conflicting'] = event.target.checked
     })
-    d3.select('#checkBoxNotPro').on('change', (event) => {
+   $('#checkBoxNotPro').on('change', (event) => {
         this.filters['pathogenicity']['Not Provided'] = event.target.checked
     })
 
     // Now for Review Status
-    d3.select('#checkBoxReview0').on('change', (event) => {
+    $('#checkBoxReview0').on('change', (event) => {
         this.filters['reviewStatus']['0'] = event.target.checked
     })
-    d3.select('#checkBoxReview1').on('change', (event) => {
+    $('#checkBoxReview1').on('change', (event) => {
         this.filters['reviewStatus']['1'] = event.target.checked
     })
-    d3.select('#checkBoxReview2').on('change', (event) => {
+    $('#checkBoxReview2').on('change', (event) => {
         this.filters['reviewStatus']['2'] = event.target.checked
     })
-    console.log(data)
+    // console.log(data)
 
     reDrawBarPlots(data, this.filters)
 
@@ -417,20 +417,20 @@ d3.csv('./data/MLD_Valid.csv').then(function(data){
 function reDrawBarPlots(data, filters){
     data = data.filter((d)=>{
         if(!filters['databases'][d.Database]){
-         console.log(d)
+        //  console.log(d)
          return false
         } 
         if(!filters['varType'][d["Variant Type"]]){
-         console.log(d)
+        //  console.log(d)
          return false
      }
      if(!filters['pathogenicity'][d["Pathogenicity"]]){
-         console.log(d)
+        //  console.log(d)
          return false
      }
  
      if(!filters['reviewStatus'][d["Star Level"]]){
-         console.log(d)
+        //  console.log(d)
          return false
      }
      return true
@@ -449,7 +449,7 @@ function reDrawBarPlots(data, filters){
          }
  
      })
-     console.log(data)
+    //  console.log(data)
      const currentDisease = "Metachromatic Leukodystrophy"
      const datafordisease = data.filter((d)=>{
          return d.disease === currentDisease
@@ -473,8 +473,8 @@ function reDrawBarPlots(data, filters){
              uniqueHGVSData.push(d)
          }
      })
-     console.log(datafordisease)
-     console.log(uniqueHGVSData)
+    //  console.log(datafordisease)
+    //  console.log(uniqueHGVSData)
      stackedByPercent(uniqueHGVSData)
 }
 

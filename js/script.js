@@ -498,26 +498,26 @@ class Main {
 
     }
     eventListeners() {
-        d3.select('#checkBoxClinVar').on('change', (event) => {
+        $('#checkBoxClinVar').on('change', (event) => {
             this.filters['databases']['ClinVar'] = event.target.checked
 
         })
-        d3.select('#checkBoxGlob').on('change', (event) => {
+        $('#checkBoxGlob').on('change', (event) => {
             this.filters['databases']['Global_Variome'] = event.target.checked
         })
-        d3.select('#checkBoxHum').on('change', (event) => {
+       $('#checkBoxHum').on('change', (event) => {
             this.filters['databases']['Human_Variome'] = event.target.checked
         })
-        d3.select('#checkBoxBIPSNP').on('change', (event) => {
+        $('#checkBoxBIPSNP').on('change', (event) => {
             this.filters['databases']['BIPmed_SNPhg19'] = event.target.checked
         })
-        d3.select('#checkBoxBIPWES').on('change', (event) => {
+        $('#checkBoxBIPWES').on('change', (event) => {
             this.filters['databases']['BIPmed_WES'] = event.target.checked
         })
-        d3.select('#checkBoxMSEQ').on('change', (event) => {
+        $('#checkBoxMSEQ').on('change', (event) => {
             this.filters['databases']['MSeqDR-LSDB'] = event.target.checked
         })
-        d3.select('#checkBoxCCHMC').on('change', (event) => {
+        $('#checkBoxCCHMC').on('change', (event) => {
             this.filters['databases']['CCHMC'] = event.target.checked
         })
 
@@ -528,59 +528,60 @@ class Main {
         // })
 
         // Now for variant type
-        d3.select('#checkBoxSNV').on('change', (event) => {
+        $('#checkBoxSNV').on('change', (event) => {
             this.filters['varType']['single nucleotide variant'] = event.target.checked
         })
-        d3.select('#checkBoxDel').on('change', (event) => {
+        $('#checkBoxDel').on('change', (event) => {
             this.filters['varType']['Deletion'] = event.target.checked
         })
-        d3.select('#checkBoxDup').on('change', (event) => {
+        $('#checkBoxDup').on('change', (event) => {
             this.filters['varType']['Duplication'] = event.target.checked
         })
-        d3.select('#checkBoxIns').on('change', (event) => {
+        $('#checkBoxIns').on('change', (event) => {
             this.filters['varType']['Insertion'] = event.target.checked
         })
-        d3.select('#checkBoxIndel').on('change', (event) => {
+        $('#checkBoxIndel').on('change', (event) => {
             this.filters['varType']['Indel'] = event.target.checked
         })
 
         // Now for pathogenicity
-        d3.select('#checkBoxBenign').on('change', (event) => {
+        $('#checkBoxBenign').on('change', (event) => {
             this.filters['pathogenicity']['Benign'] = event.target.checked
         })
-        d3.select('#checkBoxLikBenign').on('change', (event) => {
+        $('#checkBoxLikBenign').on('change', (event) => {
             this.filters['pathogenicity']['Likely Benign'] = event.target.checked
         })
-        d3.select('#checkBoxVUS').on('change', (event) => {
+        $('#checkBoxVUS').on('change', (event) => {
             this.filters['pathogenicity']['VUS'] = event.target.checked
         })
-        d3.select('#checkBoxLikPath').on('change', (event) => {
+        $('#checkBoxLikPath').on('change', (event) => {
             this.filters['pathogenicity']['Likely Pathogenic'] = event.target.checked
         })
-        d3.select('#checkBoxPath').on('change', (event) => {
+       $('#checkBoxPath').on('change', (event) => {
             this.filters['pathogenicity']['Pathogenic'] = event.target.checked
         })
-        d3.select('#checkBoxCon').on('change', (event) => {
+        $('#checkBoxCon').on('change', (event) => {
             this.filters['pathogenicity']['Conflicting'] = event.target.checked
         })
-        d3.select('#checkBoxNotPro').on('change', (event) => {
+        $('#checkBoxNotPro').on('change', (event) => {
             this.filters['pathogenicity']['Not Provided'] = event.target.checked
         })
 
         // Now for Review Status
-        d3.select('#checkBoxReview0').on('change', (event) => {
+        $('#checkBoxReview0').on('change', (event) => {
             this.filters['reviewStatus']['0'] = event.target.checked
         })
-        d3.select('#checkBoxReview1').on('change', (event) => {
+        $('#checkBoxReview1').on('change', (event) => {
             this.filters['reviewStatus']['1'] = event.target.checked
         })
-        d3.select('#checkBoxReview2').on('change', (event) => {
+        $('#checkBoxReview2').on('change', (event) => {
             this.filters['reviewStatus']['2'] = event.target.checked
         })
 
         // redraw button
-        let redrawButton = d3.select('#redraw-button')
+        let redrawButton = $('#redraw-button')
         redrawButton.on('click', ()=>{
+            console.log("redrawing")
             this.redraw()
         })
 
