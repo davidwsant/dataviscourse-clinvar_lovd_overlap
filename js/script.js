@@ -16,10 +16,13 @@ Promise.all([
 
 class Main {
 
-    constructor(MLD_data, genomic_features, invalid_data) {
+    constructor(MLD_data, genomic_features, invalid_data) { 
         this.MLD_data = MLD_data 
         this.genomic_features = genomic_features
         this.invalid_data = invalid_data
+
+
+        this.setupInvalidChart()
 
         // set global transition time
         this.transition_time = 1000
@@ -71,11 +74,9 @@ class Main {
                 }
                 
             }
-
-            console.log(tss)
         }
-        console.log(MLD_data)
-        console.log(genomic_features)
+        // console.log(MLD_data)
+        // console.log(genomic_features)
         // console.log(invalid_data)
 
         // get all unique diseases and genes from the data
@@ -426,7 +427,7 @@ class Main {
 
 
         
-// this line 
+// Set up svg and axes for pathogenicity line graph
 
 
         let margins = {left: 50, top: 30}
@@ -494,6 +495,8 @@ class Main {
         this.drawDistanceTSSScatter()
         this.updateWithGene()
         this.pathogenicityGraph()
+        this.drawInvalidChart()
+
 
 
     }
@@ -906,8 +909,7 @@ class Main {
            
         }
 
-    }
-    
+    }    
     pathogenicityGraph(){
 
         // first set up the data 
@@ -945,7 +947,7 @@ class Main {
             if (i[1]){
                 includedStar.push(i[0])
             }
-        }
+        };
 
         let benign_list = []
         let likely_benign_list = []
@@ -1102,10 +1104,6 @@ class Main {
         let margins = {left: 50, top: 30}
 
         let pathogenicityGraphSVG = d3.select("#pathogenicity-svg")
-        // let pathogenicityGraphSVG = d3.select('#pathogenicity-graph').append('svg')
-        //     .attr('width', svg_width)
-        //     .attr('height', svg_height)
-        //     .attr('id', 'pathogenicity-svg')
 
         // define scales
         let scaleX = d3.scaleBand()
@@ -1350,18 +1348,226 @@ class Main {
                     .classed('not-hovered', true)
             })
         
-    }
-    
+    }   
     updateWithGene(){
-        d3.select('#dropdownMenu').on('change', d => this.drawDistanceTSSScatter())
+        d3.select('#dropdownMenu').on('change', d => {
+            this.drawDistanceTSSScatter()
+            this.drawInvalidChart()
+        })
     }
 
-    redraw(){
-       this.pathogenicityGraph()
-       this.drawDistanceTSSScatter()
+    setupInvalidChart(){
+        let margin = {top: 40, bottom: 20, left: 40, right: 40}
+        let height = 400 - margin.top - margin.bottom
+        let width = 600 - margin.left - margin.right
+
+        let invalid_thing = d3.select("#invalid")
+        invalid_thing.append('br')
+        let invalid_svg = invalid_thing.append('svg')
+            .attr('height', height + margin.top + margin.bottom)
+            .attr('width', width + margin.left + margin.right)
+            .attr('id', 'invalid-svg');
+
+        invalid_svg
+            .append('g')
+            .attr('class', 'invalid-group')
     }
+    drawInvalidChart(){
+        let dropDownValue = d3.select('#dropdownMenu').node().value
+
+        let invalid_data_filtered = []
+
+        // remove data objects that don't match the filtering criteria
+        for (let i of this.invalid_data){
+            let gene = i['Gene Symbol']
+            if (dropDownValue === 'None Selected'){
+                invalid_data_filtered.push(i)
+            }
+            else if (dropDownValue === gene){
+                invalid_data_filtered.push(i)
+            }
+            else{
+                continue
+            }
+        }
+
+
+        console.log(invalid_data_filtered)
+
+
+        let failure_reasons = []
+        let databases = []
+        let Clinvar = []
+        let Global_Variome = []
+        let BIPmed_SNPhg19 = []
+        ////////// Dave's super pseudocode!!!!!!!
+        let superDict = {}
+
+
+
+        for (let i of invalid_data_filtered){
+            let failure_reason = i["HGVS Normalization Failure Reason"]
+            let database = i.Database
+
+            if (!failure_reasons.includes(failure_reason)){
+                failure_reasons.push(failure_reason)
+            }
+            if (!databases.includes(database)){
+                databases.push(database)
+            }
+        }
+
+
+
+
+        invalid_data_filtered.forEach(i => {
+            if (i.Database === 'ClinVar'){
+                Clinvar.push(i)
+            }
+            else if (i.Database === 'Global_Variome'){
+                Global_Variome.push(i)
+            }
+            else if (i.Database === 'BIPmed_SNPhg19'){
+                BIPmed_SNPhg19.push(i)
+            }
+        })
+        
+        
+
+        let ClinvarCounts = {};
+        let globalVariomeCounts = {};
+        let BIPmedSNPhg19Counts = {};
+
+
+        Clinvar.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            ClinvarCounts[failure_reason] = ClinvarCounts[failure_reason] ? ClinvarCounts[failure_reason] + 1 : 1;  
+            ClinvarCounts['database'] = 'ClinVar'; 
+        });
+
+        Global_Variome.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            globalVariomeCounts[failure_reason] = globalVariomeCounts[failure_reason] ? globalVariomeCounts[failure_reason] + 1 : 1;
+            globalVariomeCounts['database'] = 'Global_Variome';
+        })
+
+        BIPmed_SNPhg19.forEach(d=>{
+            let failure_reason = d["HGVS Normalization Failure Reason"]
+            BIPmedSNPhg19Counts[failure_reason] = BIPmedSNPhg19Counts[failure_reason] ? BIPmedSNPhg19Counts[failure_reason] + 1 : 1;
+            BIPmedSNPhg19Counts['database'] = 'BIPmed_SNPhg19'
+        })
+
+        let dataByDatabase = [ClinvarCounts, globalVariomeCounts, BIPmedSNPhg19Counts];
+        // console.log('dataByDatabase:', dataByDatabase)
+
+        let margin = {top: 40, bottom: 20, left: 40, right: 40}
+        let height = 400 - margin.top - margin.bottom
+        let width = 600 - margin.left - margin.right
+
+
+        // set up scales
+        let scaleX = d3.scaleBand()
+            .domain(databases)
+            .range([margin.left, width])
+            .padding(0.3)
+        let scaleY = d3.scaleLinear()
+            .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +20])
+            .range([height - margin.top, 0])
+
+        let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+            .domain(failure_reasons)
+
+
+        let yAxisGenerator = d3.axisLeft(scaleY)
+            .ticks(6)
+        
+        let xAxisGenerator = d3.axisBottom(scaleX)
+            .ticks(3)
+
+        // append groups and call the axis generator
+
+        let y_axis_group = d3.select('#invalid-svg').append('g')
+            .attr('id', 'invalid-y-axis')
+            .attr('transform', `translate(${margin.left}, 0)`)
+            
+
+        let x_axis_group = d3.select('#invalid-svg').append('g')
+            .attr('id', 'invalid-x-axis')
+            .attr('transform', `translate(0, ${height-margin.top})`)
+
+        d3.select('#invalid-y-axis')
+            .call(yAxisGenerator)
+            
+        d3.select('#invalid-x-axis')
+            .call(xAxisGenerator)
+
+        console.log(dataByDatabase)
+
+        let stackedData = d3.stack()   
+            .keys(failure_reasons)(dataByDatabase)
+
+        console.log('stacked data:', stackedData)
+
+        d3.selectAll('.invalid-group')
+            .selectAll('g')
+            .data(stackedData)
+            .join(
+                enter=>{
+                    enter.append('g')
+                        .attr('fill', d=>colorScale(d.key))
+                        .transition()
+                            .duration(this.transition_time)
+                },
+                update=>{
+                    update
+                    .transition()
+                        .duration(this.transition_time)
+                    .attr('fill', d=>colorScale(d.key))
+                },
+                exit=>{exit.remove()
+                }
+            )
+
+            d3.select('.invalid-group').selectAll('g')
+                .selectAll('rect')
+                .data(d=>d)
+                .join(
+                    enter=>{
+                        enter.append('rect')
+                            .attr('x', d=>scaleX(d.data.database))
+                            .attr('y', d=>scaleY(d[1] || 0))
+                            .attr('height', d=>{
+                                console.log(d)
+                                return scaleY(d[0]) - scaleY(d[1]) || 0; })
+                            .attr('width', scaleX.bandwidth())
+                            .transition()
+                                .duration(this.transition_time)
+                    },
+                    update=>{
+                        update.transition()
+                                .duration(this.transition_time)
+                            .attr('x', d=>{
+                                return scaleX(d.data.database)})
+                            .attr('y', d=>scaleY(d[1] ? d[1]: 0))
+                            .attr('height', d=>{return scaleY(d[0]) - scaleY(d[1]) || 0; })
+                            .attr('width', scaleX.bandwidth())
+                            
+
+                    },
+                    exit=>{
+                        exit.remove()
+
+                    }
+                )
+                
+    }  
     
-
+    redraw(){
+        this.drawInvalidChart
+        this.pathogenicityGraph()
+        this.drawDistanceTSSScatter()
+        this.drawInvalidChart()
+    }
 }
 
 
