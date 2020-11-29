@@ -1359,7 +1359,7 @@ class Main {
     setupInvalidChart(){
         let margin = {top: 40, bottom: 20, left: 40, right: 40}
         let height = 400 - margin.top - margin.bottom
-        let width = 600 - margin.left - margin.right
+        let width = 800 - margin.left - margin.right
 
         let invalid_thing = d3.select("#invalid")
         invalid_thing.append('br')
@@ -1371,8 +1371,31 @@ class Main {
         invalid_svg
             .append('g')
             .attr('class', 'invalid-group')
+        
+        invalid_svg.append('g')
+            .attr('id', 'invalid-legend')
+
+        invalid_svg.append('g')
+            .attr('id', 'invalid-y-label')
+
+            .append('text')
+                .attr('x', -190)
+                .attr('y', 11)
+                .text('Count')
+                .attr('transform', 'rotate(-90)')
+
+        invalid_svg.append('g')
+            .attr('id', 'invalid-x-label')
+            .append('text')
+            .attr('x', width/2 -20)
+            .attr('y', height)
+            .text('Database')
     }
     drawInvalidChart(){
+        let margin = {top: 40, bottom: 20, left: 40, right: 40}
+        let height = 400 - margin.top - margin.bottom
+        let width = 800 - margin.left - margin.right
+
         let dropDownValue = d3.select('#dropdownMenu').node().value
 
         let invalid_data_filtered = []
@@ -1460,9 +1483,7 @@ class Main {
         let dataByDatabase = [ClinvarCounts, globalVariomeCounts, BIPmedSNPhg19Counts];
         // console.log('dataByDatabase:', dataByDatabase)
 
-        let margin = {top: 40, bottom: 20, left: 40, right: 40}
-        let height = 400 - margin.top - margin.bottom
-        let width = 600 - margin.left - margin.right
+        
 
 
         // set up scales
@@ -1506,7 +1527,6 @@ class Main {
         let stackedData = d3.stack()   
             .keys(failure_reasons)(dataByDatabase)
 
-        console.log('stacked data:', stackedData)
 
         d3.selectAll('.invalid-group')
             .selectAll('g')
@@ -1535,13 +1555,18 @@ class Main {
                     enter=>{
                         enter.append('rect')
                             .attr('x', d=>scaleX(d.data.database))
+                            .attr('y', d=>scaleY[d[1]] || 0)
+                            .attr('y', 0)
+                            .attr('height', 0)
+                            .attr('width', scaleX.bandwidth())
+                        .transition()
+                            .duration(this.transition_time)
+                            .attr('x', d=>scaleX(d.data.database))
                             .attr('y', d=>scaleY(d[1] || 0))
                             .attr('height', d=>{
-                                console.log(d)
                                 return scaleY(d[0]) - scaleY(d[1]) || 0; })
                             .attr('width', scaleX.bandwidth())
-                            .transition()
-                                .duration(this.transition_time)
+                            
                     },
                     update=>{
                         update.transition()
@@ -1555,10 +1580,120 @@ class Main {
 
                     },
                     exit=>{
-                        exit.remove()
+
+                        exit
+                            .attr('height', 0)
+                            .attr('width', scaleX.bandwidth())
+                            .remove()
 
                     }
                 )
+
+
+                // add legend
+                
+                let groups = d3.select('#invalid-legend').selectAll('g')
+                    .data(failure_reasons)
+                    .join(
+                        enter=>{enter.append('g')
+                            .attr('class', 'legend-groups')
+                            .attr('fill', d=>colorScale(d))
+
+                    }, 
+                        update=>update
+                            .attr('class', 'legend-groups')
+                            .attr('fill', d=>colorScale(d))
+
+                        ,
+                        exit=>exit.remove()
+                    );
+                
+                groups.selectAll('rect')
+                    .remove()
+
+                groups.selectAll('text')
+                    .remove()
+
+                d3.selectAll('.legend-groups')
+                    .append('rect')
+                    .attr('x', 500)
+                    .attr('y', (d,i)=>30 + i*20)
+                    .attr('height', 10)
+                    .attr('width', 10)
+                
+                d3.selectAll('.legend-groups')
+                    .append('text')
+                    .attr('x', 515)
+                    .attr('y', (d,i)=>40 + i*20)
+                    .text(d=>d) 
+                    .attr('fill', 'black')
+
+                // groups.selectAll('rect')
+                //     .data(failure_reasons)
+                //     .join(
+                //         enter=>{
+                //             enter.append('rect')
+                //             .attr('x', 500)
+                //             .attr('y', (d,i)=>30 + i*20)
+                //             .attr('height', 10)
+                //             .attr('width', 10)
+                //             // .attr('fill', d=>colorScale(d)) 
+                //         }, 
+                //         update=>{
+                //             update
+                //             .attr('x', 500)
+                //             .attr('y', (d,i)=>30 + i*20)
+                //             .attr('height', 10)
+                //             .attr('width', 10)
+                //             // .attr('fill', d=>colorScale(d)) 
+                //         }, 
+                //         exit=>exit.remove()
+                //     )
+                                       
+
+
+                // let legendGroup = d3.select('#invalid-legend')
+                //     .selectAll('rect')
+                //     .data(failure_reasons)
+                    
+                //     .join(
+                //         enter=>{enter.append('g')
+                //             .append('rect')
+                //             .attr('x', 500)
+                //             .attr('y', (d,i)=>30 + i*20)
+                //             .attr('height', 10)
+                //             .attr('width', 10)
+                //             .attr('fill', d=>colorScale(d))
+
+                //             d3.select(this.parentNode)
+                //             .append('text')
+                //                 .attr('x', 515)
+                //                 .attr('y', (d,i)=>40 + i*20)
+                //                 .text(d=>d)
+
+
+                //     },
+                //     update=> {update
+                //             .attr('x', 500)
+                //             .attr('y', (d,i)=>30 + i*20)
+                //             .attr('height', 10)
+                //             .attr('width', 10)
+                //             .attr('fill', d=>colorScale(d))
+                //     }, 
+                //     exit=>{exit.remove()}
+                //     );
+                
+                // let groups = d3.select('#invalid-legend').selectAll('g')
+
+                // groups
+                //         .append('text')
+                //             .attr('x', 515)
+                //             .attr('y', (d,i)=>40 + i*20)
+                //             .text(d=>d) 
+   
+
+                
+
                 
     }  
     
