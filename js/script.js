@@ -442,12 +442,10 @@ class Main {
 
         let y_axis_group = pathogenicityGraphSVG.append('g')
             .attr('id', 'pathogenicity-y-axis')
-            //.call(y_axis)
             .attr('transform', `translate(${margins.left}, ${-margins.top})`)
         
         let x_axis_group = pathogenicityGraphSVG.append('g')
             .attr('id', 'pathogenicity-x-axis')
-            //.call(x_axis)
             .attr('transform', `translate(${margins.left}, ${svg_height - margins.top})`)
 
         d3.select('#pathogenicity-svg').append('text')
@@ -459,6 +457,7 @@ class Main {
 
         let radius = 6
         pathogenicityGraphSVG.append('circle')
+            .attr('id', 'asra-legend')
             .attr('cx', 500)
             .attr('cy', 42)
             .attr('r', radius)
@@ -466,12 +465,14 @@ class Main {
 
         
         pathogenicityGraphSVG.append('circle')
+            .attr('id', 'psap-legend')
             .attr('cx', 500)
             .attr('cy', 62)
             .attr('r', radius)
             .style('fill', 'blue')
 
         pathogenicityGraphSVG.append('circle')
+            .attr('id', 'sumf1-legend')
             .attr('cx', 500)
             .attr('cy', 82)
             .attr('r', radius)
@@ -1163,7 +1164,7 @@ class Main {
                 enter => {enter.append('path')
                     .style('stroke', 'red')
                     .classed('line-chart', true)
-                
+                    .classed('asra', true)
                     .transition()
                         .duration(duration)
                         .attr('d', linesgenerator(lines_data[0]))},
@@ -1187,6 +1188,7 @@ class Main {
                 enter => {enter.append('path')
                     .style('stroke', 'blue')
                     .classed('line-chart', true)
+                    .classed('psap', true)
                 
                     .transition()
                         .duration(duration)
@@ -1211,6 +1213,7 @@ class Main {
                 enter => {enter.append('path')
                     .style('stroke', 'green')
                     .classed('line-chart', true)
+                    .classed('sumf1', true)
                 
                     .transition()
                         .duration(duration)
@@ -1227,6 +1230,7 @@ class Main {
                     .remove()}
 
             )
+
     
         // draw circles
         let radius = 6
@@ -1238,6 +1242,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'red')
+                    .classed('asra', true)
                 .append('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
                     .transition()
@@ -1250,6 +1255,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'red')
+                .select('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
 
                 },
@@ -1267,6 +1273,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'blue')
+                    .classed('psap', true)
                 .append('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
                     .transition()
@@ -1279,6 +1286,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'blue')
+                .select('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
 
                 },
@@ -1295,6 +1303,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'green')
+                    .classed('sumf1', true)
                 .append('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
 
@@ -1308,6 +1317,7 @@ class Main {
                     .attr('cx', d=>scaleX(d.pathogenicity))
                     .attr('cy', d=>scaleY(d.value))
                     .style('fill', 'green')
+                .select('title')
                     .text(d=>`${d.pathogenicity}, ${parseFloat(d.value).toFixed(2)}`)
 
                 },
@@ -1315,6 +1325,7 @@ class Main {
                     .duration(duration)
                 }
             )
+
 
         
         // add hover change
@@ -1327,6 +1338,7 @@ class Main {
             .classed('hovered', false)
 
         all_lines.on('mouseover', event=>{
+            
             d3.select(event.target)
                 .classed('hovered', true)
                 .classed('not-hovered', false)
@@ -1338,15 +1350,53 @@ class Main {
             })
 
         all_circles.on('mouseover', event=>{
-            d3.select(event.target)
+            
+            let target = d3.select(event.target)
                 .classed('hovered', true)
                 .classed('not-hovered', false)
+            
         })
             .on('mouseout', event=>{
                 d3.select(event.target)
                     .classed('hovered', false)
                     .classed('not-hovered', true)
             })
+
+        // hover over legend circles
+        d3.select('#asra-legend').on('mouseover', event=>{
+            d3.selectAll('.asra')
+                .classed('hovered', true)
+                .classed('not-hovered', false)
+        })
+            .on('mouseout', event=>{
+                d3.selectAll('.asra')
+                .classed('hovered', false)
+                .classed('not-hovered', true)
+            });
+
+        d3.select('#psap-legend').on('mouseover', event=>{
+            d3.selectAll('.psap')
+                .classed('hovered', true)
+                .classed('not-hovered', false)
+        })
+            .on('mouseout', event=>{
+                d3.selectAll('.psap')
+                    .classed('hovered', false)
+                    .classed('not-hovered', true)
+            });
+        
+        d3.select('#sumf1-legend').on('mouseover', event=>{                  
+                d3.select('#pathogenicity-graph').selectAll('.sumf1')
+                    .classed('hovered', true)
+                    .classed('not-hovered', false)
+        })
+            .on('mouseout', event=>{
+                d3.select('#pathogenicity-graph').selectAll('.sumf1')
+                    .classed('hovered', false)
+                    .classed('not-hovered', true)
+            })
+
+
         
     }   
     updateWithGene(){
@@ -1627,74 +1677,6 @@ class Main {
                     .attr('y', (d,i)=>40 + i*20)
                     .text(d=>d) 
                     .attr('fill', 'black')
-
-                // groups.selectAll('rect')
-                //     .data(failure_reasons)
-                //     .join(
-                //         enter=>{
-                //             enter.append('rect')
-                //             .attr('x', 500)
-                //             .attr('y', (d,i)=>30 + i*20)
-                //             .attr('height', 10)
-                //             .attr('width', 10)
-                //             // .attr('fill', d=>colorScale(d)) 
-                //         }, 
-                //         update=>{
-                //             update
-                //             .attr('x', 500)
-                //             .attr('y', (d,i)=>30 + i*20)
-                //             .attr('height', 10)
-                //             .attr('width', 10)
-                //             // .attr('fill', d=>colorScale(d)) 
-                //         }, 
-                //         exit=>exit.remove()
-                //     )
-                                       
-
-
-                // let legendGroup = d3.select('#invalid-legend')
-                //     .selectAll('rect')
-                //     .data(failure_reasons)
-                    
-                //     .join(
-                //         enter=>{enter.append('g')
-                //             .append('rect')
-                //             .attr('x', 500)
-                //             .attr('y', (d,i)=>30 + i*20)
-                //             .attr('height', 10)
-                //             .attr('width', 10)
-                //             .attr('fill', d=>colorScale(d))
-
-                //             d3.select(this.parentNode)
-                //             .append('text')
-                //                 .attr('x', 515)
-                //                 .attr('y', (d,i)=>40 + i*20)
-                //                 .text(d=>d)
-
-
-                //     },
-                //     update=> {update
-                //             .attr('x', 500)
-                //             .attr('y', (d,i)=>30 + i*20)
-                //             .attr('height', 10)
-                //             .attr('width', 10)
-                //             .attr('fill', d=>colorScale(d))
-                //     }, 
-                //     exit=>{exit.remove()}
-                //     );
-                
-                // let groups = d3.select('#invalid-legend').selectAll('g')
-
-                // groups
-                //         .append('text')
-                //             .attr('x', 515)
-                //             .attr('y', (d,i)=>40 + i*20)
-                //             .text(d=>d) 
-   
-
-                
-
-                
     }  
     
     redraw(){
