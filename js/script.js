@@ -1407,8 +1407,8 @@ class Main {
     }
 
     setupInvalidChart(){
-        let margin = {top: 40, bottom: 20, left: 40, right: 40}
-        let height = 400 - margin.top - margin.bottom
+        let margin = {top: 40, bottom: 20, left: 50, right: 40}
+        let height = 600 - margin.top - margin.bottom
         let width = 800 - margin.left - margin.right
 
         let invalid_thing = d3.select("#invalid")
@@ -1429,7 +1429,7 @@ class Main {
             .attr('id', 'invalid-y-label')
 
             .append('text')
-                .attr('x', -190)
+                .attr('x', -290)
                 .attr('y', 11)
                 .text('Count')
                 .attr('transform', 'rotate(-90)')
@@ -1442,8 +1442,8 @@ class Main {
             .text('Database')
     }
     drawInvalidChart(){
-        let margin = {top: 40, bottom: 20, left: 40, right: 40}
-        let height = 400 - margin.top - margin.bottom
+        let margin = {top: 40, bottom: 20, left: 50, right: 40}
+        let height = 600 - margin.top - margin.bottom
         let width = 800 - margin.left - margin.right
 
         let dropDownValue = d3.select('#dropdownMenu').node().value
@@ -1473,10 +1473,6 @@ class Main {
         let Clinvar = []
         let Global_Variome = []
         let BIPmed_SNPhg19 = []
-        ////////// Dave's super pseudocode!!!!!!!
-        let superDict = {}
-
-
 
         for (let i of invalid_data_filtered){
             let failure_reason = i["HGVS Normalization Failure Reason"]
@@ -1541,8 +1537,14 @@ class Main {
             .domain(databases)
             .range([margin.left, width])
             .padding(0.3)
+        // PSAP has a max of 20, so adding 10 to the margin seems very excessive
+        let yDomainMax = d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +10
+        if (yDomainMax <= 60) {
+            yDomainMax = d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) + 1
+        }
         let scaleY = d3.scaleLinear()
-            .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +20])
+            //.domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +10])
+            .domain([0,yDomainMax])
             .range([height, 0])
 
         let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
