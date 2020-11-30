@@ -1438,7 +1438,7 @@ class Main {
             .attr('id', 'invalid-x-label')
             .append('text')
             .attr('x', width/2 -20)
-            .attr('y', height)
+            .attr('y', height +50)
             .text('Database')
     }
     drawInvalidChart(){
@@ -1543,7 +1543,7 @@ class Main {
             .padding(0.3)
         let scaleY = d3.scaleLinear()
             .domain([0, d3.max([Clinvar.length, Global_Variome.length, BIPmed_SNPhg19.length]) +20])
-            .range([height - margin.top, 0])
+            .range([height, 0])
 
         let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain(failure_reasons)
@@ -1559,12 +1559,12 @@ class Main {
 
         let y_axis_group = d3.select('#invalid-svg').append('g')
             .attr('id', 'invalid-y-axis')
-            .attr('transform', `translate(${margin.left}, 0)`)
+            .attr('transform', `translate(${margin.left}, 10)`)
             
 
         let x_axis_group = d3.select('#invalid-svg').append('g')
             .attr('id', 'invalid-x-axis')
-            .attr('transform', `translate(0, ${height-margin.top})`)
+            .attr('transform', `translate(0, ${height + 10})`)
 
         d3.select('#invalid-y-axis')
             .call(yAxisGenerator)
@@ -1585,6 +1585,7 @@ class Main {
                 enter=>{
                     enter.append('g')
                         .attr('fill', d=>colorScale(d.key))
+                        .attr('transform', 'translate(0, 10)')
                         .transition()
                             .duration(this.transition_time)
                 },
