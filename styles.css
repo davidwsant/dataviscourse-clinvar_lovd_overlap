@@ -79,3 +79,13 @@ h1 {
 .not-hovered{
     opacity: .4;
 }
+
+.button-clicked circle,  
+.button-clicked path, 
+.button-clicked text, 
+.button-clicked td, 
+.button-clicked th,
+.button-clicked line,
+.button-clicked-misc {
+    opacity: 0.25
+}

@@ -172,18 +172,27 @@
         </div>
         <!-- Each of these will need an SVG added through d3 -->
         <div id="figures" style="flex-grow: 5; flex-basis: 0">
-            <!-- The rest is stuff that Marcus has added -->
-            <div id="overlapFigures" style="display:flex; width:100%;"> <!-- Width is 1191 on the page-->
-                <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
+            <div id="storyButton"> 
+                <button  style="margin-left:10px;" type="button" 
+                class="btn btn-light btn-outline-secondary btn-sm buttons" >
+                <span style="font-size:18px; color:black">Show an example of how this information is helpful</span>
+                </button>
+            </div>
+            
+            <br/>
+            <div id="overlapFigures" style="display:flex; width:100%;" > <!-- Width is 1191 on the page,  margin-top: -170px;-->
+                <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;" >
                     Percentage Overlap between ClinVar and LOVD
                     <svg id = "percentOverlapPlot"></svg>
                 </div>
-                <div id="overlapPercentBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
+                <div id="overlapCountBar" style="text-align: center; flex-grow: 1; flex-basis: 0; padding-top: 10px;">
                     Count Overlap between ClinVar and LOVD
                     <svg id = "countOverlapPlot"></svg>
                 </div>
+
             </div>
-            <div class="LegendContainer">
+            
+            <div class="LegendContainer" id="LegendContainer" >
                 <div><span class="LOVDLegend"></span> LOVD Only</div>
                 <div><span class="BothLegend"></span> Both</div>
                 <div><span class="ClinVarLegend"></span> ClinVar Only</div>
@@ -198,7 +207,7 @@
 
 
 
-            <div style="padding-left:10px">
+            <div id="geneSelect" style="padding-left:10px">
                 <label>Select a gene</label>
                 <select id="dropdownMenu">
                     <option selected>None Selected</option> <!-- These will need value="ARSA" or something like that to be able to graph them-->
@@ -226,11 +235,24 @@
 
     
         </div>
-    </div>   
+        
+    </div> 
+    <div style="text-align: center; flex-grow: 0; flex-basis: 0; padding-top: 10px;">
+                    
+        <svg id ="storySVG" transform="translate(260, -2445)"></svg>
+        <div style="padding-bottom:10px; padding-right:10px">
+            <button  id="secondButton" style="margin-left:10px;" type="button" 
+            class="btn btn-light btn-outline-secondary btn-sm buttons" >
+            <span style="font-size:18px; color:black"></span>
+        </button>
+        </div>
+        
+    </div>  
   
 </body>
 <script src="./js/script.js"></script>
 <script src="./js/disease.js"></script>
+<script src="./js/storyTelling.js"></script>
 
 
 </html>

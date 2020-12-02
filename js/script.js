@@ -381,7 +381,7 @@ class Main {
             .attr('id', 'freqDistStructureLabel')
             .attr('transform', 'translate('+labelStartX+','+labelStartY+')')
             .attr('text-anchor', 'middle')
-        // this line 
+
         freqDistStructureLabel.append('text').attr('id', 'geneStructureText')
         let nextlabelStartX = this.freqDistance.margin.left+this.freqDistance.axis.left+this.freqDistance.figure.width+10
         let freqDistStructureFigures = freqDistanceSVG
@@ -497,6 +497,9 @@ class Main {
         this.updateWithGene()
         this.pathogenicityGraph()
         this.drawInvalidChart()
+        this.storyTelling()
+        this.setStoryTellingElements()
+        this.resetStoryBoard()
 
 
 
@@ -824,7 +827,7 @@ class Main {
                     .text(d['HGVS Normalized Genomic Annotation'])
 
                 })
-//this line
+
             scatterCircles.on('mouseout', event=>{
                 d3.select(event.target)
                     .attr('opacity', '0.4')
@@ -1688,6 +1691,298 @@ class Main {
         this.drawDistanceTSSScatter()
         this.drawInvalidChart()
     }
+    setStoryTellingElements(){
+        //d3.select('#storySVG1')
+        d3.select('#storySVG').attr('width', '1500px')
+        let overlapSVGGroup1 = d3.select('#storySVG').append('g').attr('id', 'storyGroup1')//.attr('transform' ,'translate(0, -2000)')//.attr('padding-top', '-2000')
+        overlapSVGGroup1.append('rect').attr('id','storyTellingOverlapRect1')//.attr('transform' ,'translate(0, -1000)') //
+        overlapSVGGroup1.append('text').attr('id','storyTellingOverlapText1').attr('transform' ,'translate(0, 50)').attr('fill', 'black')
+
+
+    }
+    storyTelling(){
+        d3.select('#storyButton').on('click', ()=>{
+            d3.select('#secondButton').text('Put Some Text Here')
+            //d3.select('#figures').attr('class', 'button-clicked-misc') 
+            // d3.select('#overlapFigures').attr('padding-top', '150px')
+            d3.select('#filters').attr('class', 'button-clicked-misc') 
+            d3.select('#overlapFigures').attr('class', 'button-clicked-misc')
+            // d3.select('#percentOverlapPlot').attr('class', 'button-clicked-misc')
+            // d3.select('#countOverlapPlot').attr('class', 'button-clicked-misc')
+            d3.select('#LegendContainer').attr('class', 'LegendContainer button-clicked-misc')
+            d3.select('#pathogenicity-graph').attr('class', 'button-clicked-misc')
+            d3.select('#geneSelect').attr('class', 'button-clicked-misc')
+            d3.select('#frequency-height').attr('class', 'button-clicked-misc')
+            d3.select('#invalid').attr('class', 'button-clicked-misc')
+            // d3.select('#storySVG1')
+            //     .attr('height', '100')
+            //     .attr('width', '200')
+            d3.select('#storyTellingOverlapRect1')
+                .attr('height', '100')
+                .attr('width', '400')
+                .attr('rx', '25')
+                .attr('fill', 'white')
+                .attr('stroke', 'black')
+            d3.select('#storyTellingOverlapText1')
+                .text('Scroll down to the Scatter Plot of Location within Gene vs Frequency')
+            
+            // d3.select('#overlapFigures').attr('class', 'button-clicked-misc')
+            // redraw the scatterplot with ARSA
+            // this line 
+
+
+
+            let dropDownValue = "ARSA"
+            let tss = +this.genomic_features[dropDownValue].TSS
+            let tts = +this.genomic_features[dropDownValue].TTS
+            let sense = this.genomic_features[dropDownValue].sense
+            let geneLength = Math.abs(tts - tss)
+            let addDistance = Math.round(geneLength*0.05)
+            let relevantVariants = []
+            let rangeStart = tss-addDistance
+            let rangeStop = tts+addDistance
+            if (sense === 'reverse') {
+                rangeStart = tts-addDistance
+                rangeStop = tss+addDistance
+            }
+
+            for (let variant of this.MLD_data) {
+
+                // Only keep variants that will show up in ARSA
+
+                if (variant['Gene Symbol'] === dropDownValue && 
+                    variant['Position Middle'] >= rangeStart &&
+                    variant['Pathogenicity'] != "Not Provided" &&
+                    variant['Position Middle'] <= rangeStop) {
+                        relevantVariants.push(variant) 
+                    }
+            }
+            for (let variant of relevantVariants) {
+                let distanceTss = variant['Position Middle'] - tss 
+                if (sense === 'reverse') {
+                    distanceTss = -1*distanceTss
+                }
+                variant['Distance from TSS'] = distanceTss
+            }
+
+            let scaleX = d3.scaleLinear()
+                .domain([-addDistance,geneLength+addDistance])
+                .range([0, this.freqDistance.figure.width]) 
+            let scaleY = d3.scaleLinear()
+                .domain([6,0])
+                .range([0, this.freqDistance.figure.height]) 
+
+            // Draw rectangles for exons 
+            d3.select('#geneStructureText').text('Gene Structure')
+            d3.select('#exonsLabel').text('Exons') // 
+            d3.select('#UTRLabel').text('Untranslated Exons') 
+            d3.select('#intronLabel').text('Introns')
+            d3.select('#exonsRect').attr('width', '20') 
+            d3.select('#UTRRect').attr('width', '20') 
+            d3.select('#intronRect').style('stroke-width', 1) 
+            let addRectangles = d3.select('#freqDistanceGeneStructure')
+                .selectAll('rect')
+                .data(this.genomic_features[dropDownValue].exons)
+                .join('rect')
+
+            let newRectangles = addRectangles.enter()
+                .append('circle')
+                .attr('transform', d => {
+                    let localY = this.freqDistance.bars.height*0.5-12.5
+                    if (d['type'] === "UTR") {
+                        localY = this.freqDistance.bars.height*0.5-5
+                    }
+                    let localX = scaleX(d.start)
+                    return 'translate('+localX+','+localY+')'
+                }) 
+                .attr('width', d => {
+                    let localStart = scaleX(d.start)
+                    let localStop = scaleX(d.stop)
+                    let localWidth = localStop-localStart
+                    return localWidth
+                })
+                .attr('height', d => {
+                    if (d['type'] === "UTR") {
+                        return 10
+                    }
+                    return 25
+                })
+
+            let mergedRectangles = newRectangles.merge(addRectangles)
+                .transition()
+                .duration(this.transition_time)
+                .attr('transform', d => {
+                    let localY = this.freqDistance.bars.height*0.5-12.5
+                    if (d['type'] === "UTR") {
+                        localY = this.freqDistance.bars.height*0.5-5
+                    }
+                    let localX = scaleX(d.start)
+                    return 'translate('+localX+','+localY+')'
+                }) 
+                .attr('width', d => {
+                    let localStart = scaleX(d.start)
+                    let localStop = scaleX(d.stop)
+                    let localWidth = localStop-localStart
+                    return localWidth
+                })
+                .attr('height', d => {
+                    if (d['type'] === "UTR") {
+                        return 10
+                    }
+                    return 25
+                })
+
+            d3.select('#tssToTtsLine')
+                .attr('x1', scaleX(0))
+                .attr('x2', scaleX(geneLength))
+
+            let classDict = {'Pathogenic':'pathogenic', 
+                'Likely Pathogenic':'likely-pathogenic', 
+                'VUS':'vus', 
+                'Likely Benign': 'likely-benign', 
+                'Benign': 'benign',
+                'Not Provided': 'not-provided',
+                'Conflicting': 'conflicting'}
+
+            
+            let x_axis = d3.axisBottom(scaleX).ticks(10)
+            d3.select("#freqDistanceXAxis").call(x_axis)
+                .attr('opacity', '1')
+                .selectAll('text')
+                .style("text-anchor", "end")
+                .attr('transform', 'rotate(-45)')
+            let y_axis = d3.axisLeft(scaleY).ticks(7)
+                d3.select("#freqDistanceYAxis").call(y_axis)
+                .attr('opacity', '1')
+
+            d3.select('#freqDistancePlotYAxisLabel').text('-Log base 10 Minor Allele Frequency')
+            d3.select('#freqDistancePlotXAxisLabel').text('Distance from Transcription Start Site (TSS)')
+            d3.select('#frequency-distance-text')
+                .text('')
+            let scatterCircles = d3.select('#freqDistancePlotSection')
+                .selectAll('circle')
+                .data(relevantVariants)
+                .join('circle')
+
+
+            let circleRadius = 5
+            let newCircles = scatterCircles.enter().append('circle')
+                .attr('cx', d => scaleX(d['Distance from TSS'])) // 0.5*this.freqDistance.figure.width
+                .attr('cy', d => scaleY(d['Frequency Position'])) // 0.5*this.freqDistance.figure.height
+                .attr('r', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 7
+                    } 
+                    else {
+                        return circleRadius
+                    }
+                })
+                .attr('opacity', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 1
+                    } 
+                    else {
+                        return 0.4
+                    }
+                })
+                .attr('class', d => classDict[d['Pathogenicity']])
+                .style('stroke-width', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 1
+                    } 
+                    else {
+                        return 0
+                    }
+                })
+                .style('stroke', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 'black'
+                    } 
+                    else {
+                        return 'none'
+                    }
+                })
+                // this line
+
+            let mergedCircles = newCircles.merge(scatterCircles)
+                .transition()
+                .duration(this.transition_time)
+                .attr('cx', d => scaleX(d['Distance from TSS']))
+                .attr('cy', d => scaleY(d['Frequency Position']))
+                .attr('r', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 7
+                    } 
+                    else {
+                        return circleRadius
+                    }
+                })
+                .attr('opacity', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 1
+                    } 
+                    else {
+                        return 0.4
+                    }
+                })
+                .attr('class', d => classDict[d['Pathogenicity']])
+                .style('stroke-width', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 1
+                    } 
+                    else {
+                        return 0
+                    }
+                })
+                .style('stroke', d => {if (d['Pathogenicity'] === "Pathogenic" || d['Pathogenicity'] === "Likely Pathogenic") {
+                    return 'black'
+                    } 
+                    else {
+                        return 'none'
+                    }
+                })
+            
+
+
+
+
+
+
+            console.log('button was clicked')
+        })
+        // let that = this
+        // function resetStoryBoard() {
+        //     d3.select('#filters').classed('button-clicked-misc', false)
+        //     d3.select('#overlapFigures').classed('button-clicked-misc', false)
+        //     // d3.select('#percentOverlapPlot').classed('button-clicked-misc', false)
+        //     // d3.select('#countOverlapPlot').classed('button-clicked-misc', false)
+        //     d3.select('#LegendContainer').attr('class', 'LegendContainer')
+        //     d3.select('#pathogenicity-graph').classed('button-clicked-misc', false)
+        //     d3.select('#geneSelect').classed('button-clicked-misc', false)
+        //     d3.select('#frequency-height').classed('button-clicked-misc', false)
+        //     d3.select('#invalid').classed('button-clicked-misc', false)
+        //     // this line 
+        //     that.redraw()
+        // }
+        
+        // d3.select('body').on('click', resetStoryBoard, true)
+    }
+    resetStoryBoard() {
+        d3.select('body').on('click', ()=>{
+            // d3.select('#filters').classed('button-clicked-misc', false)
+            // d3.select('#overlapFigures').classed('button-clicked-misc', false)
+            // // d3.select('#percentOverlapPlot').classed('button-clicked-misc', false)
+            // // d3.select('#countOverlapPlot').classed('button-clicked-misc', false)
+            // d3.select('#LegendContainer').attr('class', 'LegendContainer')
+            // d3.select('#pathogenicity-graph').classed('button-clicked-misc', false)
+            // d3.select('#geneSelect').classed('button-clicked-misc', false)
+            // d3.select('#frequency-height').classed('button-clicked-misc', false)
+            // d3.select('#invalid').classed('button-clicked-misc', false)
+            // // this line 
+            // this.redraw()
+            console.log('body selected')
+        }, true)
+        
+    }
+    
+    
 }
 
+ 
 
+
+            
+            
