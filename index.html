@@ -222,12 +222,13 @@
             <div id="frequency-distance" style="padding-left:10px; width:100%; text-align: center;">
                 Distance from TSS vs -log10 Frequency 
             </div>
-            <br/>
+            <!-- <br/>
             <br/>
             <div id="frequency-height" style="padding-left:10px; text-align: center;">
                 Location of Variants Within the Gene
             </div>
-            <br/>
+            <br/> 
+        I was going to make this show scatter plot brushing results, but I am out of time -->
             <br/>
             <div id="invalid" style="padding-left:10px; text-align: center;">
                 Count of Invalid Variants per Database
@@ -237,17 +238,17 @@
         </div>
         
     </div> 
+    <div style="text-align: center; flex-grow: 0; flex-basis: 0; padding-top: 10px;">          
+        <svg id ="storySVG1" transform="translate(-40, -2345)"></svg>
+    </div>  
+    <div style="text-align: center; flex-grow: 0; flex-basis: 0; padding-top: 10px;">          
+        <svg id ="storySVG2" transform="translate(-230, -1845)"></svg>
+    </div>  
     <div style="text-align: center; flex-grow: 0; flex-basis: 0; padding-top: 10px;">
                     
-        <svg id ="storySVG" transform="translate(260, -2445)"></svg>
-        <div style="padding-bottom:10px; padding-right:10px">
-            <button  id="secondButton" style="margin-left:10px;" type="button" 
-            class="btn btn-light btn-outline-secondary btn-sm buttons" >
-            <span style="font-size:18px; color:black"></span>
-        </button>
-        </div>
+        <svg id ="storySVG3" transform="translate(500, -1130)"></svg>
         
-    </div>  
+    </div>
   
 </body>
 <script src="./js/script.js"></script>

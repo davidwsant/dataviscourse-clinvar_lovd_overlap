@@ -75,9 +75,6 @@ class Main {
                 
             }
         }
-        // console.log(MLD_data)
-        // console.log(genomic_features)
-        // console.log(invalid_data)
 
         // get all unique diseases and genes from the data
         this.diseases = []
@@ -370,8 +367,8 @@ class Main {
             .attr('id', 'tssToTtsLine')
             .style('stroke-width', 1)
             .style('stroke', 'black')
-            .attr('y1', this.freqDistance.bars.height*0.5)//)//
-            .attr('y2', this.freqDistance.bars.height*0.5)//)//this.freqDistance.bars.height*0.5)
+            .attr('y1', this.freqDistance.bars.height*0.5)
+            .attr('y2', this.freqDistance.bars.height*0.5)
 
         let labelStartY = structureStartY+this.freqDistance.bars.height
         
@@ -588,7 +585,7 @@ class Main {
         // redraw button
         let redrawButton = $('#redraw-button')
         redrawButton.on('click', ()=>{
-            console.log("redrawing")
+            //console.log("redrawing")
             this.redraw()
         })
 
@@ -789,7 +786,6 @@ class Main {
                 .data(relevantVariants)
                 .join('circle')
 
-                //this.freqDistance.figure.width
             let circleRadius = 5
             let newCircles = scatterCircles.enter().append('circle')
                 .attr('cx', d => scaleX(d['Distance from TSS'])) // 0.5*this.freqDistance.figure.width
@@ -906,10 +902,8 @@ class Main {
                 d3.select('#freqDistanceInfoBoxFreq').text('')
             }
 
-            d3.select('body').on('click', clearInfoBox, true)
-            
+            d3.select('#frequency-distance').on('click', clearInfoBox, true)
 
-            //super line
            
         }
 
@@ -1468,7 +1462,7 @@ class Main {
         }
 
 
-        console.log(invalid_data_filtered)
+        //console.log(invalid_data_filtered)
 
 
         let failure_reasons = []
@@ -1577,7 +1571,7 @@ class Main {
         d3.select('#invalid-x-axis')
             .call(xAxisGenerator)
 
-        console.log(dataByDatabase)
+        //console.log(dataByDatabase)
 
         let stackedData = d3.stack()   
             .keys(failure_reasons)(dataByDatabase)
@@ -1692,45 +1686,106 @@ class Main {
         this.drawInvalidChart()
     }
     setStoryTellingElements(){
-        //d3.select('#storySVG1')
-        d3.select('#storySVG').attr('width', '1500px')
-        let overlapSVGGroup1 = d3.select('#storySVG').append('g').attr('id', 'storyGroup1')//.attr('transform' ,'translate(0, -2000)')//.attr('padding-top', '-2000')
-        overlapSVGGroup1.append('rect').attr('id','storyTellingOverlapRect1')//.attr('transform' ,'translate(0, -1000)') //
-        overlapSVGGroup1.append('text').attr('id','storyTellingOverlapText1').attr('transform' ,'translate(0, 50)').attr('fill', 'black')
+        //d3.select('#storySVG1').attr('width', '600px').attr('height', '50px')
+        d3.select('#storySVG1').attr('width', '0px').attr('height', '0px')
+        let storySVG1 = d3.select('#storySVG1')
+        let overlapSVGGroup1 = storySVG1.append('g').attr('id', 'storyGroup1')
+        overlapSVGGroup1.append('rect').attr('id','storyTellingOverlapRect1')
+            .attr('rx', '12')
+            .attr('fill', 'white')
+            .attr('stroke', 'black')
+            .attr('height', '50')
+            .attr('width', '600')
+            
+        overlapSVGGroup1.append('text').attr('id','storyTellingOverlapText1')
+            .attr('transform' ,'translate(300, 30)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('Scroll down to the Scatter Plot of Location within Gene vs Frequency')
 
+        let storySVG2 = d3.select('#storySVG2')
+        //storySVG2.attr('width', '150px').attr('height', '50px')
+        storySVG2.attr('width', '0px').attr('height', '0px')
+        let overlapSVGGroup2 = storySVG2.append('g').attr('id', 'storyGroup2')
+        overlapSVGGroup2.append('rect').attr('id','storyTellingOverlapRect2')
+            .attr('rx', '12')
+            .attr('fill', 'white')
+            .attr('stroke', 'black')
+            .attr('height', '50')
+            .attr('width', '150')
+            
+        overlapSVGGroup2.append('text').attr('id','storyTellingOverlapText2')
+            .attr('transform' ,'translate(75, 30)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('Keep Scrolling!')         
+
+        let storySVG3 = d3.select('#storySVG3')
+        storySVG3.attr('width', '0px').attr('height', '0px')
+        //storySVG3.attr('width', '500px').attr('height', '200px')
+        let overlapSVGGroup3 = storySVG3.append('g').attr('id', 'storyGroup3')
+        overlapSVGGroup3.append('rect').attr('id','storyTellingOverlapRect3')
+            .attr('rx', '12')
+            .attr('fill', 'white')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '2px')
+            .attr('height', '190')
+            .attr('width', '500')
+                          
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText3')
+            .attr('transform' ,'translate(250, 30)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('The gene ARSA gives a good example of how this ')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText4')
+            .attr('transform' ,'translate(250, 50)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('visualization can help determine if a variant is likely to be ')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText5')
+            .attr('transform' ,'translate(250, 70)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('pathogenic. Notice how many variants are reported in all ')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText6')
+            .attr('transform' ,'translate(250, 90)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('regions of the gene. However, pathogenic and likely')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText7')
+            .attr('transform' ,'translate(250, 110)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('pathogenic variants (red and orange, large circles) are ')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText8')
+            .attr('transform' ,'translate(250, 130)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('present only in the gene body. This indicates that new')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText9')
+            .attr('transform' ,'translate(250, 150)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('variants found in untranslated regions are lilkely ')
+        overlapSVGGroup3.append('text').attr('id','storyTellingOverlapText10')
+            .attr('transform' ,'translate(250, 170)')
+            .attr('fill', 'black')
+            .style('text-anchor', 'middle')
+            .text('not going to contribute to disease. ')
 
     }
     storyTelling(){
         d3.select('#storyButton').on('click', ()=>{
-            d3.select('#secondButton').text('Put Some Text Here')
-            //d3.select('#figures').attr('class', 'button-clicked-misc') 
-            // d3.select('#overlapFigures').attr('padding-top', '150px')
             d3.select('#filters').attr('class', 'button-clicked-misc') 
             d3.select('#overlapFigures').attr('class', 'button-clicked-misc')
-            // d3.select('#percentOverlapPlot').attr('class', 'button-clicked-misc')
-            // d3.select('#countOverlapPlot').attr('class', 'button-clicked-misc')
             d3.select('#LegendContainer').attr('class', 'LegendContainer button-clicked-misc')
             d3.select('#pathogenicity-graph').attr('class', 'button-clicked-misc')
             d3.select('#geneSelect').attr('class', 'button-clicked-misc')
             d3.select('#frequency-height').attr('class', 'button-clicked-misc')
             d3.select('#invalid').attr('class', 'button-clicked-misc')
-            // d3.select('#storySVG1')
-            //     .attr('height', '100')
-            //     .attr('width', '200')
-            d3.select('#storyTellingOverlapRect1')
-                .attr('height', '100')
-                .attr('width', '400')
-                .attr('rx', '25')
-                .attr('fill', 'white')
-                .attr('stroke', 'black')
-            d3.select('#storyTellingOverlapText1')
-                .text('Scroll down to the Scatter Plot of Location within Gene vs Frequency')
-            
-            // d3.select('#overlapFigures').attr('class', 'button-clicked-misc')
-            // redraw the scatterplot with ARSA
-            // this line 
-
-
+            d3.select('#storySVG1').attr('width', '600px').attr('height', '50px')
+            d3.select('#storySVG2').attr('width', '150px').attr('height', '50px')
+            d3.select('#storySVG3').attr('width', '500px').attr('height', '195px')
 
             let dropDownValue = "ARSA"
             let tss = +this.genomic_features[dropDownValue].TSS
@@ -1747,8 +1802,6 @@ class Main {
             }
 
             for (let variant of this.MLD_data) {
-
-                // Only keep variants that will show up in ARSA
 
                 if (variant['Gene Symbol'] === dropDownValue && 
                     variant['Position Middle'] >= rangeStart &&
@@ -1898,7 +1951,6 @@ class Main {
                         return 'none'
                     }
                 })
-                // this line
 
             let mergedCircles = newCircles.merge(scatterCircles)
                 .transition()
@@ -1934,47 +1986,34 @@ class Main {
                         return 'none'
                     }
                 })
-            
 
 
-
-
-
-
-            console.log('button was clicked')
+            //console.log('button was clicked')
         })
-        // let that = this
-        // function resetStoryBoard() {
-        //     d3.select('#filters').classed('button-clicked-misc', false)
-        //     d3.select('#overlapFigures').classed('button-clicked-misc', false)
-        //     // d3.select('#percentOverlapPlot').classed('button-clicked-misc', false)
-        //     // d3.select('#countOverlapPlot').classed('button-clicked-misc', false)
-        //     d3.select('#LegendContainer').attr('class', 'LegendContainer')
-        //     d3.select('#pathogenicity-graph').classed('button-clicked-misc', false)
-        //     d3.select('#geneSelect').classed('button-clicked-misc', false)
-        //     d3.select('#frequency-height').classed('button-clicked-misc', false)
-        //     d3.select('#invalid').classed('button-clicked-misc', false)
-        //     // this line 
-        //     that.redraw()
-        // }
-        
-        // d3.select('body').on('click', resetStoryBoard, true)
+
     }
     resetStoryBoard() {
+
         d3.select('body').on('click', ()=>{
-            // d3.select('#filters').classed('button-clicked-misc', false)
-            // d3.select('#overlapFigures').classed('button-clicked-misc', false)
-            // // d3.select('#percentOverlapPlot').classed('button-clicked-misc', false)
-            // // d3.select('#countOverlapPlot').classed('button-clicked-misc', false)
-            // d3.select('#LegendContainer').attr('class', 'LegendContainer')
-            // d3.select('#pathogenicity-graph').classed('button-clicked-misc', false)
-            // d3.select('#geneSelect').classed('button-clicked-misc', false)
-            // d3.select('#frequency-height').classed('button-clicked-misc', false)
-            // d3.select('#invalid').classed('button-clicked-misc', false)
-            // // this line 
-            // this.redraw()
-            console.log('body selected')
+            d3.select('#filters').classed('button-clicked-misc', false)
+            d3.select('#overlapFigures').classed('button-clicked-misc', false)
+            d3.select('#LegendContainer').attr('class', 'LegendContainer')
+            d3.select('#pathogenicity-graph').classed('button-clicked-misc', false)
+            d3.select('#geneSelect').classed('button-clicked-misc', false)
+            d3.select('#frequency-height').classed('button-clicked-misc', false)
+            d3.select('#invalid').classed('button-clicked-misc', false)
+            d3.select('#freqDistancePlotSection').selectAll('circle')
+                .attr('opacity', '0.4')
+                .style('stroke-width', '0')
+                .style('stroke', 'none')
+
+            d3.select('#storySVG1').attr('width', '0px').attr('height', '0px')
+            d3.select('#storySVG2').attr('width', '0px').attr('height', '0px')
+            d3.select('#storySVG3').attr('width', '0px').attr('height', '0px')
+           
+            this.redraw()
         }, true)
+
         
     }
     
