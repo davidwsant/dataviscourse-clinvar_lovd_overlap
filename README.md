@@ -11,6 +11,7 @@
 |UID|u0454956|u01275125|u0420655|
 
 Our project webpage is hosted on [GitPages](https://davidwsant.github.io/dataviscourse-clinvar_lovd_overlap/).
+The video to accompany this project can be found on [YouTube](https://youtu.be/ChWy0Gjzrso).
 
 ### Background and Motivation
 

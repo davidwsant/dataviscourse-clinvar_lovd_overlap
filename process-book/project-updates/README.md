@@ -68,3 +68,23 @@ the year that the variant was submitted to the website. Unfortunately, almost al
 of the LOVD variants and a significant proportion of the ClinVar variants were found
 to have no reported date. As a result, we chose to remove the option to filter by
 year of submission.
+
+### Adding StoryTelling
+
+We added a storytelling function. When you click the button labeled 'Show an
+example of how this information is helpful', the scatter plot is generated with
+variants from ARSA. The 'pathogenic' and 'likely pathogenic' variants are made
+larger (radius of 7 instead of 4) and darker (opacity 1 while other variants have
+opacity of 0.4). Additionally, there are three SVGs that appear. All three contain
+white rectangles with black borders and text. The first one instructs the user to
+scroll down. The second one says 'Keep scrolling!' The final one is next to the
+scatterplot and points out that variants appear across the entire gene, but
+all 'pathogenic' and 'likely pathogenic' variants are only in the coding regions
+of the gene, indicating that new variants that are found in the untranslated
+regions are very unlikely to be pathogenic.
+
+### Hosting and Video
+
+We were able to host the website on [GitPages](https://davidwsant.github.io/dataviscourse-clinvar_lovd_overlap/).
+We obtained permission from Alex Lex to make our video over 2 minutes as long as
+it was shorter than 2:30. Our video is now posted on [YouTube](https://www.youtube.com/watch?v=ChWy0Gjzrso&feature=youtu.be) and is 2 minutes and 26 seconds long.
